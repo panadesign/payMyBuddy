@@ -1,0 +1,44 @@
+<!doctype html>
+<html xmlns:th="https://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>PayMyBuddy | transfer</title>
+    <link media="all" rel="stylesheet" th:href="@{/css/style.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/reset.css}" type="text/css"/>
+</head>
+<body>
+    <header>
+        <h1>Pay My Buddy</h1>
+        <nav>
+            <ul>
+                <li>Home</li>
+                <li>Transfer</li>
+                <li>Profile</li>
+                <li>Contact</li>
+                <li>Log off</li>
+            </ul>
+        </nav>
+        <div class="ariane">Home / Transfer</div>
+    </header>
+
+    <section class="sendMoney">
+        <div class="sectionTitle">
+            <div>Send Money</div>
+            <button class="addConnection">Add Connection</button>
+        </div>
+        <div class="paySection">
+            <select name="connections" id="selection">
+                <option value="">Select a connection</option>
+                <option value="dog">Pers1</option>
+                <option value="cat">Pers2</option>
+            </select>
+
+            <button class="pay">Pay</button>
+        </div>
+    </section>
+    <section class="myTransactions">
+
+    </section>
+
+</body>
+</html>

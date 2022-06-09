@@ -1,0 +1,31 @@
+<!doctype html>
+<html xmlns:th="https://www.thymeleaf.org" lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>PayMyBuddy | login</title>
+        <link media="all" rel="stylesheet" th:href="@{/css/style.css}" type="text/css"/>
+        <link media="all" rel="stylesheet" th:href="@{/css/reset.css}" type="text/css"/>
+    </head>
+    <body>
+        <form class="loggingForm" name="log" th:action="@{/login}" method="post">
+            <h1 id="logo">Pay My Buddy</h1>
+            <div th:if="${param.error}">
+                Invalid email or password.
+            </div>
+            <div th:if="${param.logout}">
+                You have been logged out.
+            </div>
+            <div>
+                <input type="text" id="email" name="email" placeholder="Email">
+            </div>
+            <div>
+                <input type="password" id="password" name="password" placeholder="Password">
+            </div>
+            <section class="checkBox">
+                <input type="checkbox" id="rememberMe" name="rememberMe" checked>
+                <label for="rememberMe">Remember me</label>
+            </section>
+            <button class="cta" type="submit">Login</button>
+        </form>
+    </body>
+</html>

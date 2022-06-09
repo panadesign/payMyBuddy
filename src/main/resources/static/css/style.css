@@ -1,0 +1,100 @@
+body {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    align-items: center;-webkit-align-items: center;
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100vh;
+}
+
+.loggingForm {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    max-width: 724px;
+    height: 600px;
+    border: #AFAFAF solid 2px;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+#logo {
+    width: 288px;
+    height: 80px;
+    margin: 0 auto;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 5rem;
+    background: linear-gradient(to right, #60B95A, #AED581);
+
+}
+
+input {
+    display: block;
+    margin: 0 auto;
+    width: 652px;
+    height: 90px;
+    border: #C8C8C8 solid 2px;
+    border-radius: 10px;
+}
+
+input#email {
+    background-image: url(../img/email.png);
+    background-repeat: no-repeat;
+    background-size: 60px;
+    background-position: 10px;
+    text-indent: 60px;
+}
+
+input#password {
+    background-image: url(../img/password.png);
+    background-repeat: no-repeat;
+    background-size: 30px;
+    background-position: 20px;
+    text-indent: 60px;
+}
+
+::placeholder {
+    color: #616161;
+    font-size: 1.5rem;
+}
+
+.checkBox {
+
+    margin: 0 auto;
+}
+
+.checkBox label {
+    margin-left: 20px;
+    line-height: 40px;
+}
+
+input#rememberMe {
+    float: left;
+}
+
+
+#rememberMe {
+    width: 40px;
+    height: 40px;
+    border: #C8C8C8 solid 2px;
+    border-radius: 2px;
+
+}
+
+.cta {
+    display: block;
+    width: 280px;
+    height: 80px;
+    margin: 0 auto;
+    color: #fff;
+    background-color: #0275D8;
+    border: none;
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 5rem;
+}
