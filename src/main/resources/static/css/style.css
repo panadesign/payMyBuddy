@@ -1,0 +1,97 @@
+.container-login {
+    border: solid 2px #afafaf;
+    border-radius: 10px;
+    padding: 40px;
+    max-width: 520px;
+    height: 630px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    top: 50vh;
+    position: relative;
+    margin-top: -315px;
+}
+
+#logo {
+    width: 288px;
+    height: 52px;
+    margin: 0 auto;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 52px;
+    background: linear-gradient(to right, #60B95A, #AED581);
+    }
+
+.btn {
+    margin: 0 auto;
+    display: block;
+    width: 200px;
+    height: 58px;
+    font-weight: 700;
+}
+
+.form-control {
+    height: 64px;
+    border-color: #F5F5F5;
+    border-radius: 5px;
+}
+/*NAV*/
+.navbar-collapse {
+    justify-content: end;
+}
+
+.nav-link active {
+    color: #0275D8;
+}
+
+/*ARIANE*/
+.ariane{
+    background-color: #F5F5F5;
+    height: 52px;
+    line-height: 52px;
+    padding-left: 10px;
+}
+
+.breadcrumb-item a {
+    text-decoration: none;
+}
+
+/*SEND MONEY*/
+.sendMoney .sectionTitle {
+    display: flex;
+    justify-content: space-between;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.sectionTitle .btn {
+    margin: 0;
+    height: 42px;
+    line-height: 32px;
+}
+
+.paySection {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #F5F5F5;
+    max-width: 800px;
+    height: 156px;
+    margin: 0 auto;
+}
+
+.paySection #selection {
+    height: 42px;
+
+}
+
+.paySection .btn {
+    background-color: #5CB85C;
+    height: 42px;
+    line-height: 32px;
+    border: none;
+    margin: 0;
+}
