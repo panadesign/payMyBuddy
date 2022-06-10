@@ -1,8 +1,1 @@
-/.idea/$PROJECT_FILE$
-/.idea/.gitignore
-/.idea/checkstyle-idea.xml
-/.idea/misc.xml
-/.idea/modules.xml
-/.idea/payMyBuddy.iml
-/.idea/qaplug_profiles.xml
-/.idea/vcs.xml
+/target/
