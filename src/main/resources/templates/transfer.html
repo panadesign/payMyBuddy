@@ -2,43 +2,72 @@
 <html xmlns:th="https://www.thymeleaf.org" lang="fr">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PayMyBuddy | transfer</title>
-    <link media="all" rel="stylesheet" th:href="@{/css/style.css}" type="text/css"/>
-    <link media="all" rel="stylesheet" th:href="@{/css/reset.css}" type="text/css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+            integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+            integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+            crossorigin="anonymous"></script>
+    <link media="all" rel="stylesheet" href="/css/style.css" type="text/css"/>
 </head>
 <body>
-    <header>
-        <h1>Pay My Buddy</h1>
-        <nav>
-            <ul>
-                <li>Home</li>
-                <li>Transfer</li>
-                <li>Profile</li>
-                <li>Contact</li>
-                <li>Log off</li>
-            </ul>
-        </nav>
-        <div class="ariane">Home / Transfer</div>
-    </header>
+    <div class="container">
+        <header>
+            <nav class="navbar navbar-expand-lg">
+                <h1 id="logo">Pay My Buddy</h1>
+                <menu class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Transfer</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Log off</a>
+                        </li>
+                    </ul>
+                </menu>
 
-    <section class="sendMoney">
-        <div class="sectionTitle">
-            <div>Send Money</div>
-            <button class="addConnection">Add Connection</button>
-        </div>
-        <div class="paySection">
-            <select name="connections" id="selection">
-                <option value="">Select a connection</option>
-                <option value="dog">Pers1</option>
-                <option value="cat">Pers2</option>
-            </select>
+            </nav>
+            <nav aria-label="breadcrumb" class="ariane">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Transfer</li>
+                </ol>
+            </nav>
+        </header>
 
-            <button class="pay">Pay</button>
-        </div>
-    </section>
-    <section class="myTransactions">
+        <section class="container-lg sendMoney">
+            <div class="sectionTitle">
+                <h2>Send Money</h2>
+                <button class="btn btn-primary">Add Connection</button>
+            </div>
+            <div class="paySection">
+                <select class="form-select" name="connections" id="selection">
+                    <option value="">Select a connection</option>
+                    <option value="dog">User1</option>
+                    <option value="cat">User2</option>
+                </select>
 
-    </section>
+                <input class="form-control" type="number" id="amount" name="amount" min="1" placeholder="0€">
 
+                <button class="btn btn-primary">Pay</button>
+            </div>
+        </section>
+        <section class="myTransactions">
+
+        </section>
+    </div>
 </body>
 </html>

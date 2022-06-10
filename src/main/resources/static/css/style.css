@@ -1,100 +1,97 @@
-body {
-    display: flex;
-    display: -webkit-flex;
-    justify-content: center;
-    align-items: center;-webkit-align-items: center;
-    font-size: 16px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    height: 100vh;
-}
-
-.loggingForm {
+.container-login {
+    border: solid 2px #afafaf;
+    border-radius: 10px;
+    padding: 40px;
+    max-width: 520px;
+    height: 630px;
     display: flex;
     justify-content: space-around;
     flex-direction: column;
-    max-width: 724px;
-    height: 600px;
-    border: #AFAFAF solid 2px;
-    border-radius: 10px;
-    padding: 20px;
+    top: 50vh;
+    position: relative;
+    margin-top: -315px;
 }
 
 #logo {
     width: 288px;
-    height: 80px;
+    height: 52px;
     margin: 0 auto;
     border-radius: 10px;
     color: #fff;
     text-align: center;
     font-size: 1.8rem;
     font-weight: 800;
-    line-height: 5rem;
+    line-height: 52px;
     background: linear-gradient(to right, #60B95A, #AED581);
+    }
 
-}
-
-input {
+.btn {
+    margin: 0 auto;
     display: block;
+    width: 200px;
+    height: 58px;
+    font-weight: 700;
+}
+
+.form-control {
+    height: 64px;
+    border-color: #F5F5F5;
+    border-radius: 5px;
+}
+/*NAV*/
+.navbar-collapse {
+    justify-content: end;
+}
+
+.nav-link active {
+    color: #0275D8;
+}
+
+/*ARIANE*/
+.ariane{
+    background-color: #F5F5F5;
+    height: 52px;
+    line-height: 52px;
+    padding-left: 10px;
+}
+
+.breadcrumb-item a {
+    text-decoration: none;
+}
+
+/*SEND MONEY*/
+.sendMoney .sectionTitle {
+    display: flex;
+    justify-content: space-between;
+    max-width: 800px;
     margin: 0 auto;
-    width: 652px;
-    height: 90px;
-    border: #C8C8C8 solid 2px;
-    border-radius: 10px;
 }
 
-input#email {
-    background-image: url(../img/email.png);
-    background-repeat: no-repeat;
-    background-size: 60px;
-    background-position: 10px;
-    text-indent: 60px;
+.sectionTitle .btn {
+    margin: 0;
+    height: 42px;
+    line-height: 32px;
 }
 
-input#password {
-    background-image: url(../img/password.png);
-    background-repeat: no-repeat;
-    background-size: 30px;
-    background-position: 20px;
-    text-indent: 60px;
-}
-
-::placeholder {
-    color: #616161;
-    font-size: 1.5rem;
-}
-
-.checkBox {
-
+.paySection {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #F5F5F5;
+    max-width: 800px;
+    height: 156px;
     margin: 0 auto;
 }
 
-.checkBox label {
-    margin-left: 20px;
-    line-height: 40px;
-}
-
-input#rememberMe {
-    float: left;
-}
-
-
-#rememberMe {
-    width: 40px;
-    height: 40px;
-    border: #C8C8C8 solid 2px;
-    border-radius: 2px;
+.paySection #selection {
+    height: 42px;
 
 }
 
-.cta {
-    display: block;
-    width: 280px;
-    height: 80px;
-    margin: 0 auto;
-    color: #fff;
-    background-color: #0275D8;
+.paySection .btn {
+    background-color: #5CB85C;
+    height: 42px;
+    line-height: 32px;
     border: none;
-    font-size: 1.8rem;
-    font-weight: 800;
-    line-height: 5rem;
+    margin: 0;
 }

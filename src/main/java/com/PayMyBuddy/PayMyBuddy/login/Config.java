@@ -17,21 +17,24 @@ public class Config extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
 		auth.inMemoryAuthentication()
-				.withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN", "USER")
+				.withUser("user1").password(passwordEncoder().encode("user1")).roles("USER")
 				.and()
-				.withUser("user").password(passwordEncoder().encode("user")).roles("USER");
+				.withUser("user2").password(passwordEncoder().encode("user2")).roles("USER")
+				.and()
+				.withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN");
 	}
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
+		http
+				.authorizeRequests()
 				.antMatchers("/admin").hasRole("ADMIN")
-				.antMatchers("/user").hasRole("USER")
+				.antMatchers("/user*").hasRole("USER")
 				.anyRequest().authenticated()
 				.and()
 				.formLogin()
-				.defaultSuccessUrl("/transfer.html",true)
 				.loginPage("/login")
+				.defaultSuccessUrl("/transfer").permitAll()
 				.permitAll();
 	}
 
