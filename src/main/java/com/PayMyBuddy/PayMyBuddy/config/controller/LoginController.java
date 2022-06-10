@@ -1,4 +1,4 @@
-package com.PayMyBuddy.PayMyBuddy.login.controller;
+package com.PayMyBuddy.PayMyBuddy.config.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

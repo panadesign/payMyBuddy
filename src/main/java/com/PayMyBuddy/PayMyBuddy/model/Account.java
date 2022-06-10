@@ -1,22 +1,24 @@
-package com.PayMyBuddy.model;
+package com.PayMyBuddy.PayMyBuddy.model;
+
+import java.util.UUID;
 
 public class Account {
 
-	private int id;
+	private UUID id;
 	private int accountNumber;
 	private float balance;
 
-	public Account(int id, int accountNumber, float balance) {
+	public Account(UUID id, int accountNumber, float balance) {
 		this.id = id;
 		this.accountNumber = accountNumber;
 		this.balance = balance;
 	}
 
-	public int getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

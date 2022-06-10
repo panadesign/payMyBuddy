@@ -1,4 +1,4 @@
-package com.PayMyBuddy.PayMyBuddy.login;
+package com.PayMyBuddy.PayMyBuddy.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,8 +42,10 @@ public class Config extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) {
 		web.ignoring()
 				.antMatchers(
-						"/css/**", "/img/**");
+						"/css/**", "/img/**")
+				.antMatchers("/h2-console/**");
 	}
+
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {

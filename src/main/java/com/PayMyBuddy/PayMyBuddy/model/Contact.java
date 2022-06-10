@@ -1,25 +1,27 @@
-package com.PayMyBuddy.model;
+package com.PayMyBuddy.PayMyBuddy.model;
 
-public class User {
+import java.util.List;
 
-	private int id;
+public class Contact {
+
+	private List<Person> friendList;
 	private String firstName;
 	private String lastName;
 	private String email;
 
-	public User(int id, String firstName, String lastName, String email) {
-		this.id = id;
+	public Contact(List<Person> friendList, String firstName, String lastName, String email) {
+		this.friendList = friendList;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 	}
 
-	public int getId() {
-		return id;
+	public List<Person> getFriendList() {
+		return friendList;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setFriendList(List<Person> friendList) {
+		this.friendList = friendList;
 	}
 
 	public String getFirstName() {
