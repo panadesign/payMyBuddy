@@ -7,14 +7,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PersonService {
-	@Autowired
-	PersonRepository personRepository;
+//	@Autowired
+//	private PersonRepository personRepository;
+//
+//	public Iterable<Person> getPersons() {
+//		return personRepository.findAll();
+//	}
 
-	public Iterable<Person> getPersons() {
-		return personRepository.findAll();
-	}
-
-	public Long countPersons() {
-		return personRepository.count();
-	}
 }

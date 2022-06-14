@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import java.util.UUID;
 
 @Entity
+@Component
 @Table(name="person")
 public class Person {
 
