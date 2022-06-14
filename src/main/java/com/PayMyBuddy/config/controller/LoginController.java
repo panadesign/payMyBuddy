@@ -1,4 +1,4 @@
-package com.PayMyBuddy.PayMyBuddy.config.controller;
+package com.PayMyBuddy.config.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,28 +9,16 @@ import javax.annotation.security.RolesAllowed;
 @Controller
 public class LoginController {
 
+	@RolesAllowed("USER")
 	@GetMapping("/login")
 	public String login() {
 		return "login";
 	}
 
+	@RolesAllowed("USER")
 	@GetMapping("/transfer")
 	public String transfer() {
 		return "transfer";
 	}
-
-	@RequestMapping("/*")
-	@RolesAllowed("USER")
-	public String getUser() {
-		return "Welcome user!";
-	}
-
-	@RequestMapping("/admin")
-	@RolesAllowed("ADMIN")
-	public String getAdmin() {
-		return "Welcome admin!";
-	}
-
-
 
 }

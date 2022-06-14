@@ -1,4 +1,4 @@
-package com.PayMyBuddy.PayMyBuddy.model;
+package com.PayMyBuddy.model;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
@@ -8,27 +8,32 @@ import org.springframework.stereotype.Component;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.UUID;
 
 @Entity
-@Component
+@Table(name="person")
 public class Person {
 
 	@Id
 	@GeneratedValue(generator = "UUID")
-	@GenericGenerator(
-			name = "UUID",
-			strategy = "org.hibernate.id.UUIDGenerator"
-	)@Column(name = "ID", updatable = false, nullable = false)
+	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+	@Column(name = "id", updatable = false, nullable = false)
 	@ColumnDefault("random_uuid()")
 	@Type(type = "uuid-char")
-	private UUID id = UUID.randomUUID();;
+	private UUID id = UUID.randomUUID();
+
+	@Column(name = "email")
 	private String email;
+
+	@Column(name = "firstName")
 	private String firstName;
+
+	@Column(name = "lastName")
 	private String lastName;
+
+	@Column(name = "password")
 	private String password;
 
 	public Person(UUID id, String firstName, String lastName, String email, String password) {

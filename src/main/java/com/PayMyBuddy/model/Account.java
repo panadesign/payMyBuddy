@@ -1,16 +1,14 @@
-package com.PayMyBuddy.PayMyBuddy.model;
+package com.PayMyBuddy.model;
 
 import java.util.UUID;
 
 public class Account {
 
 	private UUID id;
-	private int accountNumber;
 	private float balance;
 
-	public Account(UUID id, int accountNumber, float balance) {
+	public Account(UUID id, float balance) {
 		this.id = id;
-		this.accountNumber = accountNumber;
 		this.balance = balance;
 	}
 
@@ -20,14 +18,6 @@ public class Account {
 
 	public void setId(UUID id) {
 		this.id = id;
-	}
-
-	public int getAccountNumber() {
-		return accountNumber;
-	}
-
-	public void setAccountNumber(int accountNumber) {
-		this.accountNumber = accountNumber;
 	}
 
 	public float getBalance() {

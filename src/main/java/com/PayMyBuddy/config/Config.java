@@ -1,4 +1,4 @@
-package com.PayMyBuddy.PayMyBuddy.config;
+package com.PayMyBuddy.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,23 +19,20 @@ public class Config extends WebSecurityConfigurerAdapter {
 		auth.inMemoryAuthentication()
 				.withUser("user1").password(passwordEncoder().encode("user1")).roles("USER")
 				.and()
-				.withUser("user2").password(passwordEncoder().encode("user2")).roles("USER")
-				.and()
-				.withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN");
+				.withUser("user2").password(passwordEncoder().encode("user2")).roles("USER");
 	}
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http
 				.authorizeRequests()
-				.antMatchers("/admin").hasRole("ADMIN")
-				.antMatchers("/user*").hasRole("USER")
 				.anyRequest().authenticated()
 				.and()
 				.formLogin()
 				.loginPage("/login")
 				.defaultSuccessUrl("/transfer").permitAll()
 				.permitAll();
+
 	}
 
 	@Override
