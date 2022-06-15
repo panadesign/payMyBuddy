@@ -28,20 +28,20 @@ public class Person {
 	@Column(name = "email")
 	private String email;
 
-	@Column(name = "firstName")
-	private String firstName;
+	@Column(name = "firstname")
+	private String firstname;
 
-	@Column(name = "lastName")
-	private String lastName;
+	@Column(name = "lastname")
+	private String lastname;
 
 	@Column(name = "password")
 	private String password;
 
-	public Person(UUID id, String firstName, String lastName, String email, String password) {
+	public Person(UUID id, String firstname, String lastname, String email, String password) {
 		this.id = id;
 		this.email = email;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.firstname = firstname;
+		this.lastname = lastname;
 		this.password = password;
 	}
 
@@ -67,19 +67,19 @@ public class Person {
 	}
 
 	public String getFirstName() {
-		return firstName;
+		return firstname;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setFirstName(String firstname) {
+		this.firstname = firstname;
 	}
 
 	public String getLastName() {
-		return lastName;
+		return lastname;
 	}
 
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastname = lastname;
 	}
 
 	public String getPassword() {

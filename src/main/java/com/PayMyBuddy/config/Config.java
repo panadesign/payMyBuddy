@@ -28,10 +28,17 @@ public class Config extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				.anyRequest().authenticated()
 				.and()
-				.formLogin()
+				.formLogin().permitAll()
 				.loginPage("/login")
 				.defaultSuccessUrl("/transfer").permitAll()
-				.permitAll();
+				.and()
+				.oauth2Login()
+				.loginPage("/login")
+				.defaultSuccessUrl("/transfer").permitAll()
+				.and()
+				.logout()
+				.logoutUrl("/perform_logout")
+				.logoutSuccessUrl("/login");
 
 	}
 
