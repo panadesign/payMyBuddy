@@ -96,7 +96,11 @@ h1 a {
 }
 
 /*SEND MONEY*/
-.sendMoney .sectionTitle {
+.sendMoney, .myTransactions {
+    margin-top: 40px;
+}
+
+.sendMoney .sectionTitle, .myTransactions .sectionTitle {
     display: flex;
     justify-content: space-between;
     max-width: 800px;
@@ -117,11 +121,19 @@ h1 a {
     max-width: 800px;
     height: 156px;
     margin: 0 auto;
+    padding: 0 80px;
 }
 
-.paySection #selection {
-    height: 42px;
+.paySection>* {
+    margin: 0 20px;
+}
 
+.paySection #selection, .form-control{
+    height: 42px;
+}
+
+.paySection .form-select {
+    border: none;
 }
 
 .paySection .btn {
@@ -130,4 +142,10 @@ h1 a {
     line-height: 32px;
     border: none;
     margin: 0;
+}
+
+.myTransactions .table {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
 }

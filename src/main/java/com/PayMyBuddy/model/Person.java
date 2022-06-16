@@ -3,17 +3,19 @@ package com.PayMyBuddy.model;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.springframework.stereotype.Component;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.UUID;
 
 @Entity
-@Component
 @Table(name="person")
 public class Person {
 
@@ -24,6 +26,8 @@ public class Person {
 	@ColumnDefault("random_uuid()")
 	@Type(type = "uuid-char")
 	private UUID id = UUID.randomUUID();
+
+	private UUID id_account = UUID.randomUUID();
 
 	@Column(name = "email")
 	private String email;
@@ -36,6 +40,14 @@ public class Person {
 
 	@Column(name = "password")
 	private String password;
+
+	@OneToOne(
+			cascade = CascadeType.ALL,
+			orphanRemoval = true,
+			fetch = FetchType.EAGER
+	)
+	@JoinColumn(name = "id_account", insertable = false, updatable = false)
+	private Account account;
 
 	public Person(UUID id, String firstname, String lastname, String email, String password) {
 		this.id = id;
@@ -57,6 +69,13 @@ public class Person {
 		this.id = id;
 	}
 
+	public UUID getId_account() {
+		return id_account;
+	}
+
+	public void setId_account(UUID id_account) {
+		this.id_account = id_account;
+	}
 
 	public String getEmail() {
 		return email;
