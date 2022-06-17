@@ -1,7 +1,6 @@
-package com.PayMyBuddy.service;
+package com.payMyBuddy.service;
 
-import com.PayMyBuddy.dao.PersonRepository;
-import com.PayMyBuddy.model.Person;
+import com.payMyBuddy.dao.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,0 +1,10 @@
+[
+  {
+    "_class": "com.payMyBuddy.model.Account",
+    "balance": 430.50
+  },
+  {
+    "_class": "com.payMyBuddy.model.Account",
+    "balance": 1000
+  }
+]

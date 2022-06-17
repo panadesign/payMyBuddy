@@ -1,12 +1,11 @@
-package com.PayMyBuddy.dao;
+package com.payMyBuddy.dao;
 
-import com.PayMyBuddy.model.Person;
+import com.payMyBuddy.model.Account;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
 import java.util.UUID;
 
 @Repository
-public interface PersonRepository extends CrudRepository<Person, UUID> {
+public interface AccountRepository extends CrudRepository<Account, UUID> {
 
 }
