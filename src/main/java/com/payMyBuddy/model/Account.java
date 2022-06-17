@@ -27,4 +27,12 @@ public class Account {
 
 	@Column
 	private float balance;
+
+	@OneToOne(
+			cascade = CascadeType.ALL,
+			orphanRemoval = true,
+			fetch = FetchType.EAGER
+	)
+	@JoinColumn
+	private Person person;
 }

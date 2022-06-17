@@ -17,8 +17,7 @@ public class PayMyBuddyApplication {
 	@Bean
 	public Jackson2RepositoryPopulatorFactoryBean getRespositoryPopulator() {
 		Jackson2RepositoryPopulatorFactoryBean factory = new Jackson2RepositoryPopulatorFactoryBean();
-		factory.setResources(new Resource[]{new ClassPathResource("person-data.json")});
-		factory.setResources(new Resource[]{new ClassPathResource("account-data.json")});
+		factory.setResources(new Resource[]{new ClassPathResource("person-data.json"), new ClassPathResource("account-data.json")});
 		return factory;
 	}
 }

@@ -14,5 +14,13 @@
     "lastname": "Béranger",
     "password": "123",
     "status": "ACTIVE"
+  },
+  {
+    "_class": "com.payMyBuddy.model.Person",
+    "email": "a.sylvestre@mail.com",
+    "firstname": "Anne",
+    "lastname": "Sylvestre",
+    "password": "123",
+    "status": "ACTIVE"
   }
 ]

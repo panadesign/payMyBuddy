@@ -18,8 +18,4 @@ public class PersonService {
 		return persons;
 	}
 
-//	public Person addPerson() {
-//		addPerson().setEmail();
-//	}
-
 }
