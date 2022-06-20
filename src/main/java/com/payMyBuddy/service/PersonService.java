@@ -1,21 +1,27 @@
 package com.payMyBuddy.service;
 
 import com.payMyBuddy.dao.PersonRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.payMyBuddy.model.Person;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
+@Component
 public class PersonService {
-	@Autowired
-	private PersonRepository personRepository;
 
-	public List getAllPersons() {
-		List persons = new ArrayList();
-		personRepository.findAll().forEach(person -> persons.add(person));
-		return persons;
+	private final PersonRepository personRepository;
+
+	public PersonService(PersonRepository personRepository) {
+		this.personRepository = personRepository;
+	}
+
+	public Iterable<Person> getAllPersons() {
+		return personRepository.findAll();
+	}
+
+	public Person addPerson(Person person) {
+		personRepository.save(person);
+		return person;
 	}
 
 }

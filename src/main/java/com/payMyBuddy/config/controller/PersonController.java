@@ -1,5 +1,6 @@
 package com.payMyBuddy.config.controller;
 
+import com.payMyBuddy.model.Person;
 import com.payMyBuddy.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +15,7 @@ public class PersonController {
 	private PersonService personService;
 
 	@GetMapping("/person")
-	private List getAllPersons() {
+	private Iterable<Person> getAllPersons() {
 		return personService.getAllPersons();
 	}
 
