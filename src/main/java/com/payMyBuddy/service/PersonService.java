@@ -5,6 +5,8 @@ import com.payMyBuddy.model.Person;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Component
 public class PersonService {
@@ -15,7 +17,7 @@ public class PersonService {
 		this.personRepository = personRepository;
 	}
 
-	public Iterable<Person> getAllPersons() {
+	public List<Person> getAllPersons() {
 		return personRepository.findAll();
 	}
 

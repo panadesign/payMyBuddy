@@ -36,7 +36,7 @@ class PersonServiceTest {
 
 		//WHEN
 		when(mockPersonRepository.findAll()).thenReturn(persons);
-		Iterable<Person> allPersons = personService.getAllPersons();
+		List<Person> allPersons = personService.getAllPersons();
 
 		//THEN
 		Assertions.assertEquals(persons, allPersons);
