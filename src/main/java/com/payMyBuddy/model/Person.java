@@ -71,14 +71,14 @@ public class Person {
 	)
 	private List<Person> friendList = new ArrayList<>();
 
-	public Person(String email, String firstname, String lastname, String password) throws NoSuchAlgorithmException {
+	public Person(String email, String firstname, String lastname, String password) {
 		this.email = email;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.password = password;
 	}
 
-	public Person(String email, String firstname, String lastname, String password, List<Person> friendList) throws NoSuchAlgorithmException {
+	public Person(String email, String firstname, String lastname, String password, List<Person> friendList) {
 		this.email = email;
 		this.firstname = firstname;
 		this.lastname = lastname;
