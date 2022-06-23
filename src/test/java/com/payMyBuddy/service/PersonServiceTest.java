@@ -55,4 +55,31 @@ class PersonServiceTest {
 		Assertions.assertEquals(person, personAdded);
 	}
 
+	@Test
+	void getPersonByEmail() {
+		//GIVEN
+		Person person1 = new Person("email1", "prenom1", "nom1", "password1");
+
+		//WHEN
+		when(mockPersonRepository.findByEmail("email1")).thenReturn(person1);
+		Person personToFind = personService.getPersonByEmail("email1");
+
+		//THEN
+		Assertions.assertEquals(personToFind, person1);
+	}
+
+	@Test
+	void addFriend() {
+		//GIVEN
+		List<Person> friendList = new ArrayList<>();
+		Person person1 = new Person("email1", "prenom1", "nom1", "password1", friendList);
+		Person person2 = new Person("email2", "prenom2", "nom2", "password2", friendList);
+
+		//WHEN
+		when(mockPersonRepository.findByEmail(person2.getEmail())).thenReturn(person2);
+		personService.addFriend(person2);
+
+		//THEN
+		Assertions.assertTrue(person1.getFriendList().contains(person2));
+	}
 }

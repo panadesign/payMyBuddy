@@ -15,7 +15,7 @@ public class PersonController {
 	private PersonService personService;
 
 	@GetMapping("/person")
-	private Iterable<Person> getAllPersons() {
+	private List<Person> getAllPersons() {
 		return personService.getAllPersons();
 	}
 

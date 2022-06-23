@@ -15,7 +15,7 @@
     <name>PayMyBuddy</name>
     <description>Solutions bancaires et financières</description>
     <properties>
-        <java.version>17</java.version>
+        <java.version>1.8</java.version>
         <dep.junit.version>5.8.2</dep.junit.version>
     </properties>
     <dependencies>
@@ -216,11 +216,19 @@
                         </configuration>
                     </execution>
                 </executions>
-
+                <configuration>
+                    <excludes>
+                        <exclude>com/payMyBuddy/dto/*</exclude>
+                        <exclude>com/payMyBuddy/model/*</exclude>
+                        <exclude>com/payMyBuddy/PayMyBuddyApplication.class</exclude>
+                        <exclude>com/payMyBuddy/actuator/*</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
+                <version>3.7.1</version>
 
             </plugin>
             <plugin>
@@ -275,6 +283,9 @@
         </profile>
         <profile>
             <id>prod</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
             <properties>
                 <activatedProperties>prod</activatedProperties>
             </properties>

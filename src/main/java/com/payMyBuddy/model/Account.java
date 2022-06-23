@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -39,4 +40,5 @@ public class Account {
 	)
 	@JoinColumn
 	private Person person;
+
 }

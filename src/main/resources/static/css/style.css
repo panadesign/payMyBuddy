@@ -149,3 +149,11 @@ h1 a {
     margin: 0 auto;
     text-align: center;
 }
+
+.signup {
+    text-align: center;
+}
+
+.signup p {
+    margin-bottom: 0;
+}
