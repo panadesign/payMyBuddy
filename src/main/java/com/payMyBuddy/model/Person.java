@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,9 +14,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -27,7 +26,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table
-@DynamicUpdate
+//@DynamicUpdate
 @EqualsAndHashCode
 public class Person {
 
@@ -35,7 +34,7 @@ public class Person {
 	@GeneratedValue(generator = "UUID")
 	private UUID id;
 
-	@Column
+	@Column(nullable = false, unique = true)
 	private String email;
 
 	@Column
@@ -58,7 +57,7 @@ public class Person {
 	@JoinColumn
 	private Account account;
 
-	@ManyToMany(
+	@OneToMany(
 			cascade = {
 					CascadeType.PERSIST,
 					CascadeType.MERGE
@@ -69,7 +68,7 @@ public class Person {
 			joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "friend_id")
 	)
-	private List<Person> friendList = new ArrayList<>();
+	private List<Person> friendsList = new ArrayList<>();
 
 	public Person(String email, String firstname, String lastname, String password) {
 		this.email = email;
@@ -78,12 +77,12 @@ public class Person {
 		this.password = password;
 	}
 
-	public Person(String email, String firstname, String lastname, String password, List<Person> friendList) {
+	public Person(String email, String firstname, String lastname, String password, List<Person> friendsList) {
 		this.email = email;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.password = password;
-		this.friendList = friendList;
+		this.friendsList = friendsList;
 	}
 
 
