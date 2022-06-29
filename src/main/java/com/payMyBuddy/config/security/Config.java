@@ -13,11 +13,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.HeaderWriterLogoutHandler;
+import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-@ComponentScan(basePackages = { "com.payMyBuddy.config.security" })
-
 public class Config extends WebSecurityConfigurerAdapter {
 
 	@Bean
@@ -31,7 +32,7 @@ public class Config extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	public DaoAuthenticationProvider authenticationProvider() {
+	public DaoAuthenticationProvider authProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 		authProvider.setUserDetailsService(userDetailsService());
 		authProvider.setPasswordEncoder(passwordEncoder());
@@ -40,33 +41,42 @@ public class Config extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.authenticationProvider(authProvider());
+	}
+
+	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http
-				.authorizeRequests()
+		http.authorizeRequests()
 				.anyRequest().authenticated()
 				.and()
 				.formLogin().permitAll()
 				.loginPage("/login")
-				.defaultSuccessUrl("/transfer").permitAll()
+				.usernameParameter("email")
+				.passwordParameter("password")
+				.permitAll()
+				.defaultSuccessUrl("/transfer")
+				.loginPage("/signup").permitAll()
+				.defaultSuccessUrl("/login")
 				.and()
 				.oauth2Login()
 				.loginPage("/login")
-				.defaultSuccessUrl("/transfer").permitAll()
 				.and()
 				.logout()
-				.logoutUrl("/perform_logout")
-				.logoutSuccessUrl("/login");
-
-
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutSuccessUrl("/login")
+				.invalidateHttpSession(true)        // set invalidation state when logout
+				.deleteCookies("JSESSIONID")
+				.and()
+				.exceptionHandling()
+				.accessDeniedPage("/403");
 	}
 
 	@Override
 	public void configure(WebSecurity web) {
 		web.ignoring()
-				.antMatchers(
-						"/css/**", "/img/**")
+				.antMatchers("/css/**", "/img/**")
 				.antMatchers("/h2-console/**");
 	}
-
 
 }

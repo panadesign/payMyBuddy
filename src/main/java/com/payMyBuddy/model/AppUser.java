@@ -1,5 +1,6 @@
 package com.payMyBuddy.model;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -24,26 +24,29 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table
-//@DynamicUpdate
-@EqualsAndHashCode
-public class Person {
+public class AppUser {
 
 	@Id
 	@GeneratedValue(generator = "UUID")
-	private UUID id;
+	private UUID person_id;
 
 	@Column(nullable = false, unique = true)
+	@NotNull
 	private String email;
 
 	@Column
+	@NotNull
 	private String firstname;
 
 	@Column
+	@NotNull
 	private String lastname;
 
 	@Column
+	@NotNull
 	private String password;
 
 	@Column
@@ -65,25 +68,26 @@ public class Person {
 	)
 	@JoinTable(
 			name = "friendslist",
-			joinColumns = @JoinColumn(name = "user_id"),
+			joinColumns = @JoinColumn(name = "person_id"),
 			inverseJoinColumns = @JoinColumn(name = "friend_id")
 	)
-	private List<Person> friendsList = new ArrayList<>();
+	private List<AppUser> friendsList = new ArrayList<>();
 
-	public Person(String email, String firstname, String lastname, String password) {
+
+
+	public AppUser(String email, String firstname, String lastname, String password) {
 		this.email = email;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.password = password;
 	}
 
-	public Person(String email, String firstname, String lastname, String password, List<Person> friendsList) {
+	public AppUser(String email, String firstname, String lastname, String password, List<AppUser> friendsList) {
 		this.email = email;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.password = password;
 		this.friendsList = friendsList;
 	}
-
 
 }

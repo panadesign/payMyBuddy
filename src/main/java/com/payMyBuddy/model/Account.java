@@ -11,11 +11,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,7 +27,7 @@ public class Account {
 
 	@Id
 	@GeneratedValue(generator = "UUID")
-	private UUID id;
+	private UUID account_id;
 
 	@Column
 	private float balance;
@@ -39,6 +38,12 @@ public class Account {
 			fetch = FetchType.EAGER
 	)
 	@JoinColumn
-	private Person person;
+	private AppUser appUser;
 
+	@OneToMany(
+			cascade = CascadeType.PERSIST,
+			fetch = FetchType.EAGER
+	)
+	@Column(name = "account_id")
+	List<Transaction> transactions = new ArrayList<>();
 }

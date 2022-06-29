@@ -22,7 +22,7 @@ public class Transaction {
 
 	@Id
 	@GeneratedValue(generator = "UUID")
-	private UUID id;
+	private UUID transaction_id;
 	private float amount;
 	private Currency currency;
 	private String description;
@@ -30,10 +30,17 @@ public class Transaction {
 
 	@ManyToOne
 	@JoinColumn
-	private Person debtor;
+	private AppUser debtor;
 
 
 	@ManyToOne
 	@JoinColumn
-	private Person creditor;
+	private AppUser creditor;
+//
+//	@ManyToOne(
+//			cascade = CascadeType.PERSIST,
+//	fetch = FetchType.EAGER
+//	)
+//	@Column(name = "transaction_id")
+//	private Account account;
 }

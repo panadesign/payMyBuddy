@@ -150,10 +150,16 @@ h1 a {
     text-align: center;
 }
 
-.signup {
+.signup, .signin {
+    margin: 0 auto;
     text-align: center;
 }
 
 .signup p {
     margin-bottom: 0;
+}
+
+.or {
+    display: block;
+    margin: 0 auto;
 }

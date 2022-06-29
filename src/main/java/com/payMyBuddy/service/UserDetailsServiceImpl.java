@@ -1,23 +1,32 @@
 package com.payMyBuddy.service;
 
-import com.payMyBuddy.dao.PersonRepository;
-import com.payMyBuddy.model.Person;
+import com.payMyBuddy.dao.AppUserRepository;
+import com.payMyBuddy.model.AppUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
-	private PersonRepository personRepository;
+	private AppUserRepository appUserRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String email) {
-		Person person = personRepository.findByEmail(email);
-		if (email == null) {
-			throw new UsernameNotFoundException(email);
+		AppUser appUser = appUserRepository.findByEmail(email);
+		if(email == null) {
+			throw new UsernameNotFoundException("email");
 		}
-		return new MyUserDetails(person);
+
+		Collection authorities = new ArrayList<>();
+
+		User user = new User(appUser.getEmail(), appUser.getPassword(), authorities);
+		return user;
 	}
+
 }
