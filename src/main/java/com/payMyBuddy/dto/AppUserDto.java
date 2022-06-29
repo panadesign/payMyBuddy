@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-public class PersonDto {
+public class AppUserDto {
 	private UUID id;
 	private String email;
 	private String firstname;
@@ -14,7 +14,7 @@ public class PersonDto {
 	private String password;
 	private AccountStatus status;
 
-	public PersonDto(String email, String firstname, String lastname, String password) {
+	public AppUserDto(String email, String firstname, String lastname, String password) {
 		this.email = email;
 		this.firstname = firstname;
 		this.lastname = lastname;

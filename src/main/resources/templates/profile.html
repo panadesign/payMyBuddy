@@ -10,7 +10,7 @@
     <link media="all" rel="stylesheet" href="/css/style.css" type="text/css"/>
 </head>
 <body>
-<form class="container-sm container-login" name="sign" th:action="@{/profile}" method="post">
+<form class="container-sm container-login" name="profile" th:action="@{/profile}" method="GET">
     <h1 id="logo">Pay My Buddy</h1>
     <h4>Mon prénom : th:text="${PersonDto.firstname}"</h4>
 

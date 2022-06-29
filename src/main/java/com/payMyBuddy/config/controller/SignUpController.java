@@ -1,5 +1,6 @@
 package com.payMyBuddy.config.controller;
 
+import com.payMyBuddy.dto.AppUserDto;
 import com.payMyBuddy.model.AppUser;
 import com.payMyBuddy.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class SignUpController {
 
 	@PostMapping("/addAppUser")
 	@ResponseBody
-	public String addAppUser(@ModelAttribute AppUser appUser){
-		appUserService.addAppUser(appUser);
+	public String addAppUser(@ModelAttribute AppUserDto appUserDto) throws Exception {
+		appUserService.registerNewUserAccount(appUserDto);
 		return"Your account has been created !";
 	}
 }

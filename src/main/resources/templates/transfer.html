@@ -4,78 +4,86 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PayMyBuddy | transfer</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+            integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+            integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+            crossorigin="anonymous"></script>
     <link media="all" rel="stylesheet" href="/css/style.css" type="text/css"/>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <nav class="navbar navbar-expand-lg">
-                <h1 id="logo">
-                    <a th:href="@{/login}">Pay My Buddy</a>
-                </h1>
-                <menu class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/login}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Transfer</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/profile}">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/contact}">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/logout}"/>Log off</a>
-                        </li>
-                    </ul>
-                </menu>
+<div class="container">
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <h1 id="logo">
+                <a th:href="@{/login}">Pay My Buddy</a>
+            </h1>
+            <menu class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/login}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Transfer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/profile}">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/contact}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/logout}">Log off</a>
+                    </li>
+                </ul>
+            </menu>
 
-            </nav>
-            <nav aria-label="breadcrumb" class="ariane">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href=th:href="@{/login}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Transfer</li>
-                </ol>
-            </nav>
-        </header>
+        </nav>
+        <nav aria-label="breadcrumb" class="ariane">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href=th:href="@{/login}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Transfer</li>
+            </ol>
+        </nav>
+    </header>
 
-        <section class="container-lg sendMoney">
-            <div class="sectionTitle">
-                <h2>Send Money</h2>
-                <button class="btn btn-primary">Add Connection</button>
-            </div>
-            <div class="paySection">
+    <section class="container-lg sendMoney">
+        <div class="sectionTitle">
+            <h2>Send Money</h2>
+            <button class="btn btn-primary">Add Connection</button>
+        </div>
+        <div class="paySection">
+            <label>
                 <select class="form-select" name="connections" id="selection">
                     <option value="">Select a connection</option>
                     <option value="dog">User1</option>
                     <option value="cat">User2</option>
                 </select>
-
+            </label>
+            <label>
                 <input class="form-control" type="number" id="amount" name="amount" min="1" placeholder="0€">
+            </label>
 
-                <button class="btn btn-primary">Pay</button>
-            </div>
-        </section>
-        <section class="container-lg myTransactions">
-            <div class="sectionTitle">
-                <h2>My transactions</h2>
-            </div>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Connections</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Amount</th>
-                </tr>
-                </thead>
-            </table>
-        </section>
-    </div>
+            <button class="btn btn-primary">Pay</button>
+        </div>
+    </section>
+    <section class="container-lg myTransactions">
+        <div class="sectionTitle">
+            <h2>My transactions</h2>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Connections</th>
+                <th scope="col">Description</th>
+                <th scope="col">Amount</th>
+            </tr>
+            </thead>
+        </table>
+    </section>
+</div>
 </body>
 </html>
