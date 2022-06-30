@@ -1,5 +1,6 @@
 package com.payMyBuddy.dto;
 
+import com.payMyBuddy.model.Account;
 import com.payMyBuddy.model.AccountStatus;
 import lombok.Data;
 
@@ -13,6 +14,7 @@ public class AppUserDto {
 	private String lastname;
 	private String password;
 	private AccountStatus status;
+	private Account account;
 
 	public AppUserDto(String email, String firstname, String lastname, String password) {
 		this.email = email;

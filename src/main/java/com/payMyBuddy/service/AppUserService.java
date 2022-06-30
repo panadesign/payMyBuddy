@@ -1,7 +1,9 @@
 package com.payMyBuddy.service;
 
+import com.payMyBuddy.dao.AccountRepository;
 import com.payMyBuddy.dao.AppUserRepository;
 import com.payMyBuddy.dto.AppUserDto;
+import com.payMyBuddy.model.Account;
 import com.payMyBuddy.model.AppUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,6 +19,9 @@ public class AppUserService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	@Autowired
+	private AccountRepository accountRepository;
+
 	private final AppUserRepository appUserRepository;
 
 	public AppUserService(AppUserRepository appUserRepository) {
@@ -27,14 +32,6 @@ public class AppUserService {
 		return appUserRepository.findAll();
 	}
 
-//	public AppUser addAppUser(AppUser appUser) {
-//		appUser.setEmail(appUser.getEmail());
-//		appUser.setFirstname(appUser.getFirstname());
-//		appUser.setLastname(appUser.getLastname());
-//		appUser.setPassword(appUser.getPassword());
-//		appUserRepository.save(appUser);
-//		return appUser;
-//	}
 
 	public AppUser getPersonByEmail(String email) {
 		return appUserRepository.findByEmail(email);
@@ -43,6 +40,11 @@ public class AppUserService {
 	public void addFriend(AppUser appUser) {
 		AppUser newFriend = getPersonByEmail(appUser.getEmail());
 		appUser.getFriendsList().add(newFriend);
+	}
+
+	private boolean emailExist(String email) {
+		AppUser emailExist = appUserRepository.findByEmail(email);
+		return emailExist.getEmail().equals(email);
 	}
 
 	public AppUser registerNewUserAccount(AppUserDto appUserDto) throws Exception {
@@ -57,12 +59,13 @@ public class AppUserService {
 		appUser.setPassword(passwordEncoder.encode(appUserDto.getPassword()));
 
 		appUser.setEmail(appUserDto.getEmail());
+
+		Account account = new Account();
+		account.setBalance(0);
+		appUser.setAccount(account);
 		return appUserRepository.save(appUser);
 	}
 
-//	private boolean emailExist(String email) {
-//		appUserRepository.findByEmail(appUserRepository.get);
-//
-//	}
+
 
 }

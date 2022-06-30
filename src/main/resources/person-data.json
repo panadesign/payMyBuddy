@@ -4,15 +4,13 @@
     "email": "c.miossec@mail.com",
     "firstname": "Christophe",
     "lastname": "Miossec",
-    "password": "$2y$10$Ei4ASFiEKe6PoOUnVlfB5eLPa0IgpWbeS8OlRS5RMx.RwUxLH3Ycm",
-    "status": "ACTIVE"
+    "password": "$2y$10$Ei4ASFiEKe6PoOUnVlfB5eLPa0IgpWbeS8OlRS5RMx.RwUxLH3Ycm"
   },
   {
   "_class": "com.payMyBuddy.model.AppUser",
   "email": "a.sylvestre@mail.com",
   "firstname": "Anne",
   "lastname": "Sylvestre",
-  "password": "$2y$10$QZZ32o0e/IDHF/6PDN0oCOi72ApuRBoMwjYsH3iUF7sSP6ein667S",
-  "status": "INACTIVE"
+  "password": "$2y$10$QZZ32o0e/IDHF/6PDN0oCOi72ApuRBoMwjYsH3iUF7sSP6ein667S"
 }
 ]

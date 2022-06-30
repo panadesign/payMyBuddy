@@ -19,6 +19,9 @@ public class AppUserController {
 		return appUserService.getAllPersons();
 	}
 
-
+	@GetMapping("/profile")
+	private String appUserDto () {
+		return "/profile";
+	}
 
 }

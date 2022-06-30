@@ -14,7 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class AppUser {
 
 	@Id
 	@GeneratedValue(generator = "UUID")
-	private UUID person_id;
+	private UUID id;
 
 	@Column(nullable = false, unique = true)
 	@NotNull
@@ -50,17 +50,13 @@ public class AppUser {
 	private String password;
 
 	@Column
-	private AccountStatus status;
+	private AccountStatus status = AccountStatus.ACTIVE;
 
-	@OneToOne(
-			cascade = CascadeType.ALL,
-			orphanRemoval = true,
-			fetch = FetchType.EAGER
-	)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn
 	private Account account;
 
-	@OneToMany(
+	@ManyToMany(
 			cascade = {
 					CascadeType.PERSIST,
 					CascadeType.MERGE
@@ -72,7 +68,6 @@ public class AppUser {
 			inverseJoinColumns = @JoinColumn(name = "friend_id")
 	)
 	private List<AppUser> friendsList = new ArrayList<>();
-
 
 
 	public AppUser(String email, String firstname, String lastname, String password) {

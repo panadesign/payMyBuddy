@@ -7,13 +7,53 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
-    <link media="all" rel="stylesheet" href="/css/style.css" type="text/css"/>
-</head>
+    <link media="all" rel="stylesheet" th:href="@{/css/style.css}" type="text/css"/></head>
 <body>
-<form class="container-sm container-login" name="profile" th:action="@{/profile}" method="GET">
-    <h1 id="logo">Pay My Buddy</h1>
-    <h4>Mon prénom : th:text="${PersonDto.firstname}"</h4>
+    <div class="container">
+        <header>
+            <nav class="navbar navbar-expand-lg">
+                <h1 id="logo">
+                    <a th:href="@{/login}">Pay My Buddy</a>
+                </h1>
+                <menu class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/login}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/transfer}">Transfer</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/contact}">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/logout}">Log off</a>
+                        </li>
+                    </ul>
+                </menu>
 
-</form>
+            </nav>
+            <nav aria-label="breadcrumb" class="ariane">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href=th:href="@{/login}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                </ol>
+            </nav>
+        </header>
+        <h4>Mon prénom : th:utext=="${AppUserDto.firstname}"</h4>
+        <table border="1">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </tr>
+            <tr th:each ="person : ${appUser}">
+                <td th:utext="${appUser.firstname}">...</td>
+                <td th:utext="${appUser.lastname}">...</td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>

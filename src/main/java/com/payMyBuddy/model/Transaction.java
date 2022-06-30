@@ -22,7 +22,7 @@ public class Transaction {
 
 	@Id
 	@GeneratedValue(generator = "UUID")
-	private UUID transaction_id;
+	private UUID id;
 	private float amount;
 	private Currency currency;
 	private String description;
