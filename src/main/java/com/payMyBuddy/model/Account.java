@@ -20,16 +20,13 @@ import java.util.UUID;
 @Entity
 @Table
 public class Account {
-
+	
 	@Id
 	@GeneratedValue(generator = "UUID")
 	private UUID id;
-
+	
 	@Column
-	private float balance;
-
-	@OneToOne(mappedBy = "account")
-	private AppUser appUser;
+	private float balance = 0;
 
 //	@OneToMany(
 //			cascade = CascadeType.PERSIST,

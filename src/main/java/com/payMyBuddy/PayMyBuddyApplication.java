@@ -14,11 +14,4 @@ public class PayMyBuddyApplication {
 		SpringApplication.run(PayMyBuddyApplication.class, args);
 	}
 
-
-//	@Bean
-//	public Jackson2RepositoryPopulatorFactoryBean getRespositoryPopulator() {
-//		Jackson2RepositoryPopulatorFactoryBean factory = new Jackson2RepositoryPopulatorFactoryBean();
-//		factory.setResources(new Resource[]{new ClassPathResource("person-data.json")});
-//		return factory;
-//	}
 }

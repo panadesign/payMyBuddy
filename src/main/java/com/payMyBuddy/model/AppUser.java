@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,7 +30,7 @@ import java.util.UUID;
 @Entity
 @Table
 public class AppUser {
-
+	
 	@Id
 	@GeneratedValue(generator = "UUID")
 	private UUID id;
@@ -52,8 +54,9 @@ public class AppUser {
 	@Column
 	private AccountStatus status = AccountStatus.ACTIVE;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn
+	@OneToOne(
+			cascade = CascadeType.ALL
+	)
 	private Account account;
 
 	@ManyToMany(
@@ -61,11 +64,6 @@ public class AppUser {
 					CascadeType.PERSIST,
 					CascadeType.MERGE
 			}
-	)
-	@JoinTable(
-			name = "friendslist",
-			joinColumns = @JoinColumn(name = "person_id"),
-			inverseJoinColumns = @JoinColumn(name = "friend_id")
 	)
 	private List<AppUser> friendsList = new ArrayList<>();
 
@@ -75,14 +73,7 @@ public class AppUser {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.password = password;
-	}
-
-	public AppUser(String email, String firstname, String lastname, String password, List<AppUser> friendsList) {
-		this.email = email;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.password = password;
-		this.friendsList = friendsList;
+		this.account = new Account();
 	}
 
 }

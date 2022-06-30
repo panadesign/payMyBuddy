@@ -3,6 +3,8 @@ package com.payMyBuddy.service;
 import com.payMyBuddy.dao.AccountRepository;
 import com.payMyBuddy.dao.AppUserRepository;
 import com.payMyBuddy.dto.AppUserDto;
+import com.payMyBuddy.exception.RessourceNotFoundException;
+import com.payMyBuddy.exception.UserAlreadyExistException;
 import com.payMyBuddy.model.Account;
 import com.payMyBuddy.model.AppUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,22 +49,13 @@ public class AppUserService {
 		return emailExist.getEmail().equals(email);
 	}
 
-	public AppUser registerNewUserAccount(AppUserDto appUserDto) throws Exception {
-//		if (emailExist(appUserDto.getEmail())) {
-//			throw new Exception(
-//					"There is an account with that email address:" + appUserDto.getEmail());
-//		}
-		AppUser appUser = new AppUser();
-		appUser.setFirstname(appUserDto.getFirstname());
-		appUser.setLastname(appUserDto.getLastname());
+	public AppUser registerNewUserAccount(AppUserDto appUserDto) {
+		if (emailExist(appUserDto.getEmail())) {
+			throw new UserAlreadyExistException("There is an account with that email address:" + appUserDto.getEmail());
+		}
+		String password = passwordEncoder.encode(appUserDto.getPassword());
+		AppUser appUser = new AppUser(appUserDto.getEmail(), appUserDto.getFirstname(), appUserDto.getLastname(), password);
 
-		appUser.setPassword(passwordEncoder.encode(appUserDto.getPassword()));
-
-		appUser.setEmail(appUserDto.getEmail());
-
-		Account account = new Account();
-		account.setBalance(0);
-		appUser.setAccount(account);
 		return appUserRepository.save(appUser);
 	}
 

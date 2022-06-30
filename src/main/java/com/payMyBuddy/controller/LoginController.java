@@ -1,4 +1,4 @@
-package com.payMyBuddy.config.controller;
+package com.payMyBuddy.controller;
 
 import com.payMyBuddy.dto.AppUserDto;
 import com.payMyBuddy.model.AppUser;
@@ -19,19 +19,6 @@ public class LoginController {
 	@GetMapping({"/login", "/"})
 	public String login() {
 		return "/login";
-	}
-
-	@GetMapping("/signup")
-	public String signup(Model model) {
-		model.addAttribute("appUser", new AppUser());
-		return "/signup";
-	}
-
-	@PostMapping("/signup")
-	@ResponseBody
-	public String addAppUser(@ModelAttribute AppUserDto appUserDto) throws Exception {
-		appUserService.registerNewUserAccount(appUserDto);
-		return"Your account has been created";
 	}
 
 	@GetMapping("/transfer")

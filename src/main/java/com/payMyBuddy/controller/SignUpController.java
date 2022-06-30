@@ -1,4 +1,4 @@
-package com.payMyBuddy.config.controller;
+package com.payMyBuddy.controller;
 
 import com.payMyBuddy.dto.AppUserDto;
 import com.payMyBuddy.model.AppUser;
