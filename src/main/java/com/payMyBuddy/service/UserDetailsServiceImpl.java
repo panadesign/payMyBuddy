@@ -18,15 +18,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String email) {
-		AppUser appUser = appUserRepository.findByEmail(email);
-		if(email == null) {
-			throw new UsernameNotFoundException("email");
-		}
-
-		Collection authorities = new ArrayList<>();
-
-		User user = new User(appUser.getEmail(), appUser.getPassword(), authorities);
-		return user;
+		AppUser appUser = appUserRepository.findByEmail(email)
+				.orElseThrow(() -> new UsernameNotFoundException("email"));
+		
+		return new User(appUser.getEmail(), appUser.getPassword(), new ArrayList<>());
 	}
 
 }

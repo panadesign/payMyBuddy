@@ -12,7 +12,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Component
@@ -20,9 +22,6 @@ public class AppUserService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-
-	@Autowired
-	private AccountRepository accountRepository;
 
 	private final AppUserRepository appUserRepository;
 
@@ -36,7 +35,9 @@ public class AppUserService {
 
 
 	public AppUser getPersonByEmail(String email) {
-		return appUserRepository.findByEmail(email);
+		
+		return appUserRepository.findByEmail(email)
+				.orElseThrow(() -> new RessourceNotFoundException("User not found with email : " + email));
 	}
 
 	public void addFriend(AppUser appUser) {
@@ -45,8 +46,7 @@ public class AppUserService {
 	}
 
 	private boolean emailExist(String email) {
-		AppUser emailExist = appUserRepository.findByEmail(email);
-		return emailExist.getEmail().equals(email);
+		return appUserRepository.findByEmail(email).isPresent();
 	}
 
 	public AppUser registerNewUserAccount(AppUserDto appUserDto) {
