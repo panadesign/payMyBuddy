@@ -25,7 +25,7 @@
     background: linear-gradient(to right, #60B95A, #AED581);
 }
 
-h1 a {
+h1 a, h1 a:hover {
     color: #fff;
     text-decoration: none;
 }
@@ -77,6 +77,10 @@ h1 a {
 /*NAV*/
 .navbar-collapse {
     justify-content: end;
+}
+
+.navbar li a:hover {
+    background-color: #F5F5F5   ;
 }
 
 .nav-link active {
@@ -162,4 +166,17 @@ h1 a {
 .or {
     display: block;
     margin: 0 auto;
+}
+
+/*PROFILE*/
+
+.profileInfo {
+    width: 100%;
+    background-color: #F5F5F5;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+thead td {
+    font-weight: 700;
 }

@@ -7,5 +7,6 @@ public class FriendDto {
 
 	private String email;
 	private String firstname;
+	private String lastname;
 
 }

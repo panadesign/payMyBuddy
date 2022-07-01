@@ -1,7 +1,7 @@
 package com.payMyBuddy.service;
 
-import com.payMyBuddy.dao.AppUserRepository;
-import com.payMyBuddy.model.AppUser;
+import com.payMyBuddy.dao.UserAccountRepository;
+import com.payMyBuddy.model.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.UUID;
@@ -14,13 +14,13 @@ public class MyUserDetails {
 	private String lastname;
 	private String password;
 
-	private AppUser appUser;
+	private UserAccount userAccount;
 
 	@Autowired
-	AppUserRepository appUserRepository;
+	UserAccountRepository userAccountRepository;
 
-	public MyUserDetails(AppUser appUser) {
-		this.appUser = appUser;
+	public MyUserDetails(UserAccount userAccount) {
+		this.userAccount = userAccount;
 	}
 
 //	@Override

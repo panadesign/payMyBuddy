@@ -1,6 +1,6 @@
 [
   {
-    "_class": "com.payMyBuddy.model.AppUser",
+    "_class": "com.payMyBuddy.model.UserAccount",
     "email": "c.miossec@mail.com",
     "firstname": "Christophe",
     "lastname": "Miossec",
@@ -10,7 +10,7 @@
     }
   },
   {
-    "_class": "com.payMyBuddy.model.AppUser",
+    "_class": "com.payMyBuddy.model.UserAccount",
     "email": "a.sylvestre@mail.com",
     "firstname": "Anne",
     "lastname": "Sylvestre",

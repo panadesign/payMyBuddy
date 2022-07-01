@@ -13,16 +13,16 @@
 <form class="container-sm container-login" th:action="@{/signup}"  method="POST">
     <h1 id="logo">Pay My Buddy</h1>
     <label>
-        <input id="email" type="email" class="form-control" name="email" placeholder="Email">
+        <input id="email" type="email" class="form-control" name="email" placeholder="Email" required>
     </label>
     <label>
-        <input id="firstname" type="text" class="form-control" name="firstname" placeholder="Firstname">
+        <input id="firstname" type="text" class="form-control" name="firstname" placeholder="Firstname" required>
     </label>
     <label>
-        <input id="lastname" type="text" class="form-control" name="lastname" placeholder="Lastname">
+        <input id="lastname" type="text" class="form-control" name="lastname" placeholder="Lastname" required>
     </label>
     <label>
-        <input id="password" type="password" class="form-control" name="password" placeholder="Password">
+        <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
     </label>
     <button class="btn btn-primary" type="submit" value="Create">Sign up</button>
     <p class="or">or</p>

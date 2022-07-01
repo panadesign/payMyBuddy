@@ -30,12 +30,12 @@ public class Transaction {
 
 	@ManyToOne
 	@JoinColumn
-	private AppUser debtor;
+	private UserAccount debtor;
 
 
 	@ManyToOne
 	@JoinColumn
-	private AppUser creditor;
+	private UserAccount creditor;
 //
 //	@ManyToOne(
 //			cascade = CascadeType.PERSIST,

@@ -1,20 +1,18 @@
 package com.payMyBuddy.controller;
 
-import com.payMyBuddy.dto.AppUserDto;
-import com.payMyBuddy.model.AppUser;
-import com.payMyBuddy.service.AppUserService;
+import com.payMyBuddy.model.UserAccount;
+import com.payMyBuddy.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 public class LoginController {
 	@Autowired
-	AppUserService appUserService;
+	UserAccountService userAccountService;
 
 	@GetMapping({"/login", "/"})
 	public String login() {
@@ -30,5 +28,6 @@ public class LoginController {
 	public String logout() {
 		return "/login";
 	}
+
 
 }
