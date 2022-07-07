@@ -2,6 +2,7 @@ package com.payMyBuddy.controller;
 
 import com.payMyBuddy.dao.UserAccountRepository;
 import com.payMyBuddy.dto.ContactDto;
+import com.payMyBuddy.dto.ContactOutputDto;
 import com.payMyBuddy.model.UserAccount;
 import com.payMyBuddy.service.ContactService;
 import com.payMyBuddy.service.MapperService;
@@ -12,9 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 
 @Controller
 public class ContactController {
@@ -39,11 +39,13 @@ public class ContactController {
 
 	@GetMapping("/contact")
 	public String getContact(Model model) {
-		Optional<UserAccount> userPrincipal = userAccountRepository.findByEmail(principalUser.getCurrentUserEmail());
-		List<UserAccount> contactList = userPrincipal.get().getContactList();
+		List<UserAccount> userAccountContactList = contactService.getContactList();
+		
+		var contactList = userAccountContactList
+				.stream()
+				.map(ContactOutputDto::new);
+		
 		model.addAttribute("contactList", contactList);
-
-		mapperService.convertUserAccountListToContactDtoList(contactList);
 
 		return "/transfer";
 	}

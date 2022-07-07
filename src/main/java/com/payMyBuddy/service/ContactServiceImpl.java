@@ -37,8 +37,11 @@ public class ContactServiceImpl implements ContactService {
 		}
 	}
 
-	public List<UserAccount> getContact() {
-		UserAccount userConnected = userAccountRepository.findByEmail(principalUser.getCurrentUserEmail()).get();
+	public List<UserAccount> getContactList() {
+		UserAccount userConnected = userAccountRepository.findByEmail(principalUser.getCurrentUserEmail())
+				.orElseThrow(() -> new RessourceNotFoundException("User not found"));
+		
+		
 		return userConnected.getContactList();
 	}
 

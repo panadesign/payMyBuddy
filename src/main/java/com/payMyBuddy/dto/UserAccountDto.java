@@ -2,6 +2,7 @@ package com.payMyBuddy.dto;
 
 import com.payMyBuddy.model.Account;
 import com.payMyBuddy.model.AccountStatus;
+import com.payMyBuddy.model.UserAccount;
 import lombok.Data;
 
 import java.util.List;
@@ -13,26 +14,17 @@ public class UserAccountDto {
 	private String email;
 	private String firstname;
 	private String lastname;
-	private String password;
+	private String password; // -> NON !!!!
 	private AccountStatus status;
 	private Account account;
 	private List<UserAccountDto> userAccountList;
 
-	public UserAccountDto(String email, String firstname, String lastname, String password) {
-
-		this.email = email;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.password = password;
-
+	
+	public UserAccountDto (UserAccount userAccount){
+		this.id = userAccount.getId();
+		// etc etc etc
+		
 	}
-
-	public UserAccountDto(String email, String firstname, String lastname) {
-
-		this.email = email;
-		this.firstname = firstname;
-		this.lastname = lastname;
-
-	}
+	
 
 }

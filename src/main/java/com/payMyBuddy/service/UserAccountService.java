@@ -11,5 +11,5 @@ public interface UserAccountService {
 	List<UserAccount> getAllUsersAccount();
 	ProfileDto getUserAccountByEmail(String email);
 	UserAccount registerNewUserAccount(UserAccountDto userAccountDto);
-
+	UserAccount getPrincipalUser();
 }

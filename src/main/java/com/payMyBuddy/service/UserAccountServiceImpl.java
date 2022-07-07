@@ -51,4 +51,20 @@ public class UserAccountServiceImpl implements UserAccountService{
 
 		return userAccountRepository.save(userAccount);
 	}
+	
+	public UserAccount getPrincipalUser() {
+		var currentUserEmail = getCurrentUserEmail();
+		return userAccountRepository.findByEmail(currentUserEmail)
+				.orElseThrow(() -> new RessourceNotFoundException("User not found"));
+	}
+	
+	
+	private String getCurrentUserEmail() {
+		var currentUserEmail = principalUser.getCurrentUserEmail();
+		
+		if (currentUserEmail.isEmpty()) {
+			throw new IllegalArgumentException(); // utilisateur non authentifié => AnauthentifiedUserException
+		}
+		return currentUserEmail;
+	}
 }

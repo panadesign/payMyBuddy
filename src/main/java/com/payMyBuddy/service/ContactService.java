@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ContactService {
 	ContactDto addContactByEmail(String email);
-	List<UserAccount> getContact();
+	List<UserAccount> getContactList();
 }
