@@ -60,7 +60,7 @@ public class UserAccount {
 					CascadeType.MERGE
 			}
 	)
-	private List<UserAccount> friendsList = new ArrayList<>();
+	private List<UserAccount> contactList = new ArrayList<>();
 
 	public UserAccount(String email, String firstname, String lastname, String password) {
 		this.email = email;
@@ -70,4 +70,9 @@ public class UserAccount {
 		this.account = new Account();
 	}
 
+	public UserAccount(String email, String firstname, String lastname) {
+		this.email = email;
+		this.firstname = firstname;
+		this.lastname = lastname;
+	}
 }

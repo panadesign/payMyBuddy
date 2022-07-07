@@ -48,17 +48,21 @@
     <section class="container-lg sendMoney">
         <div class="sectionTitle">
             <h2>Send Money</h2>
-            <button class="btn btn-primary">Add Connection</button>
+            <form class="container-sm" th:action="@{/contact}" method="POST">
+                <label>
+                    <input id="email" type="email" class="form-control" name="email" placeholder="Email" required autofocus>
+                </label>
+                <button class="btn btn-primary" type="submit">Add Connection</button>
+            </form>
         </div>
         <div class="paySection">
             <label>
-                <select class="form-select" name="connections" id="selection">
-                    <option value="">Select a connection</option>
-                    <option value="dog">User1</option>
-                    <option value="cat">User2</option>
+                <select class="form-select" name="contacts" id="selection" th:action="@{/contact}" th:method="GET">
+                    <option value="default">Select a connection</option>'
+                    <option th:each="contact: ${contacts}" th:text="${contact.email}"></option>
                 </select>
             </label>
-            <label>
+            <label class="amount">
                 <input class="form-control" type="number" id="amount" name="amount" min="1" placeholder="0€">
             </label>
 
@@ -77,6 +81,13 @@
                 <th scope="col">Amount</th>
             </tr>
             </thead>
+            <tbody>
+                <tr>
+                    <td>a remplir</td>
+                    <td>a remplir</td>
+                    <td>a remplir</td>
+                </tr>
+            </tbody>
         </table>
     </section>
 </div>

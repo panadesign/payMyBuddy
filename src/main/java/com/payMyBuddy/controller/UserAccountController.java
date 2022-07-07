@@ -16,7 +16,7 @@ public class UserAccountController {
 
 	@GetMapping("/persons")
 	private List<UserAccount> getAllPersons() {
-		return userAccountService.getAllPersons();
+		return userAccountService.getAllUsersAccount();
 	}
 
 }

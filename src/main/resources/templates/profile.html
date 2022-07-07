@@ -65,22 +65,23 @@
                     </tr>
                 </tbody>
             </table>
-
+        </section>
+        <section class="profileInfo">
             <h2>My connections</h2>
-            <table class="table" >
+            <table class="table">
                 <thead>
-                <tr>
-                    <th>Email</th>
-                    <th>First name</th>
-                    <th>Last name</th>
-                </tr>
+                    <tr>
+                        <th>Email</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                    </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td th:text="${profileDto.email}"></td>
-                    <td th:text="${profileDto.firstname}"></td>
-                    <td th:text="${profileDto.lastname}"></td>
-                </tr>
+                <tbody th:action="@{/profile/contact}" th:object="${userAccountList}" method="get">
+                    <tr th:each="contact : ${userAccountList}">
+                        <td th:text="${contact.email}"></td>
+                        <td th:text="${contact.firstname}"></td>
+                        <td th:text="${contact.lastname}"></td>
+                    </tr>
                 </tbody>
             </table>
         </section>

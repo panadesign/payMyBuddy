@@ -18,5 +18,15 @@
     "account": {
       "balance": 0
     }
+  },
+  {
+    "_class": "com.payMyBuddy.model.UserAccount",
+    "email": "g.brassens@mail.com",
+    "firstname": "Georges",
+    "lastname": "Brassens",
+    "password": "$2y$10$QZZ32o0e/IDHF/6PDN0oCOi72ApuRBoMwjYsH3iUF7sSP6ein667S",
+    "account": {
+      "balance": 0
+    }
   }
 ]
