@@ -19,12 +19,11 @@ public class UserAccountDto {
 	private Account account;
 	private List<UserAccountDto> userAccountList;
 
-	
 	public UserAccountDto (UserAccount userAccount){
 		this.id = userAccount.getId();
-		// etc etc etc
-		
+		this.email= userAccount.getEmail();
+		this.firstname = userAccount.getFirstname();
+		this.lastname = userAccount.getLastname();
 	}
-	
 
 }

@@ -15,10 +15,6 @@ public class LoginController {
 		return "/login";
 	}
 
-	@GetMapping("/transfer")
-	public String transfer() {
-		return "/transfer";
-	}
 
 	@GetMapping("/logout")
 	public String logout() {

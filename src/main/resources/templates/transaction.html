@@ -48,25 +48,32 @@
     <section class="container-lg sendMoney">
         <div class="sectionTitle">
             <h2>Send Money</h2>
-            <form class="container-sm" th:action="@{/contact}" method="POST">
+            <form class="container-sm" th:action="@{/connection}" method="POST">
+                <div th:if="${param.error}">
+                    Invalid email or password.
+                </div>
                 <label>
                     <input id="email" type="email" class="form-control" name="email" placeholder="Email" required autofocus>
                 </label>
                 <button class="btn btn-primary" type="submit">Add Connection</button>
             </form>
         </div>
-        <div class="paySection">
-            <label>
-                <select class="form-select" name="contacts" id="selection" th:action="@{/contact}" th:method="GET">
-                    <option value="default">Select a connection</option>'
-                    <option th:each="contact: ${contacts}" th:text="${contact.email}"></option>
-                </select>
-            </label>
-            <label class="amount">
-                <input class="form-control" type="number" id="amount" name="amount" min="1" placeholder="0€">
-            </label>
-
-            <button class="btn btn-primary">Pay</button>
+        <div>
+            <form class="container-sm paySection" th:action="@{/transaction}" method="POST">
+                <label>
+                    <select class="form-select" id="selection" th:object="${contactList}" name="email">
+                        <option value="default">Select a connection:</option>
+                        <option th:each="contact: ${contactList}" th:value="${contact.email}" th:text="${contact.email}" selected></option>
+                    </select>
+                </label>
+                <label class="amount">
+                    <input class="form-control" type="number" id="amount" name="amount" min="1" placeholder="0€" required>
+                </label>
+                <label>
+                    <input class="form-control" type="text" id="description" name="description" placeholder="Description" required>
+                </label>
+                <button class="btn btn-primary"  type="submit" value="Create">Pay</button>
+            </form>
         </div>
     </section>
     <section class="container-lg myTransactions">

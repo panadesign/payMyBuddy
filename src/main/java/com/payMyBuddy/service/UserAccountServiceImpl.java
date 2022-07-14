@@ -4,6 +4,7 @@ import com.payMyBuddy.dao.UserAccountRepository;
 import com.payMyBuddy.dto.ProfileDto;
 import com.payMyBuddy.dto.UserAccountDto;
 import com.payMyBuddy.exception.RessourceNotFoundException;
+import com.payMyBuddy.exception.UnauthorisedUser;
 import com.payMyBuddy.exception.UserAlreadyExistException;
 import com.payMyBuddy.model.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 		var currentUserEmail = principalUser.getCurrentUserEmail();
 		
 		if (currentUserEmail.isEmpty()) {
-			throw new IllegalArgumentException(); // utilisateur non authentifié => AnauthentifiedUserException
+			throw new UnauthorisedUser("Unauthorised user");
 		}
 		return currentUserEmail;
 	}

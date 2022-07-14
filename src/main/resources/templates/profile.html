@@ -21,7 +21,7 @@
                             <a class="nav-link" th:href="@{/login}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{/transfer}">Transfer</a>
+                            <a class="nav-link" th:href="@{/transaction}">Transfer</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#">Profile</a>
@@ -76,8 +76,8 @@
                         <th>Last name</th>
                     </tr>
                 </thead>
-                <tbody th:action="@{/profile/contact}" th:object="${userAccountList}" method="get">
-                    <tr th:each="contact : ${userAccountList}">
+                <tbody>
+                    <tr th:each="contact : ${contactList}">
                         <td th:text="${contact.email}"></td>
                         <td th:text="${contact.firstname}"></td>
                         <td th:text="${contact.lastname}"></td>

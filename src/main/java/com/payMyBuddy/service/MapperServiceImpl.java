@@ -1,6 +1,8 @@
 package com.payMyBuddy.service;
 
 import com.payMyBuddy.dto.ContactDto;
+import com.payMyBuddy.dto.ContactInputDto;
+import com.payMyBuddy.dto.ContactOutputDto;
 import com.payMyBuddy.dto.ProfileDto;
 import com.payMyBuddy.model.UserAccount;
 import org.springframework.stereotype.Service;
@@ -18,26 +20,17 @@ public class MapperServiceImpl implements MapperService{
 		profileDto.setLastname(userAccount.getLastname());
 		profileDto.setStatus(userAccount.getStatus());
 		profileDto.setAccount(userAccount.getAccount());
-		profileDto.setBalance(userAccount.getAccount().getBalance());
+		profileDto.setBalance((float) userAccount.getAccount().getBalance());
 
 		return profileDto;
 	}
 
-	public ContactDto convertUserAccountToContactDto(UserAccount userAccount) {
-		ContactDto contactDto = new ContactDto();
-		contactDto.setEmail(userAccount.getEmail());
-		contactDto.setFirstname(userAccount.getFirstname());
-		contactDto.setLastname(userAccount.getLastname());
+	public ContactInputDto convertUserAccountToContactOutputDto(UserAccount userAccount) {
+		ContactInputDto contactInputDto = new ContactInputDto();
+		contactInputDto.setEmail(userAccount.getEmail());
+		contactInputDto.setFirstname(userAccount.getFirstname());
+		contactInputDto.setLastname(userAccount.getLastname());
 
-		return contactDto;
-	}
-
-	public List<ContactDto> convertUserAccountListToContactDtoList(List<UserAccount> userAccountList) {
-		return userAccountList.stream()
-				.map(userAccount -> new ContactDto(
-						userAccount.getEmail(),
-						userAccount.getFirstname(),
-						userAccount.getLastname()))
-				.collect(Collectors.toList());
+		return contactInputDto;
 	}
 }

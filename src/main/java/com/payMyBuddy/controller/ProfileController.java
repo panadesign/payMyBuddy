@@ -1,10 +1,9 @@
 package com.payMyBuddy.controller;
 
-import com.payMyBuddy.dao.UserAccountRepository;
+import com.payMyBuddy.dto.ContactOutputDto;
 import com.payMyBuddy.dto.ProfileDto;
 import com.payMyBuddy.model.UserAccount;
 import com.payMyBuddy.service.ContactService;
-import com.payMyBuddy.service.MapperService;
 import com.payMyBuddy.service.PrincipalUser;
 import com.payMyBuddy.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 public class ProfileController {
@@ -22,9 +21,6 @@ public class ProfileController {
 
 	@Autowired
 	private UserAccountService userAccountService;
-
-	@Autowired
-	private UserAccountRepository userAccountRepository;
 
 	@Autowired
 	private PrincipalUser principalUser;
@@ -36,12 +32,11 @@ public class ProfileController {
 		model.addAttribute("profileDto", profileDto);
 		
 		List<UserAccount> userAccountContactList = contactService.getContactList();
-		
-		var contactList = userAccountContactList
+		List<ContactOutputDto> contactList = userAccountContactList
 				.stream()
-				.map(ContactOutputDto::new);
-		
-		model.addAttribute("userAccountList", contactList);
+				.map(ContactOutputDto::new)
+				.collect(Collectors.toList());
+		model.addAttribute("contactList", contactList);
 		
 		return "/profile";
 	}
