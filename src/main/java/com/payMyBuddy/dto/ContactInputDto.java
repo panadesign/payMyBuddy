@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,11 +20,15 @@ public class ContactInputDto {
 	private String lastname;
 	private Account account;
 	private Transaction transaction;
+//	private LocalDate transactionDate;
 
 	public ContactInputDto(@NonNull UserAccount userAccount){
-		email = userAccount.getEmail();
-		firstname = userAccount.getFirstname();
-		lastname = userAccount.getLastname();
+		this.email = userAccount.getEmail();
+		this.firstname = userAccount.getFirstname();
+		this.lastname = userAccount.getLastname();
+		this.account = userAccount.getAccount();
+		this.transaction = userAccount.getAccount().getTransaction();
+//		this.transactionDate = userAccount.getAccount().getTransaction().getCreationDate();
 	}
 
 

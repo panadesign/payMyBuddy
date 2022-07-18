@@ -1,12 +1,10 @@
 package com.payMyBuddy.controller;
 
 import com.payMyBuddy.dto.ContactInputDto;
-import com.payMyBuddy.model.UserAccount;
 import com.payMyBuddy.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,13 +21,11 @@ public class ConnectionController {
 		return "redirect:/transaction";
 	}
 
-//	DELETE CONTACT
 
 	@GetMapping ("/deleteConnection")
 	public String deleteContact(Model model, @RequestParam String email) {
 		Boolean contactInputDto = contactService.removeContactByEmail(email);
 		model.addAttribute("contactInputDto", contactInputDto);
-
 		return "redirect:/profile";
 	}
 }

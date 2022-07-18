@@ -7,6 +7,7 @@ import com.payMyBuddy.dto.UserAccountDto;
 import com.payMyBuddy.exception.RessourceNotFoundException;
 import com.payMyBuddy.exception.UnauthorisedUser;
 import com.payMyBuddy.model.UserAccount;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
+@Log4j2
 public class ContactServiceImpl implements ContactService {
 	@Autowired
 	private UserAccountRepository userAccountRepository;
@@ -25,7 +27,7 @@ public class ContactServiceImpl implements ContactService {
 	private PrincipalUser principalUser;
 
 	public ContactInputDto addContactByEmail(String email) {
-
+		log.debug("Add new contact to user's connected list");
 		UserAccount userConnected = userAccountRepository.findByEmail(principalUser.getCurrentUserEmail())
 				.orElseThrow(() -> new UnauthorisedUser("User unauthorised"));
 		UserAccount userAccount = userAccountRepository.findByEmail(email)
@@ -38,13 +40,16 @@ public class ContactServiceImpl implements ContactService {
 			userConnected.getContactList().add(userAccount);
 			userAccountRepository.save(userConnected);
 
+			log.debug("New contact has been added to the user's connected list");
 			return mapperService.convertUserAccountToContactOutputDto(userAccount);
 		} else {
+			log.error("User connected can't add his own account to his contact's list");
 			throw new IllegalArgumentException("You can't add your user account in your favorites");
 		}
 	}
 
 	public Boolean removeContactByEmail(String email) {
+		log.debug("Remove a contact from user's connected list");
 		UserAccount contactToDelete = getContactList()
 				.stream()
 				.filter(userAccount -> userAccount.getEmail().equals(email))
@@ -52,6 +57,7 @@ public class ContactServiceImpl implements ContactService {
 				.orElseThrow(() -> new RessourceNotFoundException("User not found"));
 
 		getContactList().remove(contactToDelete);
+		log.debug("Contact has been remove from user's connected list");
 		userAccountRepository.save(userAccountService.getPrincipalUser());
 		return true;
 
@@ -60,7 +66,7 @@ public class ContactServiceImpl implements ContactService {
 	public List<UserAccount> getContactList() {
 		UserAccount userConnected = userAccountRepository.findByEmail(principalUser.getCurrentUserEmail())
 				.orElseThrow(() -> new RessourceNotFoundException("User not found"));
-
+		log.debug("Get all contacts from user's connected list");
 		return userConnected.getContactList();
 	}
 

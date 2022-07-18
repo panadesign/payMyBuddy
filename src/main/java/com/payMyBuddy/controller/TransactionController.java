@@ -6,6 +6,7 @@ import com.payMyBuddy.dto.ContactOutputDto;
 import com.payMyBuddy.model.UserAccount;
 import com.payMyBuddy.service.ContactService;
 import com.payMyBuddy.service.TransactionService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
+@Log4j2
 public class TransactionController {
 
 	@Autowired
@@ -26,7 +28,7 @@ public class TransactionController {
 	@PostMapping("/transaction")
 	public String transaction(Model model, String email, float amount, String description) {
 
-		//CREATE A TRANSACTION
+		log.debug("Transfer money to selected contact");
 		model.addAttribute("contactList", new ContactInputDto());
 		transactionService.transferMoney(email, amount, description);
 
@@ -48,7 +50,6 @@ public class TransactionController {
 
 		return "/transaction";
 	}
-
 
 
 }

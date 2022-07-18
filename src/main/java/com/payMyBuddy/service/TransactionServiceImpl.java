@@ -4,10 +4,12 @@ import com.payMyBuddy.constants.Commission;
 import com.payMyBuddy.dao.TransactionRepository;
 import com.payMyBuddy.dao.UserAccountRepository;
 import com.payMyBuddy.dto.ContactInputDto;
+import com.payMyBuddy.dto.UserAccountDto;
 import com.payMyBuddy.exception.DebtorAccountException;
 import com.payMyBuddy.exception.RessourceNotFoundException;
 import com.payMyBuddy.model.Transaction;
 import com.payMyBuddy.model.UserAccount;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +17,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Component
+@Log4j2
 public class TransactionServiceImpl implements TransactionService {
 
 	@Autowired
@@ -28,9 +31,8 @@ public class TransactionServiceImpl implements TransactionService {
 
 		UserAccount userConnected = userAccountService.getPrincipalUser();
 
-		//TODO modifier par appel DTO
 		List<UserAccount> contactList = userConnected.getContactList();
-		ContactInputDto creditor =
+		ContactInputDto creditorAccount =
 				contactList.stream()
 						.filter(userAccount -> userAccount.getEmail().equals(email))
 						.findFirst()
@@ -47,9 +49,11 @@ public class TransactionServiceImpl implements TransactionService {
 		if(balanceDebtor >= amountWithCommission) {
 
 			userConnected.getAccount().setBalance(balanceDebtor - amountWithCommission);
-			creditor.getAccount().setBalance(balanceCreditor + amountForCreditor);
+			creditorAccount.getAccount().setBalance(balanceCreditor + amountForCreditor);
+//			userConnected.getAccount().getTransaction().setDescription(description);
+//			userConnected.getAccount().getTransaction().setCreationDate(LocalDate.now());
+//			creditorAccount.getAccount().getTransaction().setDescription(description);
 //			creditor.getAccount().getTransaction().setCreationDate(LocalDate.now());
-//			creditor.getAccount().getTransaction().setDescription(description);
 
 			userAccountRepository.save(userConnected);
 //			userAccountRepository.save(creditor);
