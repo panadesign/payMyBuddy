@@ -198,3 +198,11 @@ h1 a, h1 a:hover {
 thead td {
     font-weight: 700;
 }
+
+.connection .delete {
+    margin: 0;
+    color: red;
+    font-weight: 700;
+    background-color: #F7F7F7;
+    border: none;
+}

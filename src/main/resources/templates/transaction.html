@@ -48,7 +48,7 @@
     <section class="container-lg sendMoney">
         <div class="sectionTitle">
             <h2>Send Money</h2>
-            <form class="container-sm" th:action="@{/connection}" method="POST">
+            <form class="container-sm" th:action="@{/addConnection}" method="POST">
                 <div th:if="${param.error}">
                     Invalid email or password.
                 </div>
@@ -63,7 +63,7 @@
                 <label>
                     <select class="form-select" id="selection" th:object="${contactList}" name="email">
                         <option value="default">Select a connection:</option>
-                        <option th:each="contact: ${contactList}" th:value="${contact.email}" th:text="${contact.email}" selected></option>
+                        <option th:each="contact: ${contactList}" th:value="${contact.email}" th:text="${contact.email}"></option>
                     </select>
                 </label>
                 <label class="amount">

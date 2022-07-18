@@ -3,10 +3,12 @@ package com.payMyBuddy.service;
 import com.payMyBuddy.dao.UserAccountRepository;
 import com.payMyBuddy.dto.ContactDto;
 import com.payMyBuddy.dto.ContactInputDto;
+import com.payMyBuddy.dto.UserAccountDto;
 import com.payMyBuddy.exception.RessourceNotFoundException;
 import com.payMyBuddy.exception.UnauthorisedUser;
 import com.payMyBuddy.model.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,6 +18,8 @@ public class ContactServiceImpl implements ContactService {
 	@Autowired
 	private UserAccountRepository userAccountRepository;
 	@Autowired
+	private UserAccountService userAccountService;
+	@Autowired
 	private MapperService mapperService;
 	@Autowired
 	private PrincipalUser principalUser;
@@ -23,7 +27,7 @@ public class ContactServiceImpl implements ContactService {
 	public ContactInputDto addContactByEmail(String email) {
 
 		UserAccount userConnected = userAccountRepository.findByEmail(principalUser.getCurrentUserEmail())
-				.orElseThrow(() ->new UnauthorisedUser("User unauthorised"));
+				.orElseThrow(() -> new UnauthorisedUser("User unauthorised"));
 		UserAccount userAccount = userAccountRepository.findByEmail(email)
 				.orElseThrow(() -> new RessourceNotFoundException("User not found with email : " + email));
 
@@ -38,6 +42,19 @@ public class ContactServiceImpl implements ContactService {
 		} else {
 			throw new IllegalArgumentException("You can't add your user account in your favorites");
 		}
+	}
+
+	public Boolean removeContactByEmail(String email) {
+		UserAccount contactToDelete = getContactList()
+				.stream()
+				.filter(userAccount -> userAccount.getEmail().equals(email))
+				.findFirst()
+				.orElseThrow(() -> new RessourceNotFoundException("User not found"));
+
+		getContactList().remove(contactToDelete);
+		userAccountRepository.save(userAccountService.getPrincipalUser());
+		return true;
+
 	}
 
 	public List<UserAccount> getContactList() {

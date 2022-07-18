@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface ContactService {
 	ContactInputDto addContactByEmail(String email);
+	Boolean removeContactByEmail(String email);
 	List<UserAccount> getContactList();
 }
