@@ -1,10 +1,10 @@
 package com.payMyBuddy.model;
 
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -31,19 +31,19 @@ public class UserAccount {
 	private UUID id;
 
 	@Column(nullable = false, unique = true)
-	@NotNull
+	@NonNull
 	private String email;
 
 	@Column
-	@NotNull
+	@NonNull
 	private String firstname;
 
 	@Column
-	@NotNull
+	@NonNull
 	private String lastname;
 
 	@Column
-	@NotNull
+	@NonNull
 	private String password;
 
 	@Column
@@ -68,11 +68,5 @@ public class UserAccount {
 		this.lastname = lastname;
 		this.password = password;
 		this.account = new Account();
-	}
-
-	public UserAccount(String email, String firstname, String lastname) {
-		this.email = email;
-		this.firstname = firstname;
-		this.lastname = lastname;
 	}
 }

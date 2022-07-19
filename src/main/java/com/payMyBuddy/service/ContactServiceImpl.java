@@ -1,15 +1,12 @@
 package com.payMyBuddy.service;
 
 import com.payMyBuddy.dao.UserAccountRepository;
-import com.payMyBuddy.dto.ContactDto;
 import com.payMyBuddy.dto.ContactInputDto;
-import com.payMyBuddy.dto.UserAccountDto;
 import com.payMyBuddy.exception.RessourceNotFoundException;
 import com.payMyBuddy.exception.UnauthorisedUser;
 import com.payMyBuddy.model.UserAccount;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -41,7 +38,7 @@ public class ContactServiceImpl implements ContactService {
 			userAccountRepository.save(userConnected);
 
 			log.debug("New contact has been added to the user's connected list");
-			return mapperService.convertUserAccountToContactOutputDto(userAccount);
+			return mapperService.convertUserAccountToContactInputDto(userAccount);
 		} else {
 			log.error("User connected can't add his own account to his contact's list");
 			throw new IllegalArgumentException("You can't add your user account in your favorites");

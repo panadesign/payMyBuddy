@@ -1,6 +1,7 @@
 package com.payMyBuddy.service;
 
 import com.payMyBuddy.dao.UserAccountRepository;
+import com.payMyBuddy.dto.ContactInputDto;
 import com.payMyBuddy.dto.ProfileDto;
 import com.payMyBuddy.dto.UserAccountDto;
 import com.payMyBuddy.exception.RessourceNotFoundException;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Component
@@ -39,6 +41,12 @@ public class UserAccountServiceImpl implements UserAccountService {
 				.orElseThrow(() -> new RessourceNotFoundException("User not found with email : " + email));
 		return mapperService.convertUserAccountToProfileDto(userAccount);
 	}
+
+	public ContactInputDto getUserAccountById(UUID id) {
+		UserAccount userAccount = userAccountRepository.findById(id)
+				.orElseThrow(() -> new RessourceNotFoundException("User not found with id : " + id));
+		return mapperService.convertUserAccountToContactInputDto(userAccount);
+	}
 	
 	private boolean emailExist(String email) {
 		return userAccountRepository.findByEmail(email).isPresent();
@@ -55,14 +63,14 @@ public class UserAccountServiceImpl implements UserAccountService {
 	}
 	
 	public UserAccount getPrincipalUser() {
-		var currentUserEmail = getCurrentUserEmail();
+		String currentUserEmail = getCurrentUserEmail();
 		return userAccountRepository.findByEmail(currentUserEmail)
 				.orElseThrow(() -> new RessourceNotFoundException("User not found"));
 	}
 	
 	
 	private String getCurrentUserEmail() {
-		var currentUserEmail = principalUser.getCurrentUserEmail();
+		String currentUserEmail = principalUser.getCurrentUserEmail();
 		
 		if (currentUserEmail.isEmpty()) {
 			throw new UnauthorisedUser("Unauthorised user");

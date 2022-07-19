@@ -61,9 +61,9 @@
         <div>
             <form class="container-sm paySection" th:action="@{/transaction}" method="POST">
                 <label>
-                    <select class="form-select" id="selection" th:object="${contactList}" name="email">
+                    <select class="form-select" id="selection" th:object="${contactList}" name="id">
                         <option value="default">Select a connection:</option>
-                        <option th:each="contact: ${contactList}" th:value="${contact.email}" th:text="${contact.email}"></option>
+                        <option th:each="contact: ${contactList}" th:value="${contact.id}" th:text="${contact.email}"></option>
                     </select>
                 </label>
                 <label class="amount">

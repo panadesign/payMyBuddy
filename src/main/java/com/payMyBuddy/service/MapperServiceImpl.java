@@ -1,14 +1,9 @@
 package com.payMyBuddy.service;
 
-import com.payMyBuddy.dto.ContactDto;
 import com.payMyBuddy.dto.ContactInputDto;
-import com.payMyBuddy.dto.ContactOutputDto;
 import com.payMyBuddy.dto.ProfileDto;
 import com.payMyBuddy.model.UserAccount;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class MapperServiceImpl implements MapperService{
@@ -25,8 +20,9 @@ public class MapperServiceImpl implements MapperService{
 		return profileDto;
 	}
 
-	public ContactInputDto convertUserAccountToContactOutputDto(UserAccount userAccount) {
+	public ContactInputDto convertUserAccountToContactInputDto(UserAccount userAccount) {
 		ContactInputDto contactInputDto = new ContactInputDto();
+
 		contactInputDto.setEmail(userAccount.getEmail());
 		contactInputDto.setFirstname(userAccount.getFirstname());
 		contactInputDto.setLastname(userAccount.getLastname());

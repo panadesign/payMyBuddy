@@ -1,8 +1,6 @@
 package com.payMyBuddy.controller;
 
-import com.payMyBuddy.dto.ContactDto;
 import com.payMyBuddy.dto.ContactInputDto;
-import com.payMyBuddy.dto.ContactOutputDto;
 import com.payMyBuddy.model.UserAccount;
 import com.payMyBuddy.service.ContactService;
 import com.payMyBuddy.service.TransactionService;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Controller
@@ -26,11 +25,11 @@ public class TransactionController {
 	private TransactionService transactionService;
 
 	@PostMapping("/transaction")
-	public String transaction(Model model, String email, float amount, String description) {
+	public String transaction(Model model, UUID id, float amount, String description) {
 
 		log.debug("Transfer money to selected contact");
 		model.addAttribute("contactList", new ContactInputDto());
-		transactionService.transferMoney(email, amount, description);
+		transactionService.transferMoney(id, amount, description);
 
 		return "transaction";
 	}

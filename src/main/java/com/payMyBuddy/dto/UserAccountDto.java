@@ -14,7 +14,8 @@ public class UserAccountDto {
 	private String email;
 	private String firstname;
 	private String lastname;
-	private String password; // -> NON !!!!
+	//TODO supp password
+	private String password;
 	private AccountStatus status;
 	private Account account;
 	private List<UserAccountDto> userAccountList;
