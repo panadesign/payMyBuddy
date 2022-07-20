@@ -29,4 +29,15 @@ public class MapperServiceImpl implements MapperService{
 
 		return contactInputDto;
 	}
+
+	public UserAccount contactInputDtoToUserAccount(ContactInputDto contactInputDto) {
+		UserAccount userAccount = new UserAccount();
+		userAccount.setId(contactInputDto.getId());
+		userAccount.setEmail(contactInputDto.getEmail());
+		userAccount.setFirstname(contactInputDto.getFirstname());
+		userAccount.setLastname(contactInputDto.getLastname());
+		userAccount.setAccount(contactInputDto.getAccount());
+
+		return userAccount;
+	}
 }

@@ -82,17 +82,17 @@
         </div>
         <table class="table">
             <thead>
-            <tr>
-                <th scope="col">Connections</th>
-                <th scope="col">Description</th>
-                <th scope="col">Amount</th>
-            </tr>
-            </thead>
-            <tbody>
                 <tr>
-                    <td>a remplir</td>
-                    <td>a remplir</td>
-                    <td>a remplir</td>
+                    <th scope="col">Connections</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Amount</th>
+                </tr>
+            </thead>
+            <tbody th:action="@{/transaction}" method="GET">
+                <tr id="transactions" th:object="${transactions}" th:each="transaction: ${transactions}">
+                    <td th:text="${transaction.firstname}"></td>
+                    <td th:text="${transaction.description}"></td>
+                    <td th:text="${transaction.amount}"></td>
                 </tr>
             </tbody>
         </table>

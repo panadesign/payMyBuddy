@@ -20,7 +20,7 @@ public class Transaction {
 	@GeneratedValue(generator = "UUID")
 	private UUID id;
 	private double amount;
-	private Currency euro;
+	private Currency currency;
 	private String description;
 	private LocalDate creationDate;
 

@@ -7,4 +7,5 @@ import com.payMyBuddy.model.UserAccount;
 public interface MapperService {
 	ProfileDto convertUserAccountToProfileDto(UserAccount userAccount);
 	ContactInputDto convertUserAccountToContactInputDto(UserAccount userAccount);
+	UserAccount contactInputDtoToUserAccount(ContactInputDto contactInputDto);
 }
