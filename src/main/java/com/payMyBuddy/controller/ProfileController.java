@@ -1,6 +1,6 @@
 package com.payMyBuddy.controller;
 
-import com.payMyBuddy.dto.ContactOutputDto;
+import com.payMyBuddy.dto.ContactInputDto;
 import com.payMyBuddy.dto.ProfileDto;
 import com.payMyBuddy.model.UserAccount;
 import com.payMyBuddy.service.ContactService;
@@ -32,9 +32,9 @@ public class ProfileController {
 		model.addAttribute("profileDto", profileDto);
 		
 		List<UserAccount> userAccountContactList = contactService.getContactList();
-		List<ContactOutputDto> contactList = userAccountContactList
+		List<ContactInputDto> contactList = userAccountContactList
 				.stream()
-				.map(ContactOutputDto::new)
+				.map(ContactInputDto::new)
 				.collect(Collectors.toList());
 		model.addAttribute("contactList", contactList);
 		
