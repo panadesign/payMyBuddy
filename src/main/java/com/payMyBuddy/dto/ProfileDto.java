@@ -16,4 +16,14 @@ public class ProfileDto {
 	private Account account;
 	private float balance;
 	private List<UserAccount> userAccountList;
+
+	public ProfileDto(String email, String firstname, String lastname) {
+		this.email = email;
+		this.firstname = firstname;
+		this.lastname = lastname;
+	}
+
+	public ProfileDto() {
+
+	}
 }
