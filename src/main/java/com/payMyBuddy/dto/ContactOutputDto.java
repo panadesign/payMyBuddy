@@ -1,15 +1,9 @@
 package com.payMyBuddy.dto;
 
 import com.payMyBuddy.model.UserAccount;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Value
 public class ContactOutputDto {
 	
 	private String email;

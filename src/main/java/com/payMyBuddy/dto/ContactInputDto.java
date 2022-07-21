@@ -3,16 +3,11 @@ package com.payMyBuddy.dto;
 import com.payMyBuddy.model.Account;
 import com.payMyBuddy.model.Transaction;
 import com.payMyBuddy.model.UserAccount;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import java.util.UUID;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Value
 public class ContactInputDto {
 
 	private UUID id;

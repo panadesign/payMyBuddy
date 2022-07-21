@@ -5,6 +5,8 @@ import com.payMyBuddy.model.UserAccount;
 import org.springframework.stereotype.Service;
 
 @Service
+
+//ToDo a supprimer
 public class MapperServiceImpl implements MapperService{
 
 	public ContactInputDto convertUserAccountToContactInputDto(UserAccount userAccount) {

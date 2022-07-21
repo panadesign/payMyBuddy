@@ -33,6 +33,7 @@ public class TransactionServiceImpl implements TransactionService {
 		UserAccount userConnected = userAccountService.getPrincipalUser();
 
 		List<UserAccount> contactList = userConnected.getContactList();
+		
 		UserAccount creditorAccount =
 				contactList.stream()
 						.filter(userAccount -> userAccount.getId().equals(id))
@@ -52,15 +53,11 @@ public class TransactionServiceImpl implements TransactionService {
 			userAccountRepository.save(userConnected);
 			userAccountRepository.save(creditorAccount);
 
-			Transaction transaction = new Transaction();
-			transaction.setAmount(amount);
-			transaction.setDescription(description);
-			transaction.setCreationDate(LocalDate.now());
-			transaction.setCurrency(Currency.getInstance(Locale.FRANCE));
-			transaction.setDebtor(userConnected);
-			transaction.setCreditor(creditorAccount);
+			Transaction transaction =  new Transaction(userConnected, creditorAccount, amount , "EUR", description );
 
 			transactionRepository.save(transaction);
+			
+			log.debug("New Transaction = " + transaction);
 
 			return transaction;
 
@@ -70,9 +67,7 @@ public class TransactionServiceImpl implements TransactionService {
 
 	public List<Transaction> getAllTransactions() {
 		UserAccount userConnected = userAccountService.getPrincipalUser();
-		if(userConnected.getAccount().getTransaction().getDebtor().equals(userConnected.getId())) {
-			return transactionRepository.findAll();
-		} else
-			return null;
+		
+		return transactionRepository.findAllByCreditorIdOrDebtorIdOrderByCreationDate(userConnected.getId(), userConnected.getId());
 	}
 }

@@ -38,7 +38,7 @@ public class ContactServiceImpl implements ContactService {
 			userAccountRepository.save(userConnected);
 
 			log.debug("New contact has been added to the user's connected list");
-			return mapperService.convertUserAccountToContactInputDto(userAccount);
+			return new ContactInputDto(userAccount);
 		} else {
 			log.error("User connected can't add his own account to his contact's list");
 			throw new IllegalArgumentException("You can't add your user account in your favorites");

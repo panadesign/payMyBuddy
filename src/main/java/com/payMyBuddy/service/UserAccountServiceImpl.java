@@ -7,6 +7,7 @@ import com.payMyBuddy.exception.RessourceNotFoundException;
 import com.payMyBuddy.exception.UnauthorisedUser;
 import com.payMyBuddy.exception.UserAlreadyExistException;
 import com.payMyBuddy.model.UserAccount;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ import java.util.UUID;
 
 @Service
 @Component
+@Slf4j
 public class UserAccountServiceImpl implements UserAccountService {
 
 	private final UserAccountRepository userAccountRepository;
@@ -40,13 +42,6 @@ public class UserAccountServiceImpl implements UserAccountService {
 		return new ProfileDto(userAccount);
 	}
 
-	public ContactInputDto getUserAccountById(UUID id) {
-		UserAccount userAccount = userAccountRepository.findById(id)
-				.orElseThrow(() -> new RessourceNotFoundException("User not found with id : " + id));
-
-		return new ContactInputDto(userAccount);
-	}
-
 	private boolean emailExist(String email) {
 		return userAccountRepository.findByEmail(email).isPresent();
 	}
@@ -57,7 +52,8 @@ public class UserAccountServiceImpl implements UserAccountService {
 		}
 		String password = passwordEncoder.encode(userAccount.getPassword());
 		UserAccount newUserAccount = new UserAccount(userAccount.getEmail(), userAccount.getFirstname(), userAccount.getLastname(), password);
-
+		log.debug("New account : " + newUserAccount);
+		
 		return userAccountRepository.save(newUserAccount);
 	}
 

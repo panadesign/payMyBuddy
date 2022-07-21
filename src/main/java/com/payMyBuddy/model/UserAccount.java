@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,6 +29,7 @@ public class UserAccount {
 	
 	@Id
 	@GeneratedValue(generator = "UUID")
+	@Type(type = "uuid-char")
 	private UUID id;
 
 	@Column(nullable = false, unique = true)
@@ -70,21 +72,9 @@ public class UserAccount {
 		this.password = password;
 
 	}
-
-	public UserAccount(String email, String firstname, String lastname, String password, Account account) {
-		this.email = email;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.password = password;
-		this.account = account;
+	
+	public String getName() {
+		return this.firstname + " " + this.lastname;
 	}
-
-	public UserAccount(UUID id, String email, String firstname, String lastname, String password, Account account) {
-		this.id = id;
-		this.email = email;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.password = password;
-		this.account = account;
-	}
+	
 }

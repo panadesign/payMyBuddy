@@ -30,12 +30,13 @@ public class TransactionController {
 
 	@PostMapping("/transaction")
 	public String transaction(Model model, @RequestParam("id") UUID id, @RequestParam("amount") float amount, @RequestParam("description") String description) {
-		log.debug("Transfer money to selected contact");
-		model.addAttribute("contactList", new ContactInputDto());
-		if(id == null) {
-			throw new RessourceNotFoundException("User not found");
-		}
-		transactionService.transferMoney(id, amount, description);
+		log.debug("Transfer money to selected contact with : ID = " + id
+				+ " / amount = " + amount
+				+ " / description = " + description
+		);
+
+		 transactionService.transferMoney(id, amount, description);
+		
 		log.debug("Transfer done");
 		return "transaction";
 	}
@@ -54,7 +55,7 @@ public class TransactionController {
 		List<Transaction> transactionList = transactionService.getAllTransactions();
 		List<TransactionDto> transactions =	transactionList
 				.stream()
-				.map(transaction -> new TransactionDto())
+				.map(TransactionDto::new)
 				.collect(Collectors.toList());
 
 		model.addAttribute("transactions", transactions);
