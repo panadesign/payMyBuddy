@@ -27,8 +27,6 @@ public class TransactionServiceImpl implements TransactionService {
 	private UserAccountRepository userAccountRepository;
 	@Autowired
 	private TransactionRepository transactionRepository;
-	@Autowired
-	private MapperService mapperService;
 
 	public Transaction transferMoney(UUID id, double amount, String description) {
 		log.debug("Transfer money to contact");
