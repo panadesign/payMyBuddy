@@ -39,7 +39,10 @@ public class UserAccountServiceImpl implements UserAccountService {
 	public ProfileDto getUserAccountByEmail(String email) {
 		UserAccount userAccount = userAccountRepository.findByEmail(email)
 				.orElseThrow(() -> new RessourceNotFoundException("User not found with email : " + email));
-		return mapperService.convertUserAccountToProfileDto(userAccount);
+
+		ProfileDto profileDto = new ProfileDto(userAccount);
+
+		return profileDto;
 	}
 
 	public ContactInputDto getUserAccountById(UUID id) {
@@ -57,7 +60,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 			throw new UserAlreadyExistException("There is an account with that email address:" + userAccountDto.getEmail());
 		}
 		String password = passwordEncoder.encode(userAccountDto.getPassword());
-		UserAccount userAccount = new UserAccount(userAccountDto.getEmail(), userAccountDto.getFirstname(), userAccountDto.getLastname(), password);
+		UserAccount userAccount = new UserAccount(userAccountDto.getId(), userAccountDto.getEmail(), userAccountDto.getFirstname(), userAccountDto.getLastname(), password);
 		
 		return userAccountRepository.save(userAccount);
 	}

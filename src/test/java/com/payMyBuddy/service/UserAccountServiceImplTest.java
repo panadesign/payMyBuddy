@@ -1,6 +1,7 @@
 package com.payMyBuddy.service;
 
 import com.payMyBuddy.dao.UserAccountRepository;
+import com.payMyBuddy.dto.ProfileDto;
 import com.payMyBuddy.model.UserAccount;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 
@@ -46,29 +48,34 @@ class UserAccountServiceImplTest {
 		Assertions.assertEquals(appUsers, allAppUsers);
 	}
 
+	@Test
+	void getUserAccountByEmail() {
+		//GIVEN
+		UserAccount userAccount = new UserAccount("email1@test.com", "prenom1", "nom1", "password1");
+		ProfileDto profileDto = new ProfileDto(userAccount);
+
+		//WHEN
+		when(mockUserAccountRepository.findByEmail("email1@test.com")).thenReturn(Optional.of(userAccount));
+
+		//THEN
+		ProfileDto userAccountToFind = userAccountService.getUserAccountByEmail("email1@test.com");
+		Assertions.assertTrue(userAccountToFind.equals(profileDto));
+	}
+
 //	@Test
-//	void getUserAccountByEmail() {
+//	void getUserAccountById() {
 //		//GIVEN
-//		UserAccount userAccount = new UserAccount("email1@test.com", "prenom1", "nom1", "password1");
+//		UUID id = UUID.randomUUID();
+//		UserAccount userAccount = new UserAccount(id, "email1@test.com", "prenom1", "nom1", "password1");
+//		ProfileDto profileDto = new ProfileDto(userAccount);
 //
-//		ProfileDto profileDto = new ProfileDto("email1@test.com", "prenom1", "nom1");
-//		when(mapperService.convertUserAccountToProfileDto(userAccount)).thenReturn(profileDto);
+//		//WHEN
+//		when(mockUserAccountRepository.findAllById(Collections.singleton(id))).thenReturn((List<UserAccount>) userAccount);
 //
-//		ProfileDto userAccountToFind = userAccountService.getUserAccountByEmail("email1@test.com");
+//		//THEN
+//		ProfileDto userAccountToFind = userAccountService.getUserAccountById(id);
 //		Assertions.assertTrue(userAccountToFind.equals(profileDto));
 //	}
-
-	@Test
-	void testGetAllUsersAccount() {
-	}
-
-	@Test
-	void testGetUserAccountByEmail() {
-	}
-
-	@Test
-	void getUserAccountById() {
-	}
 
 	@Test
 	void registerNewUserAccount() {

@@ -62,6 +62,14 @@ public class UserAccount {
 	)
 	private List<UserAccount> contactList = new ArrayList<>();
 
+	public UserAccount(UUID id, String email, String firstname, String lastname, String password) {
+		this.id = id;
+		this.email = email;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.password = password;
+		this.account = new Account();
+	}
 	public UserAccount(String email, String firstname, String lastname, String password) {
 		this.email = email;
 		this.firstname = firstname;

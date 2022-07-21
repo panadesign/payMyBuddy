@@ -6,9 +6,11 @@ import com.payMyBuddy.model.UserAccount;
 import lombok.Data;
 
 import java.util.List;
+import java.util.UUID;
 
 @Data
 public class ProfileDto {
+	private UUID id;
 	private String email;
 	private String firstname;
 	private String lastname;
@@ -17,10 +19,11 @@ public class ProfileDto {
 	private float balance;
 	private List<UserAccount> userAccountList;
 
-	public ProfileDto(String email, String firstname, String lastname) {
-		this.email = email;
-		this.firstname = firstname;
-		this.lastname = lastname;
+	public ProfileDto(UserAccount userAccount) {
+		this.id = userAccount.getId();
+		this.email = userAccount.getEmail();
+		this.firstname = userAccount.getFirstname();
+		this.lastname = userAccount.getLastname();
 	}
 
 	public ProfileDto() {
