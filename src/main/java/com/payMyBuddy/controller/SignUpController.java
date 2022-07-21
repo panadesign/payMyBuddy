@@ -1,6 +1,5 @@
 package com.payMyBuddy.controller;
 
-import com.payMyBuddy.dto.UserAccountDto;
 import com.payMyBuddy.model.UserAccount;
 import com.payMyBuddy.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +22,8 @@ public class SignUpController {
 	}
 
 	@PostMapping("/signup")
-	public String addUserAccount(@ModelAttribute UserAccountDto userAccountDto) throws Exception {
-		userAccountService.registerNewUserAccount(userAccountDto);
+	public String addUserAccount(@ModelAttribute UserAccount userAccount) {
+		userAccountService.registerNewUserAccount(userAccount);
 		return "login";
 	}
 }

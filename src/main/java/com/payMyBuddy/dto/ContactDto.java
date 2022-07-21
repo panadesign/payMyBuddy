@@ -17,7 +17,7 @@ public class ContactDto {
 	private String firstname;
 	private String lastname;
 
-	ContactDto(UserAccount userAccount) {
+	public ContactDto(UserAccount userAccount) {
 		this.id = userAccount.getId();
 		this.email = userAccount.getEmail();
 		this.firstname = userAccount.getFirstname();

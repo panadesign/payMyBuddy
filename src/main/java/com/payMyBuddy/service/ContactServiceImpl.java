@@ -23,7 +23,7 @@ public class ContactServiceImpl implements ContactService {
 	@Autowired
 	private PrincipalUser principalUser;
 
-	public ContactInputDto addContactByEmail(String email) {
+		public ContactInputDto addContactByEmail(String email) {
 		log.debug("Add new contact to user's connected list");
 		UserAccount userConnected = userAccountRepository.findByEmail(principalUser.getCurrentUserEmail())
 				.orElseThrow(() -> new UnauthorisedUser("User unauthorised"));

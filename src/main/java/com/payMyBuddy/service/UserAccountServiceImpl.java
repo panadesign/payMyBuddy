@@ -3,7 +3,6 @@ package com.payMyBuddy.service;
 import com.payMyBuddy.dao.UserAccountRepository;
 import com.payMyBuddy.dto.ContactInputDto;
 import com.payMyBuddy.dto.ProfileDto;
-import com.payMyBuddy.dto.UserAccountDto;
 import com.payMyBuddy.exception.RessourceNotFoundException;
 import com.payMyBuddy.exception.UnauthorisedUser;
 import com.payMyBuddy.exception.UserAlreadyExistException;
@@ -39,7 +38,6 @@ public class UserAccountServiceImpl implements UserAccountService {
 	public ProfileDto getUserAccountByEmail(String email) {
 		UserAccount userAccount = userAccountRepository.findByEmail(email)
 				.orElseThrow(() -> new RessourceNotFoundException("User not found with email : " + email));
-
 		ProfileDto profileDto = new ProfileDto(userAccount);
 
 		return profileDto;
@@ -48,21 +46,23 @@ public class UserAccountServiceImpl implements UserAccountService {
 	public ContactInputDto getUserAccountById(UUID id) {
 		UserAccount userAccount = userAccountRepository.findById(id)
 				.orElseThrow(() -> new RessourceNotFoundException("User not found with id : " + id));
-		return mapperService.convertUserAccountToContactInputDto(userAccount);
+		ContactInputDto contactInputDto = new ContactInputDto(userAccount);
+
+		return contactInputDto;
 	}
 	
-	private boolean emailExist(String email) {
+	public boolean emailExist(String email) {
 		return userAccountRepository.findByEmail(email).isPresent();
 	}
 	
-	public UserAccount registerNewUserAccount(UserAccountDto userAccountDto) {
-		if (emailExist(userAccountDto.getEmail())) {
-			throw new UserAlreadyExistException("There is an account with that email address:" + userAccountDto.getEmail());
+	public UserAccount registerNewUserAccount(UserAccount userAccount) {
+		if (emailExist(userAccount.getEmail())) {
+			throw new UserAlreadyExistException("There is an account with that email address:" + userAccount.getEmail());
 		}
-		String password = passwordEncoder.encode(userAccountDto.getPassword());
-		UserAccount userAccount = new UserAccount(userAccountDto.getId(), userAccountDto.getEmail(), userAccountDto.getFirstname(), userAccountDto.getLastname(), password);
+		String password = passwordEncoder.encode(userAccount.getPassword());
+		UserAccount newUserAccount = new UserAccount(userAccount.getEmail(), userAccount.getFirstname(), userAccount.getLastname(), password);
 		
-		return userAccountRepository.save(userAccount);
+		return userAccountRepository.save(newUserAccount);
 	}
 	
 	public UserAccount getPrincipalUser() {
@@ -72,7 +72,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 	}
 	
 	
-	private String getCurrentUserEmail() {
+	protected String getCurrentUserEmail() {
 		String currentUserEmail = principalUser.getCurrentUserEmail();
 		
 		if (currentUserEmail.isEmpty()) {
