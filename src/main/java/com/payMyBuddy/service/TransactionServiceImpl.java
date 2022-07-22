@@ -11,10 +11,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
-import java.util.Currency;
 import java.util.List;
-import java.util.Locale;
 import java.util.UUID;
 
 @Component
@@ -67,7 +64,7 @@ public class TransactionServiceImpl implements TransactionService {
 
 	public List<Transaction> getAllTransactions() {
 		UserAccount userConnected = userAccountService.getPrincipalUser();
-		
+
 		return transactionRepository.findAllByCreditorIdOrDebtorIdOrderByCreationDate(userConnected.getId(), userConnected.getId());
 	}
 }

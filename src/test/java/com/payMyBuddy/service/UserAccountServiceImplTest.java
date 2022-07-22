@@ -21,12 +21,6 @@ class UserAccountServiceImplTest {
 
 	private UserAccountService userAccountService;
 
-	@Mock
-	MapperService mapperService;
-
-	@Mock
-	PrincipalUser principalUserMock;
-
 	@BeforeEach
 	public void Init() {
 		userAccountService = new UserAccountServiceImpl(mockUserAccountRepository);
@@ -54,31 +48,16 @@ class UserAccountServiceImplTest {
 	@Test
 	void getUserAccountByEmail() {
 		//GIVEN
-		UserAccount userAccount = new UserAccount("email1@test.com", "prenom1", "nom1", "password1");
-		ProfileDto profileDto = new ProfileDto(userAccount);
+		//COmpte à trouver
+		UserAccount userAccount = new UserAccount("email@test.com", "jeremy", "charpentier", "'password");
 
-		//WHEN
-		when(mockUserAccountRepository.findByEmail("email1@test.com")).thenReturn(Optional.of(userAccount));
+		when(mockUserAccountRepository.findByEmail(userAccount.getEmail())).thenReturn(Optional.of(userAccount));
 
-		//THEN
-		ProfileDto userAccountToFind = userAccountService.getUserAccountByEmail("email1@test.com");
-		Assertions.assertTrue(userAccountToFind.equals(profileDto));
+		ProfileDto user = userAccountService.getUserAccountByEmail("email@test.com");
+
+		Assertions.assertEquals(user.getFirstname(), "jeremy");
 	}
 
-	@Test
-	void getUserAccountById() {
-//		//GIVEN
-//		UUID id = UUID.randomUUID();
-//		UserAccount userAccount = new UserAccount(id, "email1@test.com", "prenom1", "nom1", "password1");
-//		ContactInputDto contactInputDto = new ContactInputDto(userAccount);
-//
-//		//WHEN
-//		when(mockUserAccountRepository.findById(id)).thenReturn(Optional.of(userAccount));
-//
-//		//THEN
-//		ContactInputDto userAccountToFind = userAccountService.getUserAccountById(id);
-//		Assertions.assertTrue(userAccountToFind.getId().equals(contactInputDto.getId()));
-	}
 
 	@Test
 	void registerNewUserAccount() {
@@ -90,7 +69,7 @@ class UserAccountServiceImplTest {
 //		UserAccount userAccount = new UserAccount("principalUser@mail.com", "principalUser", "principalUser", "");
 //
 //		//WHEN
-//		when(principalUserMock.getCurrentUserEmail()).thenReturn(userAccount.getEmail());
+//		when(principalUserMock.getCurrentUserEmail()).thenReturn(userAccount);
 //
 //		UserAccount principalUser = userAccountService.get();
 //

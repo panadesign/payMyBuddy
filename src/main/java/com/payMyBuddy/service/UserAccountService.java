@@ -9,7 +9,6 @@ public interface UserAccountService {
 
 	List<UserAccount> getAllUsersAccount();
 	ProfileDto getUserAccountByEmail(String email);
-//	ContactInputDto getUserAccountById(UUID id);
 	UserAccount registerNewUserAccount(UserAccount userAccount);
 	UserAccount getPrincipalUser();
 }

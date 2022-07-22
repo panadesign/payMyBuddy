@@ -2,7 +2,6 @@ package com.payMyBuddy.controller;
 
 import com.payMyBuddy.dto.ContactInputDto;
 import com.payMyBuddy.dto.TransactionDto;
-import com.payMyBuddy.exception.RessourceNotFoundException;
 import com.payMyBuddy.model.Transaction;
 import com.payMyBuddy.model.UserAccount;
 import com.payMyBuddy.service.ContactService;
@@ -38,7 +37,7 @@ public class TransactionController {
 		 transactionService.transferMoney(id, amount, description);
 		
 		log.debug("Transfer done");
-		return "transaction";
+		return "redirect:/transaction";
 	}
 
 	@GetMapping("/transaction")

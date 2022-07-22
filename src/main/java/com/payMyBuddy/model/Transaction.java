@@ -1,6 +1,5 @@
 package com.payMyBuddy.model;
 
-import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
@@ -12,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
-import java.util.Currency;
 import java.util.UUID;
 
 @Data
@@ -39,9 +37,9 @@ public class Transaction {
 	private UserAccount creditor;
 	
 	
-	public Transaction(UserAccount creditorAccount, UserAccount debtorAccount, double amount, String currency, String description) {
-		this.creditor = creditorAccount;
+	public Transaction(UserAccount debtorAccount, UserAccount creditorAccount, double amount, String currency, String description) {
 		this.debtor = debtorAccount;
+		this.creditor = creditorAccount;
 		this.amount = amount;
 		this.currency = currency;
 		this.description = description;

@@ -80,7 +80,7 @@
         <div class="sectionTitle">
             <h2>My transactions</h2>
         </div>
-        <table class="table">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th scope="col">Connections</th>
@@ -90,7 +90,7 @@
             </thead>
             <tbody th:action="@{/transaction}" method="GET">
                 <tr id="transactions" th:object="${transactions}" th:each="transaction: ${transactions}">
-                    <td th:text="${transaction.firstname}"></td>
+                    <td th:text="${transaction.creditorName}"></td>
                     <td th:text="${transaction.description}"></td>
                     <td th:text="${transaction.amount}"></td>
                 </tr>

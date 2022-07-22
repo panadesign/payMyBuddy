@@ -19,8 +19,6 @@ public class ContactServiceImpl implements ContactService {
 	@Autowired
 	private UserAccountService userAccountService;
 	@Autowired
-	private MapperService mapperService;
-	@Autowired
 	private PrincipalUser principalUser;
 
 		public ContactInputDto addContactByEmail(String email) {
