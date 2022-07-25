@@ -23,7 +23,7 @@ public class ContactServiceImpl implements ContactService {
 
 		public ContactInputDto addContactByEmail(String email) {
 		log.debug("Add new contact to user's connected list");
-		UserAccount userConnected = userAccountRepository.findByEmail(principalUser.getCurrentUserEmail())
+		UserAccount userConnected = userAccountRepository.findByEmail(principalUser.getCurrentUserName())
 				.orElseThrow(() -> new UnauthorisedUser("User unauthorised"));
 		UserAccount userAccount = userAccountRepository.findByEmail(email)
 				.orElseThrow(() -> new RessourceNotFoundException("User not found with email : " + email));
@@ -59,7 +59,7 @@ public class ContactServiceImpl implements ContactService {
 	}
 
 	public List<UserAccount> getContactList() {
-		UserAccount userConnected = userAccountRepository.findByEmail(principalUser.getCurrentUserEmail())
+		UserAccount userConnected = userAccountRepository.findByEmail(principalUser.getCurrentUserName())
 				.orElseThrow(() -> new RessourceNotFoundException("User not found"));
 		log.debug("Get all contacts from user's connected list");
 		return userConnected.getContactList();

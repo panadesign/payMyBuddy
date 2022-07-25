@@ -70,9 +70,18 @@ public class UserAccount {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.password = password;
-
 	}
-	
+
+	public UserAccount(UUID id, String email, String firstname, String lastname, String password, AccountStatus status, Account account) {
+		this.id = id;
+		this.email = email;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.password = password;
+		this.status = status;
+		this.account = account;
+	}
+
 	public String getName() {
 		return this.firstname + " " + this.lastname;
 	}

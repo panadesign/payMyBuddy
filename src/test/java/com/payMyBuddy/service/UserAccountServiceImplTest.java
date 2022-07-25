@@ -2,21 +2,25 @@ package com.payMyBuddy.service;
 
 import com.payMyBuddy.dao.UserAccountRepository;
 import com.payMyBuddy.dto.ProfileDto;
+import com.payMyBuddy.model.Account;
+import com.payMyBuddy.model.AccountStatus;
 import com.payMyBuddy.model.UserAccount;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.mockito.Mockito.when;
 
-@ExtendWith(SpringExtension.class)
+@ExtendWith(MockitoExtension.class)
 class UserAccountServiceImplTest {
 
 	private UserAccountService userAccountService;
@@ -28,6 +32,10 @@ class UserAccountServiceImplTest {
 
 	@Mock
 	private UserAccountRepository mockUserAccountRepository;
+	@Mock
+	private PrincipalUser mockPrincipalUser;
+	@Mock
+	private PasswordEncoder mockPasswordEncoder;
 
 	@Test
 	void getAllUsersAccount() {
@@ -48,32 +56,41 @@ class UserAccountServiceImplTest {
 	@Test
 	void getUserAccountByEmail() {
 		//GIVEN
-		//COmpte à trouver
-		UserAccount userAccount = new UserAccount("email@test.com", "jeremy", "charpentier", "'password");
+		UserAccount userAccount = new UserAccount(UUID.randomUUID(), "email@test.com", "jeremy", "charpentier", "'password", AccountStatus.ACTIVE, new Account());
 
+		//WHEN
 		when(mockUserAccountRepository.findByEmail(userAccount.getEmail())).thenReturn(Optional.of(userAccount));
-
+		ProfileDto userAccountToDto = new ProfileDto(userAccount);
 		ProfileDto user = userAccountService.getUserAccountByEmail("email@test.com");
 
-		Assertions.assertEquals(user.getFirstname(), "jeremy");
-	}
-
-
-	@Test
-	void registerNewUserAccount() {
+		//THEN
+		Assertions.assertEquals(user, userAccountToDto);
 	}
 
 //	@Test
 //	void getPrincipalUser() {
-//		//GIVEN
-//		UserAccount userAccount = new UserAccount("principalUser@mail.com", "principalUser", "principalUser", "");
 //
-//		//WHEN
-//		when(principalUserMock.getCurrentUserEmail()).thenReturn(userAccount);
 //
-//		UserAccount principalUser = userAccountService.get();
 //
-//		//THEN
-//		Assertions.assertTrue(principalUser.getEmail().equals(userAccount.getEmail()));
+//		UserAccount userAccount = new UserAccount(UUID.randomUUID(), "email@test.com", "jeremy", "charpentier", "'password", AccountStatus.ACTIVE, new Account());
+//
+//		String currentUserEmail = "email@test.com";
+//		when(mockUserAccountRepository.findByEmail(currentUserEmail)).thenReturn(Optional.of(userAccount));
+//
+//		UserAccount principalUSer = userAccountService.getPrincipalUser();
+//
+//		Assertions.assertTrue(principalUSer.equals(userAccount));
+//	}
+
+//	@Test
+//	void registerNewUserAccount() {
+//		UserAccount userToRegister = new UserAccount("connected@mail.com", "firstname1", "lastname1", "$2y$10$Ei4ASFiEKe6PoOUnVlfB5eLPa0IgpWbeS8OlRS5RMx.RwUxLH3Ycm");
+//
+//		when(mockPasswordEncoder.encode(userToRegister.getPassword())).thenReturn("$2y$10$Ei4ASFiEKe6PoOUnVlfB5eLPa0IgpWbeS8OlRS5RMx.RwUxLH3Ycm");
+//		when(mockUserAccountRepository.save(userToRegister)).thenReturn(userToRegister);
+//
+//		userAccountService.registerNewUserAccount(userToRegister);
+//
+//		Assertions.assertTrue(userAccountService.getAllUsersAccount().contains(userToRegister));
 //	}
 }

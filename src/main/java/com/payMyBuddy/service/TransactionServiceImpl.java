@@ -50,7 +50,7 @@ public class TransactionServiceImpl implements TransactionService {
 			userAccountRepository.save(userConnected);
 			userAccountRepository.save(creditorAccount);
 
-			Transaction transaction =  new Transaction(userConnected, creditorAccount, amount , "EUR", description );
+			Transaction transaction =  new Transaction(creditorAccount.getId(), amount, description, "EUR", userConnected, creditorAccount);
 
 			transactionRepository.save(transaction);
 			

@@ -1,7 +1,6 @@
 package com.payMyBuddy.service;
 
 import com.payMyBuddy.dao.UserAccountRepository;
-import com.payMyBuddy.dto.ContactInputDto;
 import com.payMyBuddy.dto.ProfileDto;
 import com.payMyBuddy.exception.RessourceNotFoundException;
 import com.payMyBuddy.exception.UnauthorisedUser;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @Component
@@ -64,8 +62,8 @@ public class UserAccountServiceImpl implements UserAccountService {
 	}
 
 
-	protected String getCurrentUserEmail() {
-		String currentUserEmail = principalUser.getCurrentUserEmail();
+	private String getCurrentUserEmail() {
+		String currentUserEmail = principalUser.getCurrentUserName();
 
 		if(currentUserEmail.isEmpty()) {
 			throw new UnauthorisedUser("Unauthorised user");

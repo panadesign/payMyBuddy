@@ -27,7 +27,7 @@ public class ProfileController {
 
 	@GetMapping("/profile")
 	private String userAccount(Model model) {
-		String email = principalUser.getCurrentUserEmail();
+		String email = principalUser.getCurrentUserName();
 		ProfileDto profileDto = userAccountService.getUserAccountByEmail(email);
 		model.addAttribute("profileDto", profileDto);
 		

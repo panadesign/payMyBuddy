@@ -45,4 +45,20 @@ public class Transaction {
 		this.description = description;
 		this.creationDate = LocalDate.now();
 	}
+
+	public Transaction(UUID id, double amount, String description) {
+		this.id = id;
+		this.amount = amount;
+		this.description = description;
+	}
+
+	public Transaction(UUID id, double amount, String description, String currency, UserAccount debtor, UserAccount creditor) {
+		this.id = id;
+		this.amount = amount;
+		this.description = description;
+		this.currency = currency;
+		this.creationDate = LocalDate.now();
+		this.debtor = debtor;
+		this.creditor = creditor;
+	}
 }
