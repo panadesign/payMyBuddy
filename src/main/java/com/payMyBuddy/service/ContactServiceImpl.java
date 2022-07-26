@@ -22,7 +22,7 @@ public class ContactServiceImpl implements ContactService {
 	private PrincipalUser principalUser;
 
 		public ContactInputDto addContactByEmail(String email) {
-		log.debug("Add new contact to user's connected list");
+		log.debug("Add new contact to user's connected list with this email:" + email);
 		UserAccount userConnected = userAccountRepository.findByEmail(principalUser.getCurrentUserName())
 				.orElseThrow(() -> new UnauthorisedUser("User unauthorised"));
 		UserAccount userAccount = userAccountRepository.findByEmail(email)
@@ -35,7 +35,7 @@ public class ContactServiceImpl implements ContactService {
 			userConnected.getContactList().add(userAccount);
 			userAccountRepository.save(userConnected);
 
-			log.debug("New contact has been added to the user's connected list");
+			log.debug("New contact has been added to the user's connected list" + userAccount);
 			return new ContactInputDto(userAccount);
 		} else {
 			log.error("User connected can't add his own account to his contact's list");
@@ -44,7 +44,7 @@ public class ContactServiceImpl implements ContactService {
 	}
 
 	public Boolean removeContactByEmail(String email) {
-		log.debug("Remove a contact from user's connected list");
+		log.debug("Remove a contact from user's connected list with this email:" + email);
 		UserAccount contactToDelete = getContactList()
 				.stream()
 				.filter(userAccount -> userAccount.getEmail().equals(email))

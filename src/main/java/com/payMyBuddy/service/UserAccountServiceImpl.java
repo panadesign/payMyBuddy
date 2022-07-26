@@ -5,13 +5,16 @@ import com.payMyBuddy.dto.ProfileDto;
 import com.payMyBuddy.exception.RessourceNotFoundException;
 import com.payMyBuddy.exception.UnauthorisedUser;
 import com.payMyBuddy.exception.UserAlreadyExistException;
+import com.payMyBuddy.model.Account;
+import com.payMyBuddy.model.AccountStatus;
 import com.payMyBuddy.model.UserAccount;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,10 +23,10 @@ import java.util.List;
 public class UserAccountServiceImpl implements UserAccountService {
 
 	private final UserAccountRepository userAccountRepository;
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	@Autowired
-	private PrincipalUser principalUser;
+	
+	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+	private PrincipalUser principalUser = new PrincipalUserImpl();
 
 	public UserAccountServiceImpl(UserAccountRepository userAccountRepository) {
 		this.userAccountRepository = userAccountRepository;
@@ -46,10 +49,10 @@ public class UserAccountServiceImpl implements UserAccountService {
 
 	public UserAccount registerNewUserAccount(UserAccount userAccount) {
 		if(emailExist(userAccount.getEmail())) {
-			throw new UserAlreadyExistException("There is an account with that email address:" + userAccount.getEmail());
+			throw new UserAlreadyExistException("An account with this email address already exist:" + userAccount.getEmail());
 		}
 		String password = passwordEncoder.encode(userAccount.getPassword());
-		UserAccount newUserAccount = new UserAccount(userAccount.getEmail(), userAccount.getFirstname(), userAccount.getLastname(), password);
+		UserAccount newUserAccount = new UserAccount(userAccount.getId(), userAccount.getEmail(), userAccount.getFirstname(), userAccount.getLastname(), password, AccountStatus.ACTIVE, new Account(), new ArrayList<>());
 		log.debug("New account : " + newUserAccount);
 		
 		return userAccountRepository.save(newUserAccount);
@@ -57,10 +60,10 @@ public class UserAccountServiceImpl implements UserAccountService {
 
 	public UserAccount getPrincipalUser() {
 		String currentUserEmail = getCurrentUserEmail();
+		log.debug("Principal user: " + userAccountRepository.findByEmail(currentUserEmail));
 		return userAccountRepository.findByEmail(currentUserEmail)
 				.orElseThrow(() -> new RessourceNotFoundException("User not found"));
 	}
-
 
 	private String getCurrentUserEmail() {
 		String currentUserEmail = principalUser.getCurrentUserName();
@@ -68,6 +71,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 		if(currentUserEmail.isEmpty()) {
 			throw new UnauthorisedUser("Unauthorised user");
 		}
+		log.debug("Current user email: " + currentUserEmail);
 		return currentUserEmail;
 	}
 }

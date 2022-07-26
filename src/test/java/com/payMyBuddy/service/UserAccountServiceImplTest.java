@@ -11,13 +11,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -35,7 +35,7 @@ class UserAccountServiceImplTest {
 	@Mock
 	private PrincipalUser mockPrincipalUser;
 	@Mock
-	private PasswordEncoder mockPasswordEncoder;
+	private UserAccountService mcoKUserAccountService;
 
 	@Test
 	void getAllUsersAccount() {
@@ -67,30 +67,43 @@ class UserAccountServiceImplTest {
 		Assertions.assertEquals(user, userAccountToDto);
 	}
 
-//	@Test
-//	void getPrincipalUser() {
-//
-//
-//
-//		UserAccount userAccount = new UserAccount(UUID.randomUUID(), "email@test.com", "jeremy", "charpentier", "'password", AccountStatus.ACTIVE, new Account());
-//
-//		String currentUserEmail = "email@test.com";
-//		when(mockUserAccountRepository.findByEmail(currentUserEmail)).thenReturn(Optional.of(userAccount));
-//
-//		UserAccount principalUSer = userAccountService.getPrincipalUser();
-//
-//		Assertions.assertTrue(principalUSer.equals(userAccount));
-//	}
+	@Test
+	void getPrincipalUser() {
+
+		UserAccount userAccount = new UserAccount(UUID.randomUUID(), "email@test.com", "jeremy", "charpentier", "'password", AccountStatus.ACTIVE, new Account());
+
+		when(mockPrincipalUser.getCurrentUserName()).thenReturn("email@test.com");
+		when(mockUserAccountRepository.findByEmail(userAccount.getEmail())).thenReturn(Optional.of(userAccount));
+
+		UserAccount principalUSer = userAccountService.getPrincipalUser();
+
+		Assertions.assertTrue(principalUSer.equals(userAccount));
+	}
+
+	@Test
+	void registerNewUserAccount() {
+		//GIVEN
+		UserAccount userToRegister = new UserAccount(UUID.randomUUID(), "connected@mail.com", "firstname1", "lastname1", "123", AccountStatus.ACTIVE, new Account());
+
+		//WHEN
+		when(mockUserAccountRepository.save(any())).thenReturn(userToRegister);
+		UserAccount newUser = userAccountService.registerNewUserAccount(userToRegister);
+
+		//THEN
+		Assertions.assertTrue(newUser.getEmail().equals("connected@mail.com"));
+	}
 
 //	@Test
-//	void registerNewUserAccount() {
-//		UserAccount userToRegister = new UserAccount("connected@mail.com", "firstname1", "lastname1", "$2y$10$Ei4ASFiEKe6PoOUnVlfB5eLPa0IgpWbeS8OlRS5RMx.RwUxLH3Ycm");
+//	void registerNewUserAccountEmailAlreadyExist() {
+//		//GIVEN
+//		UserAccount userToRegister = new UserAccount(UUID.randomUUID(), "userInDataBase@mail.com", "firstname1", "lastname1", "123", AccountStatus.ACTIVE, new Account());
 //
-//		when(mockPasswordEncoder.encode(userToRegister.getPassword())).thenReturn("$2y$10$Ei4ASFiEKe6PoOUnVlfB5eLPa0IgpWbeS8OlRS5RMx.RwUxLH3Ycm");
-//		when(mockUserAccountRepository.save(userToRegister)).thenReturn(userToRegister);
+//		//WHEN
 //
-//		userAccountService.registerNewUserAccount(userToRegister);
+//		when(userAccountService.)
+//		when(mockUserAccountRepository.save(any())).thenReturn(userToRegister);
 //
-//		Assertions.assertTrue(userAccountService.getAllUsersAccount().contains(userToRegister));
+//		//THEN
+//		Assertions.assertThrows(UserAlreadyExistException.class, () -> userAccountService.registerNewUserAccount(userToRegister));
 //	}
 }

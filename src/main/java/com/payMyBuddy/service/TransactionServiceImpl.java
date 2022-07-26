@@ -10,6 +10,8 @@ import com.payMyBuddy.model.UserAccount;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -25,12 +27,14 @@ public class TransactionServiceImpl implements TransactionService {
 	@Autowired
 	private TransactionRepository transactionRepository;
 
+	@Transactional(isolation = Isolation.READ_COMMITTED)
 	public Transaction transferMoney(UUID id, double amount, String description) {
-		log.debug("Transfer money to contact");
+		log.debug("Transfer money to contact: " + id + ",amount: " + amount + ",description: " + description);
 		UserAccount userConnected = userAccountService.getPrincipalUser();
 
 		List<UserAccount> contactList = userConnected.getContactList();
-		
+		log.debug("Contact list:" + contactList);
+
 		UserAccount creditorAccount =
 				contactList.stream()
 						.filter(userAccount -> userAccount.getId().equals(id))
@@ -64,7 +68,6 @@ public class TransactionServiceImpl implements TransactionService {
 
 	public List<Transaction> getAllTransactions() {
 		UserAccount userConnected = userAccountService.getPrincipalUser();
-
 		return transactionRepository.findAllByCreditorIdOrDebtorIdOrderByCreationDate(userConnected.getId(), userConnected.getId());
 	}
 }

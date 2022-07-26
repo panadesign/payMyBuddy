@@ -121,7 +121,12 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-inline</artifactId>
+            <version>4.6.1</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
@@ -236,6 +241,7 @@
                     <excludes>
                         <exclude>com/payMyBuddy/dto/*</exclude>
                         <exclude>com/payMyBuddy/model/*</exclude>
+                        <exclude>com/payMyBuddy/constants/*</exclude>
                         <exclude>com/payMyBuddy/PayMyBuddyApplication.class</exclude>
                         <exclude>com/payMyBuddy/actuator/*</exclude>
                     </excludes>
