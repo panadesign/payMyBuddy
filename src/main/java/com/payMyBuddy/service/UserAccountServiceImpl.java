@@ -24,12 +24,13 @@ public class UserAccountServiceImpl implements UserAccountService {
 
 	private final UserAccountRepository userAccountRepository;
 	
-	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-	private PrincipalUser principalUser = new PrincipalUserImpl();
+	private final PrincipalUser principalUser;
 
-	public UserAccountServiceImpl(UserAccountRepository userAccountRepository) {
+	public UserAccountServiceImpl(UserAccountRepository userAccountRepository, PrincipalUser principalUser) {
 		this.userAccountRepository = userAccountRepository;
+		this.principalUser = principalUser;
 	}
 
 	public List<UserAccount> getAllUsersAccount() {

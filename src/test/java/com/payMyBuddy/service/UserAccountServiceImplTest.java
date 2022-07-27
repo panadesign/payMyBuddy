@@ -2,6 +2,8 @@ package com.payMyBuddy.service;
 
 import com.payMyBuddy.dao.UserAccountRepository;
 import com.payMyBuddy.dto.ProfileDto;
+import com.payMyBuddy.exception.UnauthorisedUser;
+import com.payMyBuddy.exception.UserAlreadyExistException;
 import com.payMyBuddy.model.Account;
 import com.payMyBuddy.model.AccountStatus;
 import com.payMyBuddy.model.UserAccount;
@@ -27,7 +29,7 @@ class UserAccountServiceImplTest {
 
 	@BeforeEach
 	public void Init() {
-		userAccountService = new UserAccountServiceImpl(mockUserAccountRepository);
+		userAccountService = new UserAccountServiceImpl(mockUserAccountRepository, mockPrincipalUser);
 	}
 
 	@Mock
@@ -67,17 +69,24 @@ class UserAccountServiceImplTest {
 		Assertions.assertEquals(user, userAccountToDto);
 	}
 
+
 	@Test
 	void getPrincipalUser() {
 
 		UserAccount userAccount = new UserAccount(UUID.randomUUID(), "email@test.com", "jeremy", "charpentier", "'password", AccountStatus.ACTIVE, new Account());
-
 		when(mockPrincipalUser.getCurrentUserName()).thenReturn("email@test.com");
 		when(mockUserAccountRepository.findByEmail(userAccount.getEmail())).thenReturn(Optional.of(userAccount));
 
 		UserAccount principalUSer = userAccountService.getPrincipalUser();
 
 		Assertions.assertTrue(principalUSer.equals(userAccount));
+	}
+
+	@Test
+	void getPrincipalUserWithCurrentUSerEMailEmpty() {
+		when(mockPrincipalUser.getCurrentUserName()).thenReturn("");
+
+		Assertions.assertThrows(UnauthorisedUser.class, () -> userAccountService.getPrincipalUser());
 	}
 
 	@Test
@@ -93,17 +102,16 @@ class UserAccountServiceImplTest {
 		Assertions.assertTrue(newUser.getEmail().equals("connected@mail.com"));
 	}
 
-//	@Test
-//	void registerNewUserAccountEmailAlreadyExist() {
-//		//GIVEN
-//		UserAccount userToRegister = new UserAccount(UUID.randomUUID(), "userInDataBase@mail.com", "firstname1", "lastname1", "123", AccountStatus.ACTIVE, new Account());
-//
-//		//WHEN
-//
-//		when(userAccountService.)
-//		when(mockUserAccountRepository.save(any())).thenReturn(userToRegister);
-//
-//		//THEN
-//		Assertions.assertThrows(UserAlreadyExistException.class, () -> userAccountService.registerNewUserAccount(userToRegister));
-//	}
+	@Test
+	void registerNewUserAccountEmailAlreadyExist() {
+		//GIVEN
+		UserAccount userAlreadyRegistered = new UserAccount(UUID.randomUUID(), "userInDataBase@mail.com", "firstname1", "lastname1", "123", AccountStatus.ACTIVE, new Account());
+		UserAccount userToRegister = new UserAccount(UUID.randomUUID(), "userInDataBase@mail.com", "firstname1", "lastname1", "123", AccountStatus.ACTIVE, new Account());
+
+		//WHEN
+		when(mockUserAccountRepository.findByEmail("userInDataBase@mail.com")).thenReturn(Optional.of(userAlreadyRegistered));
+
+		//THEN
+		Assertions.assertThrows(UserAlreadyExistException.class, () -> userAccountService.registerNewUserAccount(userToRegister));
+	}
 }
