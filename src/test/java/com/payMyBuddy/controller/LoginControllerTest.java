@@ -17,11 +17,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 class LoginControllerTest {
 
-	@Mock
 	private MockMvc mockMvc;
 
-	@MockBean
-	UserAccountService userAccountService;
+	@Autowired
+	private WebApplicationContext webApplicationContext;
+
+	@BeforeEach
+	public void init() {
+		mockMvc = MockMvcBuilders
+				.webAppContextSetup(webApplicationContext)
+				.apply(springSecurity())
+				.build();
+	}
 
 	@Test
 	void login() throws Exception {

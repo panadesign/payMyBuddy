@@ -9,7 +9,6 @@ import com.payMyBuddy.model.Account;
 import com.payMyBuddy.model.AccountStatus;
 import com.payMyBuddy.model.UserAccount;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -24,13 +23,14 @@ public class UserAccountServiceImpl implements UserAccountService {
 
 	private final UserAccountRepository userAccountRepository;
 	
-	private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	private final PasswordEncoder passwordEncoder;
 
 	private final PrincipalUser principalUser;
 
-	public UserAccountServiceImpl(UserAccountRepository userAccountRepository, PrincipalUser principalUser) {
+	public UserAccountServiceImpl(UserAccountRepository userAccountRepository, PrincipalUser principalUser,  PasswordEncoder passwordEncoder) {
 		this.userAccountRepository = userAccountRepository;
 		this.principalUser = principalUser;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	public List<UserAccount> getAllUsersAccount() {
@@ -52,10 +52,11 @@ public class UserAccountServiceImpl implements UserAccountService {
 		if(emailExist(userAccount.getEmail())) {
 			throw new UserAlreadyExistException("An account with this email address already exist:" + userAccount.getEmail());
 		}
+
 		String password = passwordEncoder.encode(userAccount.getPassword());
+
 		UserAccount newUserAccount = new UserAccount(userAccount.getId(), userAccount.getEmail(), userAccount.getFirstname(), userAccount.getLastname(), password, AccountStatus.ACTIVE, new Account(), new ArrayList<>());
 		log.debug("New account : " + newUserAccount);
-		
 		return userAccountRepository.save(newUserAccount);
 	}
 

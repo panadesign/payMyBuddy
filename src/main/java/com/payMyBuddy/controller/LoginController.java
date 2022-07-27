@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class LoginController {
-	@Autowired
-	UserAccountService userAccountService;
 
 	@GetMapping({"/login", "/"})
 	public String login() {

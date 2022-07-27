@@ -83,13 +83,15 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">Connections</th>
+                    <th scope="col">Debiteur</th>
+                    <th scope="col">Crediteur</th>
                     <th scope="col">Description</th>
                     <th scope="col">Amount</th>
                 </tr>
             </thead>
             <tbody th:action="@{/transaction}" method="GET">
                 <tr id="transactions" th:object="${transactions}" th:each="transaction: ${transactions}">
+                    <td th:text="${transaction.debtorName}"></td>
                     <td th:text="${transaction.creditorName}"></td>
                     <td th:text="${transaction.description}"></td>
                     <td th:text="${transaction.amount}"></td>

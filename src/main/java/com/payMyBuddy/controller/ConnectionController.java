@@ -13,17 +13,15 @@ public class ConnectionController {
 	private ContactService contactService;
 
 	@PostMapping("/addConnection")
-	public String addContact(Model model, String email) {
-		ContactInputDto contactInputDto = contactService.addContactByEmail(email);
-		model.addAttribute("contactInputDto", contactInputDto);
+	public String addContact(String email) {
+		contactService.addContactByEmail(email);
 		return "redirect:/transaction";
 	}
 
 
-	@GetMapping ("/deleteConnection")
-	public String deleteContact(Model model, @RequestParam String email) {
-		Boolean contactInputDto = contactService.removeContactByEmail(email);
-		model.addAttribute("contactInputDto", contactInputDto);
+	@GetMapping("/deleteConnection")
+	public String deleteContact(@RequestParam String email) {
+		contactService.removeContactByEmail(email);
 		return "redirect:/profile";
 	}
 }

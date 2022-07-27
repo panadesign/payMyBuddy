@@ -19,12 +19,18 @@ import java.util.UUID;
 @Log4j2
 public class TransactionServiceImpl implements TransactionService {
 
-	@Autowired
-	private UserAccountService userAccountService;
-	@Autowired
-	private UserAccountRepository userAccountRepository;
-	@Autowired
-	private TransactionRepository transactionRepository;
+	private final UserAccountService userAccountService;
+	private final UserAccountRepository userAccountRepository;
+	private final TransactionRepository transactionRepository;
+
+	public TransactionServiceImpl(UserAccountService userAccountService,
+								  UserAccountRepository userAccountRepository,
+								  TransactionRepository transactionRepository) {
+
+		this.userAccountService = userAccountService;
+		this.userAccountRepository = userAccountRepository;
+		this.transactionRepository = transactionRepository;
+	}
 
 	@Transactional(isolation = Isolation.READ_COMMITTED)
 	public Transaction transferMoney(UUID id, double amount, String description) {

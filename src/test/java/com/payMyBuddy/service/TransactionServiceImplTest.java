@@ -8,6 +8,7 @@ import com.payMyBuddy.model.AccountStatus;
 import com.payMyBuddy.model.Transaction;
 import com.payMyBuddy.model.UserAccount;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -22,8 +23,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class TransactionServiceImplTest {
 
-	@InjectMocks
-	TransactionService transactionService = new TransactionServiceImpl();
+	private TransactionService transactionService ;
 
 	@Mock
 	private UserAccountService mockUserAccountService;
@@ -31,8 +31,16 @@ class TransactionServiceImplTest {
 	private UserAccountRepository mockUserAccountRepository;
 	@Mock
 	private TransactionRepository mockTransactionRepository;
-	@Mock
-	private PrincipalUser mockPrincipalUser;
+
+	//init
+	@BeforeEach
+	void init() {
+		transactionService = new TransactionServiceImpl(mockUserAccountService,
+				mockUserAccountRepository,
+				mockTransactionRepository
+		);
+	}
+
 
 	@Test
 	void transferMoney() {

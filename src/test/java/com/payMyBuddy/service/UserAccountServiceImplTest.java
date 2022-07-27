@@ -13,12 +13,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -27,17 +29,18 @@ class UserAccountServiceImplTest {
 
 	private UserAccountService userAccountService;
 
-	@BeforeEach
-	public void Init() {
-		userAccountService = new UserAccountServiceImpl(mockUserAccountRepository, mockPrincipalUser);
-	}
-
 	@Mock
 	private UserAccountRepository mockUserAccountRepository;
 	@Mock
-	private PrincipalUser mockPrincipalUser;
+	private PasswordEncoder mockPasswordEncoder;
 	@Mock
-	private UserAccountService mcoKUserAccountService;
+	private PrincipalUser mockPrincipalUser;
+
+	@BeforeEach
+	public void Init() {
+		userAccountService = new UserAccountServiceImpl(mockUserAccountRepository, mockPrincipalUser, mockPasswordEncoder);
+	}
+
 
 	@Test
 	void getAllUsersAccount() {
@@ -79,7 +82,7 @@ class UserAccountServiceImplTest {
 
 		UserAccount principalUSer = userAccountService.getPrincipalUser();
 
-		Assertions.assertTrue(principalUSer.equals(userAccount));
+		Assertions.assertEquals(userAccount, principalUSer);
 	}
 
 	@Test
@@ -92,14 +95,38 @@ class UserAccountServiceImplTest {
 	@Test
 	void registerNewUserAccount() {
 		//GIVEN
-		UserAccount userToRegister = new UserAccount(UUID.randomUUID(), "connected@mail.com", "firstname1", "lastname1", "123", AccountStatus.ACTIVE, new Account());
+		String email = "connected@mail.com";
+		String firstname = "firstname1";
+		String lastname = "lastname1";
+		String plainTextPassword = "123";
+		String hashedPassword = "456";
+
+
+		UserAccount userToRegister = new UserAccount(
+				UUID.randomUUID(),
+				email,
+				firstname,
+				lastname,
+				plainTextPassword,
+				AccountStatus.ACTIVE,
+				new Account());
 
 		//WHEN
-		when(mockUserAccountRepository.save(any())).thenReturn(userToRegister);
+		when(mockUserAccountRepository.save(any())).thenAnswer(i -> i.getArguments()[0]);
+
+		when(mockPasswordEncoder.encode(any())).thenReturn(hashedPassword);
+
 		UserAccount newUser = userAccountService.registerNewUserAccount(userToRegister);
 
 		//THEN
-		Assertions.assertTrue(newUser.getEmail().equals("connected@mail.com"));
+		assertThat(newUser)
+				.satisfies( u -> {
+					assertThat(u.getEmail()).hasToString(email);
+					assertThat(u.getFirstname()).hasToString(firstname);
+					assertThat(u.getLastname()).hasToString(lastname);
+					assertThat(u.getPassword()).hasToString(hashedPassword);
+				});
+
 	}
 
 	@Test

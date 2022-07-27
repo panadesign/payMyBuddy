@@ -34,7 +34,9 @@ public class TransactionController {
 				+ " / description = " + description
 		);
 
-		 transactionService.transferMoney(id, amount, description);
+		Transaction transaction =  transactionService.transferMoney(id, amount, description);
+		model.addAttribute("transaction", transaction);
+		model.addAttribute("transactionSuccess", "Your transaction is successfully added");
 		
 		log.debug("Transfer done");
 		return "redirect:/transaction";
