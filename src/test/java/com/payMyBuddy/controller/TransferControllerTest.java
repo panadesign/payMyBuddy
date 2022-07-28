@@ -12,17 +12,14 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-@Sql("/data.sql")
+@Sql("/test-data.sql")
 @Transactional
 public class TransferControllerTest {
 	private MockMvc mockMvc;
@@ -39,23 +36,18 @@ public class TransferControllerTest {
 	}
 
 	@Test
-	@WithUserDetails("a@email")
+	@WithUserDetails("c.miossec@mail.com")
 	void postTransfer() throws Exception {
-
-		Map<String, Object> attributs = new HashMap<>();
-		attributs.put("id" , UUID.randomUUID()); // uuid de B
-		attributs.put("amount", 2.5);
-		attributs.put("description", "blabla");
 
 		mockMvc.perform(
 						post("/transaction")
 								.with(csrf())
-								.flashAttrs(attributs))
+							  	.param("id", "51686c1c-3f5e-4edb-8d8b-b809b4f2f1b9")
+								.param("amount", "12.5")
+								.param("description", "test")
+				)
 				.andDo(MockMvcResultHandlers.print())
-
-				.andExpect(flash().attributeExists("transaction", "transactionSuccess"))
-				.andExpect(flash().attribute("transactionSuccess", "Your transaction is successfully added"))
-
+				.andExpect(status().isFound())
 				.andExpect(redirectedUrl("/transaction"));
 
 	}

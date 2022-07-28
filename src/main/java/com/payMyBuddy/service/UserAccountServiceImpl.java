@@ -22,12 +22,14 @@ import java.util.List;
 public class UserAccountServiceImpl implements UserAccountService {
 
 	private final UserAccountRepository userAccountRepository;
-	
+
 	private final PasswordEncoder passwordEncoder;
 
 	private final PrincipalUser principalUser;
 
-	public UserAccountServiceImpl(UserAccountRepository userAccountRepository, PrincipalUser principalUser,  PasswordEncoder passwordEncoder) {
+	public UserAccountServiceImpl(UserAccountRepository userAccountRepository,
+								  PrincipalUser principalUser,
+								  PasswordEncoder passwordEncoder) {
 		this.userAccountRepository = userAccountRepository;
 		this.principalUser = principalUser;
 		this.passwordEncoder = passwordEncoder;

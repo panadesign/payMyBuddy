@@ -5,9 +5,9 @@ import com.payMyBuddy.model.Account;
 import com.payMyBuddy.model.AccountStatus;
 import com.payMyBuddy.model.UserAccount;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -21,8 +21,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class ContactServiceImplTest {
 
-	@InjectMocks
-	ContactService contactService = new ContactServiceImpl();
+	private ContactService contactService;
 
 	@Mock
 	private PrincipalUser mockPrincipalUser;
@@ -30,6 +29,16 @@ class ContactServiceImplTest {
 	private UserAccountService mockUserAccountService;
 	@Mock
 	private UserAccountRepository mockUserAccountRepository;
+
+	//init
+	@BeforeEach
+	void init() {
+		contactService = new ContactServiceImpl(
+				mockUserAccountService,
+				mockUserAccountRepository,
+				mockPrincipalUser
+		);
+	}
 
 	@Test
 	void addContactByEmail() {
