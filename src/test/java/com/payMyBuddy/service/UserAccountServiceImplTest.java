@@ -2,7 +2,7 @@ package com.payMyBuddy.service;
 
 import com.payMyBuddy.dao.UserAccountRepository;
 import com.payMyBuddy.dto.ProfileDto;
-import com.payMyBuddy.exception.UnauthorisedUser;
+import com.payMyBuddy.exception.UnauthorisedUserException;
 import com.payMyBuddy.exception.UserAlreadyExistException;
 import com.payMyBuddy.model.Account;
 import com.payMyBuddy.model.AccountStatus;
@@ -89,7 +89,7 @@ class UserAccountServiceImplTest {
 	void getPrincipalUserWithCurrentUSerEMailEmpty() {
 		when(mockPrincipalUser.getCurrentUserName()).thenReturn("");
 
-		Assertions.assertThrows(UnauthorisedUser.class, () -> userAccountService.getPrincipalUser());
+		Assertions.assertThrows(UnauthorisedUserException.class, () -> userAccountService.getPrincipalUser());
 	}
 
 	@Test

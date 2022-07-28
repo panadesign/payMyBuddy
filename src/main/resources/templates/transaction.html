@@ -49,9 +49,6 @@
         <div class="sectionTitle">
             <h2>Send Money</h2>
             <form class="container-sm" th:action="@{/addConnection}" method="POST">
-                <div th:if="${param.error}">
-                    Invalid email or password.
-                </div>
                 <label>
                     <input id="email" type="email" class="form-control" name="email" placeholder="Email" required autofocus>
                 </label>

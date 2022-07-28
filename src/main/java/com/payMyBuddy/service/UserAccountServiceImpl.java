@@ -3,7 +3,7 @@ package com.payMyBuddy.service;
 import com.payMyBuddy.dao.UserAccountRepository;
 import com.payMyBuddy.dto.ProfileDto;
 import com.payMyBuddy.exception.RessourceNotFoundException;
-import com.payMyBuddy.exception.UnauthorisedUser;
+import com.payMyBuddy.exception.UnauthorisedUserException;
 import com.payMyBuddy.exception.UserAlreadyExistException;
 import com.payMyBuddy.model.Account;
 import com.payMyBuddy.model.AccountStatus;
@@ -71,7 +71,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 		String currentUserEmail = principalUser.getCurrentUserName();
 
 		if(currentUserEmail.isEmpty()) {
-			throw new UnauthorisedUser("Unauthorised user");
+			throw new UnauthorisedUserException("Unauthorised user");
 		}
 		log.debug("Current user email: " + currentUserEmail);
 		return currentUserEmail;

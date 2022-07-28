@@ -3,7 +3,7 @@ package com.payMyBuddy.service;
 import com.payMyBuddy.dao.UserAccountRepository;
 import com.payMyBuddy.dto.ContactInputDto;
 import com.payMyBuddy.exception.RessourceNotFoundException;
-import com.payMyBuddy.exception.UnauthorisedUser;
+import com.payMyBuddy.exception.UnauthorisedUserException;
 import com.payMyBuddy.model.UserAccount;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class ContactServiceImpl implements ContactService {
 	public ContactInputDto addContactByEmail(String email) {
 		log.debug("Add new contact to user's connected list with this email:" + email);
 		UserAccount userConnected = userAccountRepository.findByEmail(principalUser.getCurrentUserName())
-				.orElseThrow(() -> new UnauthorisedUser("User unauthorised"));
+				.orElseThrow(() -> new UnauthorisedUserException("User unauthorised"));
 		UserAccount userAccount = userAccountRepository.findByEmail(email)
 				.orElseThrow(() -> new RessourceNotFoundException("User not found with email : " + email));
 
