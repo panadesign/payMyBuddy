@@ -30,6 +30,10 @@ h1 a, h1 a:hover {
     text-decoration: none;
 }
 
+h2 {
+    margin-top: 20px;
+}
+
 .cta {
     margin: 0 auto;
     display: block;
@@ -112,7 +116,7 @@ h1 a, h1 a:hover {
 
 .sectionTitle h2 {
     display: block;
-    width: 30%;
+    width: 35%;
 }
 
 .sectionTitle form {
@@ -205,4 +209,30 @@ thead td {
     font-weight: 700;
     background-color: #F7F7F7;
     border: none;
+}
+
+/*ERROR*/
+.error_section {
+    text-align: center;
+    background: #F7F7F7;
+    padding: 20px;
+    width: 50%;
+    border-radius: 10px;}
+
+.error {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #60B95A;
+}
+
+.error_btn, .error_btn:hover {
+    font-weight: 700;
+    color : #ffffff;
+    background-color: #AED581;
+    border-color: #AED581;
+}
+
+.error_btn:hover {
+    background-color: #60B95A;
+    border-color: #60B95A;
 }
