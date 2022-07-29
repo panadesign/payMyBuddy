@@ -2,7 +2,7 @@ package com.payMyBuddy.service;
 
 import com.payMyBuddy.dao.UserAccountRepository;
 import com.payMyBuddy.dto.ContactInputDto;
-import com.payMyBuddy.exception.RessourceNotFoundException;
+import com.payMyBuddy.exception.ResourceNotFoundException;
 import com.payMyBuddy.exception.UnauthorisedUserException;
 import com.payMyBuddy.model.UserAccount;
 import lombok.extern.log4j.Log4j2;
@@ -30,7 +30,7 @@ public class ContactServiceImpl implements ContactService {
 		UserAccount userConnected = userAccountRepository.findByEmail(principalUser.getCurrentUserName())
 				.orElseThrow(() -> new UnauthorisedUserException("User unauthorised"));
 		UserAccount userAccount = userAccountRepository.findByEmail(email)
-				.orElseThrow(() -> new RessourceNotFoundException("User not found with email : " + email));
+				.orElseThrow(() -> new ResourceNotFoundException("User not found with email : " + email));
 
 		if(userConnected.getEmail().equals(userAccount.getEmail())) {
 			log.error("User connected can't add his own account to his contact's list");
@@ -55,7 +55,7 @@ public class ContactServiceImpl implements ContactService {
 				.stream()
 				.filter(userAccount -> userAccount.getEmail().equals(email))
 				.findFirst()
-				.orElseThrow(() -> new RessourceNotFoundException("User not found"));
+				.orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
 		getContactList().remove(contactToDelete);
 		log.debug("Contact has been remove from user's connected list");
@@ -65,7 +65,7 @@ public class ContactServiceImpl implements ContactService {
 
 	public List<UserAccount> getContactList() {
 		UserAccount userConnected = userAccountRepository.findByEmail(principalUser.getCurrentUserName())
-				.orElseThrow(() -> new RessourceNotFoundException("User not found"));
+				.orElseThrow(() -> new ResourceNotFoundException("User not found"));
 		log.debug("Get all contacts from user's connected list");
 		return userConnected.getContactList();
 	}

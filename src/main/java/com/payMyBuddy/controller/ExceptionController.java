@@ -1,7 +1,7 @@
 package com.payMyBuddy.controller;
 
 import com.payMyBuddy.exception.DebtorAccountException;
-import com.payMyBuddy.exception.RessourceNotFoundException;
+import com.payMyBuddy.exception.ResourceNotFoundException;
 import com.payMyBuddy.exception.UnauthorisedUserException;
 import com.payMyBuddy.exception.UserAlreadyExistException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -25,8 +25,8 @@ public class ExceptionController {
 		return "error";
 	}
 
-	@ExceptionHandler(RessourceNotFoundException.class)
-	public String ressourceNotFoundException(RessourceNotFoundException ex) {
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public String resourceNotFoundException(ResourceNotFoundException ex) {
 		return "error";
 	}
 }

@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -22,7 +21,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @Sql("/test-data.sql")
 @Transactional
-public class TransferControllerTest {
+class SignUpControllerTest {
+
 	private MockMvc mockMvc;
 
 	@Autowired
@@ -37,31 +37,25 @@ public class TransferControllerTest {
 	}
 
 	@Test
-	@WithUserDetails("c.miossec@mail.com")
-	void postTransfer() throws Exception {
-
+	void signup() throws Exception {
 		mockMvc.perform(
-						post("/transaction")
-								.with(csrf())
-								.param("id", "51686c1c-3f5e-4edb-8d8b-b809b4f2f1b9")
-								.param("amount", "12.5")
-								.param("description", "test")
-				)
-				.andDo(MockMvcResultHandlers.print())
-				.andExpect(status().isFound())
-				.andExpect(redirectedUrl("/transaction"));
-
+						get("/signup"))
+				.andExpect(status().isOk());
 	}
 
 	@Test
-	@WithUserDetails("c.miossec@mail.com")
-	void getTransfer() throws Exception {
-
+	void addUserAccount() throws Exception {
 		mockMvc.perform(
-						get("/transaction")
+						post("/signup")
+								.with(csrf())
+								.param("email", "j.charpentier@mail.com")
+								.param("firstname", "Jérémy")
+								.param("lastname", "Charpentier")
+								.param("password", "123")
 				)
-				.andDo(MockMvcResultHandlers.print())
-				.andExpect(status().isOk());
 
+				.andDo(MockMvcResultHandlers.print())
+				.andExpect(status().isFound())
+				.andExpect(redirectedUrl("/login"));
 	}
 }

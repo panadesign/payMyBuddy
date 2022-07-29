@@ -36,7 +36,7 @@ public class ProfileController {
 				.stream()
 				.map(ContactOutputDto::new)
 				.collect(Collectors.toList());
-		model.addAttribute("contactList", contactList);
+
 		
 		return "/profile";
 	}

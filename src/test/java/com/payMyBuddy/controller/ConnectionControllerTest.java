@@ -15,14 +15,15 @@ import org.springframework.web.context.WebApplicationContext;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @Sql("/test-data.sql")
 @Transactional
-public class TransferControllerTest {
+class ConnectionControllerTest {
+
 	private MockMvc mockMvc;
 
 	@Autowired
@@ -38,14 +39,11 @@ public class TransferControllerTest {
 
 	@Test
 	@WithUserDetails("c.miossec@mail.com")
-	void postTransfer() throws Exception {
-
+	void addContact() throws Exception {
 		mockMvc.perform(
-						post("/transaction")
+						post("/addConnection")
 								.with(csrf())
-								.param("id", "51686c1c-3f5e-4edb-8d8b-b809b4f2f1b9")
-								.param("amount", "12.5")
-								.param("description", "test")
+								.param("email", "g.brassens@mail.com")
 				)
 				.andDo(MockMvcResultHandlers.print())
 				.andExpect(status().isFound())
@@ -55,13 +53,15 @@ public class TransferControllerTest {
 
 	@Test
 	@WithUserDetails("c.miossec@mail.com")
-	void getTransfer() throws Exception {
-
+	void deleteContact() throws Exception {
 		mockMvc.perform(
-						get("/transaction")
+						delete("/deleteConnection")
+								.with(csrf())
+								.param("email", "a.sylvestre@mail.com")
 				)
 				.andDo(MockMvcResultHandlers.print())
-				.andExpect(status().isOk());
+				.andExpect(status().isFound())
+				.andExpect(redirectedUrl("/profile"));
 
 	}
 }

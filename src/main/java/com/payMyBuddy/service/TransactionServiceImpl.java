@@ -4,7 +4,7 @@ import com.payMyBuddy.constants.Commission;
 import com.payMyBuddy.dao.TransactionRepository;
 import com.payMyBuddy.dao.UserAccountRepository;
 import com.payMyBuddy.exception.DebtorAccountException;
-import com.payMyBuddy.exception.RessourceNotFoundException;
+import com.payMyBuddy.exception.ResourceNotFoundException;
 import com.payMyBuddy.model.Transaction;
 import com.payMyBuddy.model.UserAccount;
 import lombok.extern.log4j.Log4j2;
@@ -44,7 +44,7 @@ public class TransactionServiceImpl implements TransactionService {
 				contactList.stream()
 						.filter(userAccount -> userAccount.getId().equals(id))
 						.findFirst()
-						.orElseThrow(() -> new RessourceNotFoundException("User not found"));
+						.orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
 		double amountWithCommission = amount + (amount * Commission.COMMISSION);
 

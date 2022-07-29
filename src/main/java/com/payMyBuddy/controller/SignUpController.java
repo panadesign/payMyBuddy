@@ -24,6 +24,6 @@ public class SignUpController {
 	@PostMapping("/signup")
 	public String addUserAccount(@ModelAttribute UserAccount userAccount) {
 		userAccountService.registerNewUserAccount(userAccount);
-		return "login";
+		return "redirect:/login";
 	}
 }

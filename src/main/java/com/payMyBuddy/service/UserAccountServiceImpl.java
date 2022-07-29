@@ -2,7 +2,7 @@ package com.payMyBuddy.service;
 
 import com.payMyBuddy.dao.UserAccountRepository;
 import com.payMyBuddy.dto.ProfileDto;
-import com.payMyBuddy.exception.RessourceNotFoundException;
+import com.payMyBuddy.exception.ResourceNotFoundException;
 import com.payMyBuddy.exception.UnauthorisedUserException;
 import com.payMyBuddy.exception.UserAlreadyExistException;
 import com.payMyBuddy.model.Account;
@@ -41,7 +41,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 
 	public ProfileDto getUserAccountByEmail(String email) {
 		UserAccount userAccount = userAccountRepository.findByEmail(email)
-				.orElseThrow(() -> new RessourceNotFoundException("User not found with email : " + email));
+				.orElseThrow(() -> new ResourceNotFoundException("User not found with email : " + email));
 
 		return new ProfileDto(userAccount);
 	}
@@ -66,7 +66,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 		String currentUserEmail = getCurrentUserEmail();
 		log.debug("Principal user: " + userAccountRepository.findByEmail(currentUserEmail));
 		return userAccountRepository.findByEmail(currentUserEmail)
-				.orElseThrow(() -> new RessourceNotFoundException("User not found"));
+				.orElseThrow(() -> new ResourceNotFoundException("User not found"));
 	}
 
 	private String getCurrentUserEmail() {
