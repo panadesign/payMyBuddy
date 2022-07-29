@@ -26,7 +26,7 @@ public class ProfileController {
 	private PrincipalUser principalUser;
 
 	@GetMapping("/profile")
-	private String userAccount(Model model) {
+	public String userAccount(Model model) {
 		String email = principalUser.getCurrentUserName();
 		ProfileDto profileDto = userAccountService.getUserAccountByEmail(email);
 		model.addAttribute("profileDto", profileDto);
@@ -37,7 +37,8 @@ public class ProfileController {
 				.map(ContactOutputDto::new)
 				.collect(Collectors.toList());
 
-		
+		model.addAttribute("contactList", contactList);
+
 		return "/profile";
 	}
 

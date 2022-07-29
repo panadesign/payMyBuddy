@@ -6,5 +6,4 @@ public class UnauthorisedUserException extends RuntimeException{
 		super(message);
 	}
 
-
 }

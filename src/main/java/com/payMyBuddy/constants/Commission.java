@@ -1,5 +1,5 @@
 package com.payMyBuddy.constants;
 
 public class Commission {
-	public static final double COMMISSION = 0.5 / 100;
+	public static final double CHARGES = 0.5 / 100;
 }

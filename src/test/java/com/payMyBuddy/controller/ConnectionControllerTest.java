@@ -15,7 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -55,7 +55,7 @@ class ConnectionControllerTest {
 	@WithUserDetails("c.miossec@mail.com")
 	void deleteContact() throws Exception {
 		mockMvc.perform(
-						delete("/deleteConnection")
+						get("/deleteConnection")
 								.with(csrf())
 								.param("email", "a.sylvestre@mail.com")
 				)

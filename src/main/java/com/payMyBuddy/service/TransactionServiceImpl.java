@@ -46,7 +46,7 @@ public class TransactionServiceImpl implements TransactionService {
 						.findFirst()
 						.orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
-		double amountWithCommission = amount + (amount * Commission.COMMISSION);
+		double amountWithCommission = amount + (amount * Commission.CHARGES);
 
 		double balanceDebtor = userConnected.getAccount().getBalance();
 		double balanceCreditor = creditorAccount.getAccount().getBalance();

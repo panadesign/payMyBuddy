@@ -1,13 +1,13 @@
 package com.payMyBuddy.service;
 
 import com.payMyBuddy.model.Transaction;
-import com.sun.istack.NotNull;
+import org.springframework.lang.NonNull;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface TransactionService {
 	List<Transaction> getAllTransactions();
-	Transaction transferMoney(@NotNull UUID id, @NotNull double amount, @NotNull String description);
+	Transaction transferMoney(@NonNull UUID id, @NonNull double amount, @NonNull String description);
 
 }

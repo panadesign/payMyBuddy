@@ -17,11 +17,11 @@
         </nav>
     </header>
     <section class="container-lg">
-            <h2>Error</h2>
-            <p>
-                The user cannot be added to your account list or is already in !
-            </p>
-            <br> <a th:href="@{/transaction}" class="btn btn-info">Back to transaction</a>
+        <h2>Error</h2>
+        <p th:text="${status}"></p>
+        <p th:text="${message}"></p>
+        <br>
+        <a th:href="@{/transaction}" class="btn btn-info">Return</a>
     </section>
 </div>
 </body>
