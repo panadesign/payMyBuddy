@@ -149,4 +149,30 @@ class TransactionServiceImplTest {
 		Assertions.assertThrows(DebtorAccountException.class, () -> transactionService.transferToBank(userConnected.getIban(), transaction.getAmount(), transaction.getDescription()));
 	}
 
+	@Test
+	void addMoney() {
+		//GIVEN
+		Account debtorAccount = new Account(UUID.randomUUID(), 50);
+		UserAccount userConnected = new UserAccount(UUID.randomUUID(), "mail", "firstname", "lastname", "123", "12345565", AccountStatus.ACTIVE, debtorAccount);
+
+		//WHEN
+		when(mockUserAccountService.getPrincipalUser()).thenReturn(userConnected);
+		transactionService.addMoney(200.35);
+
+		//THEN
+		Assertions.assertTrue(debtorAccount.getBalance() == 250.35);
+	}
+
+	@Test
+	void addMoneyEqualToZeroException() {
+		//GIVEN
+		Account debtorAccount = new Account(UUID.randomUUID(), 50);
+		UserAccount userConnected = new UserAccount(UUID.randomUUID(), "mail", "firstname", "lastname", "123", "12345565", AccountStatus.ACTIVE, debtorAccount);
+
+		//WHEN
+		when(mockUserAccountService.getPrincipalUser()).thenReturn(userConnected);
+
+		//THEN
+		Assertions.assertThrows(IllegalArgumentException.class, () ->transactionService.addMoney(0));
+	}
 }

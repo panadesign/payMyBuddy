@@ -78,4 +78,16 @@ public class TransferControllerTest {
 				.andDo(MockMvcResultHandlers.print())
 				.andExpect(status().isFound());
 	}
+
+	@Test
+	@WithUserDetails("c.miossec@mail.com")
+	void addMoney() throws Exception {
+		mockMvc.perform(
+						post("/addMoney")
+								.with(csrf())
+								.param("amount", "249")
+				)
+				.andDo(MockMvcResultHandlers.print())
+				.andExpect(status().isFound());
+	}
 }

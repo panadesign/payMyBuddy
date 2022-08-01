@@ -102,6 +102,9 @@ public class TransactionServiceImpl implements TransactionService {
 
 	public void addMoney(double amount) {
 		UserAccount userConnected = userAccountService.getPrincipalUser();
+		if(amount<=0) {
+			throw new IllegalArgumentException("Please add a valid value");
+		}
 		userConnected.getAccount().setBalance(userConnected.getAccount().getBalance() + amount);
 		userAccountRepository.save(userConnected);
 	}
