@@ -8,7 +8,6 @@ import com.payMyBuddy.service.ContactService;
 import com.payMyBuddy.service.TransactionService;
 import com.payMyBuddy.service.UserAccountService;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,13 +22,17 @@ import java.util.stream.Collectors;
 @Log4j2
 public class TransactionController {
 
-	@Autowired
-	private ContactService contactService;
+	private final ContactService contactService;
 
-	@Autowired
-	UserAccountService userAccountService;
-	@Autowired
-	private TransactionService transactionService;
+	private final UserAccountService userAccountService;
+
+	private final TransactionService transactionService;
+
+	TransactionController(ContactService contactService, UserAccountService userAccountService, TransactionService transactionService) {
+		this.contactService = contactService;
+		this.userAccountService = userAccountService;
+		this.transactionService = transactionService;
+	}
 
 	@PostMapping("/transaction")
 	public String transaction(Model model, @RequestParam("id") UUID id, @RequestParam("amount") float amount, @RequestParam("description") String description) {
@@ -59,6 +62,14 @@ public class TransactionController {
 
 		log.debug("Transfer done");
 		return "redirect:/transaction";
+	}
+
+	@PostMapping("/addMoney")
+	public String addMoney(double amount) {
+		log.debug("Add money to my account");
+		transactionService.addMoney(amount);
+		log.debug("Add money done");
+		return "redirect:/profile";
 	}
 
 	@GetMapping("/transaction")

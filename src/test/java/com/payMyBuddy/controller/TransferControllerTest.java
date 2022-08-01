@@ -64,4 +64,18 @@ public class TransferControllerTest {
 				.andExpect(status().isOk());
 
 	}
+
+	@Test
+	@WithUserDetails("c.miossec@mail.com")
+	void postTransferToBankAccount() throws Exception {
+		mockMvc.perform(
+						post("/bankTransaction")
+								.with(csrf())
+								.param("iban", "123456789")
+								.param("amount", "12.5")
+								.param("description", "test")
+				)
+				.andDo(MockMvcResultHandlers.print())
+				.andExpect(status().isFound());
+	}
 }

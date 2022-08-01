@@ -2,7 +2,6 @@ package com.payMyBuddy.controller;
 
 import com.payMyBuddy.model.UserAccount;
 import com.payMyBuddy.service.UserAccountService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class SignUpController {
 
-	@Autowired
-	private UserAccountService userAccountService;
+	private final UserAccountService userAccountService;
+
+	SignUpController(UserAccountService userAccountService) {
+		this.userAccountService = userAccountService;
+	}
 
 	@GetMapping("/signup")
 	public String signup(Model model) {

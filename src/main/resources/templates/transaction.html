@@ -46,6 +46,17 @@
     </header>
     <section class="container-lg sendMoney">
         <div class="sectionTitle">
+            <h2>Add money to my account</h2>
+            <form class="container-sm addMoney" th:action="@{/addMoney}" method="POST">
+                <label class="amount">
+                    <input class="form-control" type="number" id="amountToAdd" name="amount" min="1" placeholder="0€" required>
+                </label>
+                <button class="btn btn-primary cta"  type="submit" value="Create">Transfer</button>
+            </form>
+        </div>
+    </section>
+    <section class="container-lg sendMoney">
+        <div class="sectionTitle">
             <h2>Transfer to your bank account</h2>
         </div>
         <form class="container-sm paySection ibanSection" th:action="@{/bankTransaction}" method="POST">

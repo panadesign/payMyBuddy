@@ -6,7 +6,6 @@ import com.payMyBuddy.model.UserAccount;
 import com.payMyBuddy.service.ContactService;
 import com.payMyBuddy.service.PrincipalUser;
 import com.payMyBuddy.service.UserAccountService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,14 +16,16 @@ import java.util.stream.Collectors;
 
 @Controller
 public class ProfileController {
-	@Autowired
-	private ContactService contactService;
 
-	@Autowired
-	private UserAccountService userAccountService;
+	private final ContactService contactService;
+	private final UserAccountService userAccountService;
+	private final PrincipalUser principalUser;
 
-	@Autowired
-	private PrincipalUser principalUser;
+	ProfileController(ContactService contactService, UserAccountService userAccountService, PrincipalUser principalUser) {
+		this.contactService = contactService;
+		this.userAccountService = userAccountService;
+		this.principalUser = principalUser;
+	}
 
 	@GetMapping("/profile")
 	public String userAccount(Model model) {

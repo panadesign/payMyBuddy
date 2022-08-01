@@ -218,6 +218,36 @@ thead td {
     border: none;
 }
 
+
+.bankAccount {
+    display: flex;
+    padding: 0;
+}
+
+.bankAccount label {
+    width: 50%;
+    height: 42px;
+}
+
+.bankAccount .cta {
+    margin: 0 0 0 10px;
+    height: 42px;
+}
+
+.ibanSection label {
+    height: 42px;
+}
+
+.ibanSection span {
+    display: inline-block;
+    line-height: 42px;
+    font-weight: 700;
+}
+
+.addMoney {
+    width: 40%;
+}
+
 /*ERROR*/
 .error_section {
     text-align: center;
@@ -243,30 +273,4 @@ thead td {
 .error_btn:hover {
     background-color: #60B95A;
     border-color: #60B95A;
-}
-
-/*PROFIL*/
-.bankAccount {
-    display: flex;
-    padding: 0;
-}
-
-.bankAccount label {
-    width: 50%;
-    height: 42px;
-}
-
-.bankAccount .cta {
-    margin: 0 0 0 10px;
-    height: 42px;
-}
-
-.ibanSection label {
-    height: 42px;
-}
-
-.ibanSection span {
-    display: inline-block;
-    line-height: 42px;
-    font-weight: 700;
 }

@@ -100,6 +100,12 @@ public class TransactionServiceImpl implements TransactionService {
 
 	}
 
+	public void addMoney(double amount) {
+		UserAccount userConnected = userAccountService.getPrincipalUser();
+		userConnected.getAccount().setBalance(userConnected.getAccount().getBalance() + amount);
+		userAccountRepository.save(userConnected);
+	}
+
 	public List<Transaction> getAllTransactions() {
 		UserAccount userConnected = userAccountService.getPrincipalUser();
 		return transactionRepository.findAllByCreditorIdOrDebtorIdOrderByCreationDate(userConnected.getId(), userConnected.getId());
