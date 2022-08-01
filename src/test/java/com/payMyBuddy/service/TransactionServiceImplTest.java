@@ -3,6 +3,7 @@ package com.payMyBuddy.service;
 import com.payMyBuddy.dao.TransactionRepository;
 import com.payMyBuddy.dao.UserAccountRepository;
 import com.payMyBuddy.exception.DebtorAccountException;
+import com.payMyBuddy.exception.ResourceNotFoundException;
 import com.payMyBuddy.model.Account;
 import com.payMyBuddy.model.AccountStatus;
 import com.payMyBuddy.model.Transaction;
@@ -48,8 +49,8 @@ class TransactionServiceImplTest {
 		Account debtorAccount = new Account(UUID.randomUUID(), 700);
 		Account creditorAccount = new Account(UUID.randomUUID(), 30);
 
-		UserAccount debtor = new UserAccount(UUID.randomUUID(), "connected@mail.com", "firstname1", "lastname1", "123", AccountStatus.ACTIVE, debtorAccount);
-		UserAccount creditor = new UserAccount(UUID.randomUUID(), "creditor@mail.com", "firstname1", "lastname1", "123", AccountStatus.ACTIVE, creditorAccount);
+		UserAccount debtor = new UserAccount(UUID.randomUUID(), "connected@mail.com", "firstname1", "lastname1", "123", "1234", AccountStatus.ACTIVE, debtorAccount);
+		UserAccount creditor = new UserAccount(UUID.randomUUID(), "creditor@mail.com", "firstname1", "lastname1", "123", "1234", AccountStatus.ACTIVE, creditorAccount);
 		debtor.getContactList().add(creditor);
 
 		Transaction transaction1 = new Transaction(creditor.getId(), 137, "test", "EUR", debtor, creditor);
@@ -72,8 +73,8 @@ class TransactionServiceImplTest {
 		Account debtorAccount = new Account(UUID.randomUUID(), 70);
 		Account creditorAccount = new Account(UUID.randomUUID(), 30);
 
-		UserAccount debtor = new UserAccount(UUID.randomUUID(), "connected@mail.com", "firstname1", "lastname1", "123", AccountStatus.ACTIVE, debtorAccount);
-		UserAccount creditor = new UserAccount(UUID.randomUUID(), "creditor@mail.com", "firstname1", "lastname1", "123", AccountStatus.ACTIVE, creditorAccount);
+		UserAccount debtor = new UserAccount(UUID.randomUUID(), "connected@mail.com", "firstname1", "lastname1", "123", "1234", AccountStatus.ACTIVE, debtorAccount);
+		UserAccount creditor = new UserAccount(UUID.randomUUID(), "creditor@mail.com", "firstname1", "lastname1", "123", "1234", AccountStatus.ACTIVE, creditorAccount);
 		debtor.getContactList().add(creditor);
 
 		Transaction transaction1 = new Transaction(creditor.getId(), 137, "test", "EUR", debtor, creditor);
@@ -90,8 +91,8 @@ class TransactionServiceImplTest {
 		//GIVEN
 		List<Transaction> transactions = new ArrayList<>();
 
-		UserAccount debtor = new UserAccount(UUID.randomUUID(), "connected@mail.com", "firstname1", "lastname1", "123", AccountStatus.ACTIVE, new Account());
-		UserAccount creditor = new UserAccount(UUID.randomUUID(), "creditor@mail.com", "firstname1", "lastname1", "123", AccountStatus.ACTIVE, new Account());
+		UserAccount debtor = new UserAccount(UUID.randomUUID(), "connected@mail.com", "firstname1", "lastname1", "123", "1234", AccountStatus.ACTIVE, new Account());
+		UserAccount creditor = new UserAccount(UUID.randomUUID(), "creditor@mail.com", "firstname1", "lastname1", "123", "1234", AccountStatus.ACTIVE, new Account());
 		Transaction transaction1 = new Transaction(debtor, creditor, 137, "euro", "test");
 		transactions.add(transaction1);
 
@@ -104,4 +105,48 @@ class TransactionServiceImplTest {
  		//THEN
 		Assertions.assertTrue(allTransactions.contains(transaction1));
 	}
+
+	@Test
+	void transferToBank() {
+		//GIVEN
+		Account debtorAccount = new Account(UUID.randomUUID(), 700);
+		UserAccount userConnected = new UserAccount(UUID.randomUUID(), "mail", "firstname", "lastname", "123", "999", AccountStatus.ACTIVE, debtorAccount);
+		Transaction transaction = new Transaction(userConnected.getId(), 100, "transfer");
+
+		//WHEN
+		when(mockUserAccountService.getPrincipalUser()).thenReturn(userConnected);
+		transactionService.transferToBank(userConnected.getIban(), transaction.getAmount(), transaction.getDescription());
+
+		//THEN
+		Assertions.assertTrue(userConnected.getAccount().getBalance() == 600);
+	}
+
+	@Test
+	void transferToBankWithoutIbanException() {
+		//GIVEN
+		Account debtorAccount = new Account(UUID.randomUUID(), 700);
+		UserAccount userConnected = new UserAccount(UUID.randomUUID(), "mail", "firstname", "lastname", "123", null, AccountStatus.ACTIVE, debtorAccount);
+		Transaction transaction = new Transaction(userConnected.getId(), 100, "transfer");
+
+		//WHEN
+		when(mockUserAccountService.getPrincipalUser()).thenReturn(userConnected);
+
+		//THEN
+		Assertions.assertThrows(ResourceNotFoundException.class, () -> transactionService.transferToBank(userConnected.getIban(), transaction.getAmount(), transaction.getDescription()));
+	}
+
+	@Test
+	void transferToBankWithoutEnoughMoneyException() {
+		//GIVEN
+		Account debtorAccount = new Account(UUID.randomUUID(), 50);
+		UserAccount userConnected = new UserAccount(UUID.randomUUID(), "mail", "firstname", "lastname", "123", "12345565", AccountStatus.ACTIVE, debtorAccount);
+		Transaction transaction = new Transaction(userConnected.getId(), 100, "transfer");
+
+		//WHEN
+		when(mockUserAccountService.getPrincipalUser()).thenReturn(userConnected);
+
+		//THEN
+		Assertions.assertThrows(DebtorAccountException.class, () -> transactionService.transferToBank(userConnected.getIban(), transaction.getAmount(), transaction.getDescription()));
+	}
+
 }

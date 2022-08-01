@@ -30,7 +30,7 @@ class UserDetailsServiceImplTest {
 	@Test
 	void loadUserByUsername() {
 		//GIVEN
-		UserAccount userAccount = new UserAccount(UUID.randomUUID(), "email@test.com", "jeremy", "charpentier", "'password", AccountStatus.ACTIVE, new Account());
+		UserAccount userAccount = new UserAccount(UUID.randomUUID(), "email@test.com", "jeremy", "charpentier", "'password", "12345", AccountStatus.ACTIVE, new Account());
 
 		//WHEN
 		when(mockUserAccountRepository.findByEmail(userAccount.getEmail())).thenReturn(Optional.of(userAccount));

@@ -61,7 +61,7 @@ class UserAccountServiceImplTest {
 	@Test
 	void getUserAccountByEmail() {
 		//GIVEN
-		UserAccount userAccount = new UserAccount(UUID.randomUUID(), "email@test.com", "jeremy", "charpentier", "'password", AccountStatus.ACTIVE, new Account());
+		UserAccount userAccount = new UserAccount(UUID.randomUUID(), "email@test.com", "jeremy", "charpentier", "'password", "1234", AccountStatus.ACTIVE, new Account());
 
 		//WHEN
 		when(mockUserAccountRepository.findByEmail(userAccount.getEmail())).thenReturn(Optional.of(userAccount));
@@ -76,7 +76,7 @@ class UserAccountServiceImplTest {
 	@Test
 	void getPrincipalUser() {
 
-		UserAccount userAccount = new UserAccount(UUID.randomUUID(), "email@test.com", "jeremy", "charpentier", "'password", AccountStatus.ACTIVE, new Account());
+		UserAccount userAccount = new UserAccount(UUID.randomUUID(), "email@test.com", "jeremy", "charpentier", "'password", "1234", AccountStatus.ACTIVE, new Account());
 		when(mockPrincipalUser.getCurrentUserName()).thenReturn("email@test.com");
 		when(mockUserAccountRepository.findByEmail(userAccount.getEmail())).thenReturn(Optional.of(userAccount));
 
@@ -98,6 +98,7 @@ class UserAccountServiceImplTest {
 		String email = "connected@mail.com";
 		String firstname = "firstname1";
 		String lastname = "lastname1";
+		String iban = null;
 		String plainTextPassword = "123";
 		String hashedPassword = "456";
 
@@ -107,6 +108,7 @@ class UserAccountServiceImplTest {
 				email,
 				firstname,
 				lastname,
+				iban,
 				plainTextPassword,
 				AccountStatus.ACTIVE,
 				new Account());
@@ -132,8 +134,8 @@ class UserAccountServiceImplTest {
 	@Test
 	void registerNewUserAccountEmailAlreadyExist() {
 		//GIVEN
-		UserAccount userAlreadyRegistered = new UserAccount(UUID.randomUUID(), "userInDataBase@mail.com", "firstname1", "lastname1", "123", AccountStatus.ACTIVE, new Account());
-		UserAccount userToRegister = new UserAccount(UUID.randomUUID(), "userInDataBase@mail.com", "firstname1", "lastname1", "123", AccountStatus.ACTIVE, new Account());
+		UserAccount userAlreadyRegistered = new UserAccount(UUID.randomUUID(), "userInDataBase@mail.com", "firstname1", "lastname1", "123", "1234", AccountStatus.ACTIVE, new Account());
+		UserAccount userToRegister = new UserAccount(UUID.randomUUID(), "userInDataBase@mail.com", "firstname1", "lastname1", "123", "1234", AccountStatus.ACTIVE, new Account());
 
 		//WHEN
 		when(mockUserAccountRepository.findByEmail("userInDataBase@mail.com")).thenReturn(Optional.of(userAlreadyRegistered));

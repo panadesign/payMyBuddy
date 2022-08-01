@@ -43,8 +43,8 @@ class ContactServiceImplTest {
 	@Test
 	void addContactByEmail() {
 		//GIVEN
-		UserAccount userConnected = new UserAccount(UUID.randomUUID(), "connected@mail.com", "firstname1", "lastname1", "123", AccountStatus.ACTIVE, new Account());
-		UserAccount contact = new UserAccount(UUID.randomUUID(), "contact@mail.com", "firstname2", "lastname2", "123", AccountStatus.ACTIVE, new Account());
+		UserAccount userConnected = new UserAccount(UUID.randomUUID(), "connected@mail.com", "firstname1", "lastname1", "123", "1234", AccountStatus.ACTIVE, new Account());
+		UserAccount contact = new UserAccount(UUID.randomUUID(), "contact@mail.com", "firstname2", "lastname2", "123", "1234", AccountStatus.ACTIVE, new Account());
 
 		//WHEN
 		when(mockUserAccountRepository.findByEmail(mockPrincipalUser.getCurrentUserName())).thenReturn(Optional.of(userConnected));
@@ -61,8 +61,8 @@ class ContactServiceImplTest {
 	void addContactByEmailThrowExceptionCannotAddContactTwice() {
 		//GIVEN
 		List<UserAccount> contactList = new ArrayList<>();
-		UserAccount userConnected = new UserAccount(UUID.randomUUID(), "connected@mail.com", "firstname1", "lastname1", "123", AccountStatus.ACTIVE, new Account(), contactList);
-		UserAccount userToAdd = new UserAccount(UUID.randomUUID(), "contact@mail.com", "firstname1", "lastname1", "123", AccountStatus.ACTIVE, new Account());
+		UserAccount userConnected = new UserAccount(UUID.randomUUID(), "connected@mail.com", "firstname1", "lastname1", "123", "1234", AccountStatus.ACTIVE, new Account(), contactList);
+		UserAccount userToAdd = new UserAccount(UUID.randomUUID(), "contact@mail.com", "firstname1", "lastname1", "123", "1234", AccountStatus.ACTIVE, new Account());
 
 		contactList.add(userToAdd);
 
@@ -77,8 +77,8 @@ class ContactServiceImplTest {
 	@Test
 	void addContactByEmailThrowExceptionPrincipalUserCannotBeContact() {
 		//GIVEN
-		UserAccount userConnected = new UserAccount(UUID.randomUUID(), "connected@mail.com", "firstname1", "lastname1", "123", AccountStatus.ACTIVE, new Account());
-		UserAccount userToAdd = new UserAccount(UUID.randomUUID(), "connected@mail.com", "firstname1", "lastname1", "123", AccountStatus.ACTIVE, new Account());
+		UserAccount userConnected = new UserAccount(UUID.randomUUID(), "connected@mail.com", "firstname1", "lastname1", "1234", "123", AccountStatus.ACTIVE, new Account());
+		UserAccount userToAdd = new UserAccount(UUID.randomUUID(), "connected@mail.com", "firstname1", "lastname1", "123", "1234", AccountStatus.ACTIVE, new Account());
 
 		//WHEN
 		when(mockUserAccountRepository.findByEmail(mockPrincipalUser.getCurrentUserName())).thenReturn(Optional.of(userConnected));
@@ -92,8 +92,8 @@ class ContactServiceImplTest {
 	void removeContactByEmail() {
 		//GIVEN
 		List<UserAccount> contactList = new ArrayList<>();
-		UserAccount userConnected = new UserAccount(UUID.randomUUID(), "connected@mail.com", "firstname1", "lastname1", "123", AccountStatus.ACTIVE, new Account(), contactList);
-		UserAccount contact = new UserAccount(UUID.randomUUID(), "contact@mail.com", "firstname2", "lastname2", "123", AccountStatus.ACTIVE, new Account());
+		UserAccount userConnected = new UserAccount(UUID.randomUUID(), "connected@mail.com", "firstname1", "lastname1", "123", "1234", AccountStatus.ACTIVE, new Account(), contactList);
+		UserAccount contact = new UserAccount(UUID.randomUUID(), "contact@mail.com", "firstname2", "lastname2", "123", "1234", AccountStatus.ACTIVE, new Account());
 
 		contactList.add(contact);
 
@@ -112,10 +112,10 @@ class ContactServiceImplTest {
 	void getAllContacts() {
 		//GIVEN
 		List<UserAccount> contactList = new ArrayList<>();
-		UserAccount userConnected = new UserAccount(UUID.randomUUID(), "connected@mail.com", "firstname1", "lastname1", "123", AccountStatus.ACTIVE, new Account(), contactList);
+		UserAccount userConnected = new UserAccount(UUID.randomUUID(), "connected@mail.com", "firstname1", "lastname1", "123", "1234", AccountStatus.ACTIVE, new Account(), contactList);
 
-		UserAccount contact1 = new UserAccount(UUID.randomUUID(), "contact1@mail.com", "firstname1", "lastname1", "123", AccountStatus.ACTIVE, new Account());
-		UserAccount contact2 = new UserAccount(UUID.randomUUID(), "contact2@mail.com", "firstname2", "lastname2", "123", AccountStatus.ACTIVE, new Account());
+		UserAccount contact1 = new UserAccount(UUID.randomUUID(), "contact1@mail.com", "firstname1", "lastname1", "123", "1234", AccountStatus.ACTIVE, new Account());
+		UserAccount contact2 = new UserAccount(UUID.randomUUID(), "contact2@mail.com", "firstname2", "lastname2", "123", "1234", AccountStatus.ACTIVE, new Account());
 
 		contactList.add(contact1);
 		contactList.add(contact2);
