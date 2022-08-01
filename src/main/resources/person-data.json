@@ -5,6 +5,7 @@
     "firstname": "Christophe",
     "lastname": "Miossec",
     "password": "$2y$10$Ei4ASFiEKe6PoOUnVlfB5eLPa0IgpWbeS8OlRS5RMx.RwUxLH3Ycm",
+    "iban": 123456789,
     "account": {
       "balance": 980.50
     }
@@ -15,6 +16,7 @@
     "firstname": "Anne",
     "lastname": "Sylvestre",
     "password": "$2y$10$QZZ32o0e/IDHF/6PDN0oCOi72ApuRBoMwjYsH3iUF7sSP6ein667S",
+    "iban": null,
     "account": {
       "balance": 25
     }
@@ -25,6 +27,7 @@
     "firstname": "Georges",
     "lastname": "Brassens",
     "password": "$2y$10$QZZ32o0e/IDHF/6PDN0oCOi72ApuRBoMwjYsH3iUF7sSP6ein667S",
+    "iban": null,
     "account": {
       "balance": 0
     }

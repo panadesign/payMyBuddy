@@ -71,6 +71,35 @@ public class TransactionServiceImpl implements TransactionService {
 
 	}
 
+	@Transactional(isolation = Isolation.READ_COMMITTED)
+	public Transaction transferToBank(String iban, double amount, String description) {
+		log.debug("Transfer money to my bank account: " + iban + ",amount: " + amount + ",description: " + description);
+		UserAccount userConnected = userAccountService.getPrincipalUser();
+
+		if(userConnected.getIban() == null) {
+			throw new ResourceNotFoundException("Iban doesn't exist");
+		}
+
+		double balanceDebtor = userConnected.getAccount().getBalance();
+
+		if(balanceDebtor >= amount) {
+
+			userConnected.getAccount().setBalance(balanceDebtor - amount);
+
+			userAccountRepository.save(userConnected);
+
+			Transaction transaction =  new Transaction(userConnected.getId(), amount, description, "EUR");
+
+			transactionRepository.save(transaction);
+
+			log.debug("New Transaction = " + transaction);
+
+			return transaction;
+
+		} else throw new DebtorAccountException("Not enough money on your account");
+
+	}
+
 	public List<Transaction> getAllTransactions() {
 		UserAccount userConnected = userAccountService.getPrincipalUser();
 		return transactionRepository.findAllByCreditorIdOrDebtorIdOrderByCreationDate(userConnected.getId(), userConnected.getId());

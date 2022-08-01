@@ -41,6 +41,11 @@ h2 {
     font-weight: 700;
 }
 
+.sendMoney .cta {
+    margin: 0;
+}
+
+
 .form-control {
     height: 64px;
     border-color: #F5F5F5;
@@ -111,12 +116,14 @@ h2 {
     display: flex;
     justify-content: space-between;
     max-width: 800px;
-    margin: 0 auto;
+    margin: 0 auto 10px;
+    height: 42px;
 }
 
 .sectionTitle h2 {
     display: block;
-    width: 35%;
+    width: 60%;
+    line-height: 0px;
 }
 
 .sectionTitle form {
@@ -236,4 +243,30 @@ thead td {
 .error_btn:hover {
     background-color: #60B95A;
     border-color: #60B95A;
+}
+
+/*PROFIL*/
+.bankAccount {
+    display: flex;
+    padding: 0;
+}
+
+.bankAccount label {
+    width: 50%;
+    height: 42px;
+}
+
+.bankAccount .cta {
+    margin: 0 0 0 10px;
+    height: 42px;
+}
+
+.ibanSection label {
+    height: 42px;
+}
+
+.ibanSection span {
+    display: inline-block;
+    line-height: 42px;
+    font-weight: 700;
 }

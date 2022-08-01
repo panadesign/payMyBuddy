@@ -11,4 +11,5 @@ public interface UserAccountService {
 	ProfileDto getUserAccountByEmail(String email);
 	UserAccount registerNewUserAccount(UserAccount userAccount);
 	UserAccount getPrincipalUser();
+	void addIban(String iban);
 }

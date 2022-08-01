@@ -38,14 +38,13 @@
             </nav>
             <nav aria-label="breadcrumb" class="ariane">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href=th:href="@{/login}">Home</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/login}">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Profile</li>
                 </ol>
             </nav>
         </header>
         <h2>My profile</h2>
         <section class="profileInfo">
-
             <table class="table" >
                 <thead>
                     <tr>
@@ -54,6 +53,7 @@
                         <th>Last name</th>
                         <th>Account status</th>
                         <th>Balance</th>
+                        <th>Iban</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,10 +63,18 @@
                         <td th:text="${profileDto.lastname}"></td>
                         <td th:text="${profileDto.status}"></td>
                         <td th:text="${profileDto.balance}">€</td>
+                        <td th:text="${profileDto.iban}">€</td>
                     </tr>
                 </tbody>
             </table>
         </section>
+        <h4>My bank account</h4>
+        <form class="container-sm bankAccount" th:action="@{/addIban}" th:object="${iban}" method="POST">
+            <label>
+                <input id="iban" type="text" class="form-control" name="iban" placeholder="Add your iban" required autofocus>
+            </label>
+            <button class="btn btn-primary cta" type="submit">Ok</button>
+        </form>
         <h2>My connections</h2>
         <section class="profileInfo connection">
             <table class="table">

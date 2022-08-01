@@ -49,6 +49,9 @@ public class UserAccount {
 	private String password;
 
 	@Column
+	private String iban;
+
+	@Column
 	private AccountStatus status = AccountStatus.ACTIVE;
 
 	@OneToOne(
@@ -65,6 +68,7 @@ public class UserAccount {
 	private List<UserAccount> contactList = new ArrayList<>();
 
 
+
 	public UserAccount(String email, String firstname, String lastname, String password) {
 		this.email = email;
 		this.firstname = firstname;
@@ -72,12 +76,13 @@ public class UserAccount {
 		this.password = password;
 	}
 
-	public UserAccount(UUID id, String email, String firstname, String lastname, String password, AccountStatus status, Account account) {
+	public UserAccount(UUID id, String email, String firstname, String lastname, String password, String iban, AccountStatus status, Account account) {
 		this.id = id;
 		this.email = email;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.password = password;
+		this.iban = iban;
 		this.status = status;
 		this.account = account;
 	}

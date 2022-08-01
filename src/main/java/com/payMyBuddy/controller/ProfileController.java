@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,6 +41,15 @@ public class ProfileController {
 		model.addAttribute("contactList", contactList);
 
 		return "/profile";
+	}
+
+	@PostMapping("/addIban")
+	public String ibanUser(String iban, Model model) {
+		String email = principalUser.getCurrentUserName();
+		ProfileDto profileDto = userAccountService.getUserAccountByEmail(email);
+		userAccountService.addIban(iban);
+		model.addAttribute("profileDto", profileDto);
+		return "redirect:/profile";
 	}
 
 }

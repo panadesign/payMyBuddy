@@ -44,6 +44,23 @@
             </ol>
         </nav>
     </header>
+    <section class="container-lg sendMoney">
+        <div class="sectionTitle">
+            <h2>Transfer to your bank account</h2>
+        </div>
+        <form class="container-sm paySection ibanSection" th:action="@{/bankTransaction}" method="POST">
+            <label>
+                <span th:each="iban: ${iban}" th:value="${iban}" th:text="${iban}"></span>
+            </label>
+            <label class="amount">
+                <input class="form-control" type="number" id="amountBankAccount" name="amount" min="1" placeholder="0€" required>
+            </label>
+            <label>
+                <input class="form-control" type="text" id="descriptionBankAccount" name="description" placeholder="Description" required>
+            </label>
+            <button class="btn btn-primary cta"  type="submit" value="Create">Transfer</button>
+        </form>
+    </section>
 
     <section class="container-lg sendMoney">
         <div class="sectionTitle">

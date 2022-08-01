@@ -14,12 +14,14 @@ public class ProfileDto {
 	String lastname;
 	AccountStatus status;
 	double balance;
+	String iban;
 
 	public ProfileDto(UserAccount userAccount) {
 		this.id = userAccount.getId();
 		this.email = userAccount.getEmail();
 		this.firstname = userAccount.getFirstname();
 		this.lastname = userAccount.getLastname();
+		this.iban = userAccount.getIban();
 		this.status = userAccount.getStatus();
 		this.balance = userAccount.getAccount().getBalance();
 	}

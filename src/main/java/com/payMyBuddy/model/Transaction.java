@@ -61,4 +61,11 @@ public class Transaction {
 		this.debtor = debtor;
 		this.creditor = creditor;
 	}
+
+	public Transaction(UUID id, double amount, String description, String currency) {
+		this.id = id;
+		this.amount = amount;
+		this.description = description;
+		this.currency = currency;
+	}
 }

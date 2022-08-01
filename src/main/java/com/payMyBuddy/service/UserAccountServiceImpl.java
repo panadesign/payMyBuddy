@@ -46,10 +46,6 @@ public class UserAccountServiceImpl implements UserAccountService {
 		return new ProfileDto(userAccount);
 	}
 
-	private boolean emailExist(String email) {
-		return userAccountRepository.findByEmail(email).isPresent();
-	}
-
 	public UserAccount registerNewUserAccount(UserAccount userAccount) {
 		if(emailExist(userAccount.getEmail())) {
 			throw new UserAlreadyExistException("An account with this email address already exist:" + userAccount.getEmail());
@@ -57,7 +53,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 
 		String password = passwordEncoder.encode(userAccount.getPassword());
 
-		UserAccount newUserAccount = new UserAccount(userAccount.getId(), userAccount.getEmail(), userAccount.getFirstname(), userAccount.getLastname(), password, AccountStatus.ACTIVE, new Account(), new ArrayList<>());
+		UserAccount newUserAccount = new UserAccount(userAccount.getId(), userAccount.getEmail(), userAccount.getFirstname(), userAccount.getLastname(), password, userAccount.getIban(), AccountStatus.ACTIVE, new Account(), new ArrayList<>());
 		log.debug("New account : " + newUserAccount);
 		return userAccountRepository.save(newUserAccount);
 	}
@@ -69,6 +65,12 @@ public class UserAccountServiceImpl implements UserAccountService {
 				.orElseThrow(() -> new ResourceNotFoundException("User not found"));
 	}
 
+	public void addIban(String iban) {
+		UserAccount connectedUser = getPrincipalUser();
+		connectedUser.setIban(iban);
+		userAccountRepository.save(connectedUser);
+	}
+
 	private String getCurrentUserEmail() {
 		String currentUserEmail = principalUser.getCurrentUserName();
 
@@ -77,5 +79,9 @@ public class UserAccountServiceImpl implements UserAccountService {
 		}
 		log.debug("Current user email: " + currentUserEmail);
 		return currentUserEmail;
+	}
+
+	private boolean emailExist(String email) {
+		return userAccountRepository.findByEmail(email).isPresent();
 	}
 }

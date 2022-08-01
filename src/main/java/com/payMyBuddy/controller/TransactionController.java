@@ -6,6 +6,7 @@ import com.payMyBuddy.model.Transaction;
 import com.payMyBuddy.model.UserAccount;
 import com.payMyBuddy.service.ContactService;
 import com.payMyBuddy.service.TransactionService;
+import com.payMyBuddy.service.UserAccountService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,9 @@ public class TransactionController {
 
 	@Autowired
 	private ContactService contactService;
+
+	@Autowired
+	UserAccountService userAccountService;
 	@Autowired
 	private TransactionService transactionService;
 
@@ -38,6 +42,21 @@ public class TransactionController {
 		model.addAttribute("transaction", transaction);
 		model.addAttribute("transactionSuccess", "Your transaction is successfully added");
 		
+		log.debug("Transfer done");
+		return "redirect:/transaction";
+	}
+
+	@PostMapping("/bankTransaction")
+	public String transaction(Model model, @RequestParam("iban") String iban, @RequestParam("amount") float amount, @RequestParam("description") String description) {
+		log.debug("Transfer money to selected contact with : ID = " + iban
+				+ " / amount = " + amount
+				+ " / description = " + description
+		);
+
+		Transaction transaction =  transactionService.transferToBank(iban, amount, description);
+		model.addAttribute("transaction", transaction);
+		model.addAttribute("transactionSuccess", "Your transaction is successfully added");
+
 		log.debug("Transfer done");
 		return "redirect:/transaction";
 	}
@@ -61,7 +80,10 @@ public class TransactionController {
 
 		model.addAttribute("transactions", transactions);
 
+		UserAccount connectedUser = userAccountService.getPrincipalUser();
+		String iban = connectedUser.getIban();
+		model.addAttribute("iban", iban);
+
 		return "/transaction";
 	}
-
 }
