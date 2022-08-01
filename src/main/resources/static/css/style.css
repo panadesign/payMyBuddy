@@ -217,7 +217,8 @@ thead td {
     background: #F7F7F7;
     padding: 20px;
     width: 50%;
-    border-radius: 10px;}
+    border-radius: 10px;
+}
 
 .error {
     font-size: 3rem;
