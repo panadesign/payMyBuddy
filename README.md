@@ -17,7 +17,7 @@ Pay my buddy is a web application used to transfer money between friends.
 
 ---
 
-## Diagramme de classe UML
+## Diagramme de classe UML!
 ![](src/main/resources/static/img/img_1.png)
 ## Modèle physique de données
 ![](src/main/resources/static/img/img.png)
