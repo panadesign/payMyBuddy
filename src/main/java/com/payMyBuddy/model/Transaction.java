@@ -36,7 +36,6 @@ public class Transaction {
 	@JoinColumn
 	private UserAccount creditor;
 	
-	
 	public Transaction(UserAccount debtorAccount, UserAccount creditorAccount, double amount, String currency, String description) {
 		this.debtor = debtorAccount;
 		this.creditor = creditorAccount;
