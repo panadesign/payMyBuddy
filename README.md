@@ -1,7 +1,7 @@
 # PAY MY BUDDY
 ![](src/main/resources/static/img/logo.png)
 
-**JAVA** : 11
+**JAVA** : 8
 
 **SPRINGBOOT** : 2.6.8
 

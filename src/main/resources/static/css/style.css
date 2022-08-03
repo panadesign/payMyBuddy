@@ -34,6 +34,11 @@ h2 {
     margin-top: 20px;
 }
 
+h4 {
+    margin-bottom: 0;
+    line-height: 42px;
+}
+
 .cta {
     margin: 0 auto;
     display: block;
@@ -115,9 +120,13 @@ h2 {
 .sendMoney .sectionTitle, .myTransactions .sectionTitle {
     display: flex;
     justify-content: space-between;
-    max-width: 800px;
     margin: 0 auto 10px;
     height: 42px;
+}
+
+.sendMoney .addConnection {
+    width: 60%;
+    margin: 0;
 }
 
 .sectionTitle h2 {
@@ -143,8 +152,7 @@ h2 {
     justify-content: space-around;
     align-items: center;
     background-color: #F5F5F5;
-    max-width: 800px;
-    height: 156px;
+    height: 100px;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -174,13 +182,17 @@ h2 {
 }
 
 .myTransactions .table {
-    max-width: 800px;
     margin: 0 auto;
     text-align: center;
 }
 
 .table {
     margin-bottom: 10px;
+}
+
+.table thead {
+    background-color: #5CB85C;
+    color: #fff;
 }
 
 .signup, .signin {
@@ -201,9 +213,11 @@ h2 {
 
 .profileInfo {
     width: 100%;
-    background-color: #F5F5F5;
-    padding: 10px;
     margin: 10px 0 10px 0;
+}
+
+.profileInfo table {
+    background-color: #F5F5F5;
 }
 
 thead td {
@@ -236,6 +250,7 @@ thead td {
 
 .ibanSection label {
     height: 42px;
+    width: 100%;
 }
 
 .ibanSection span {
@@ -273,4 +288,79 @@ thead td {
 .error_btn:hover {
     background-color: #60B95A;
     border-color: #60B95A;
+}
+
+/* TRANSFER */
+.personalAccount {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto 0;
+    padding: 0;
+}
+
+.addMoney, .myAccount {
+    width: 50%;
+    margin-left: 10px;
+    padding: 20px;
+    background-color: #F5F5F5;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.addMoney h4, .myAccount h4{
+    margin-bottom: 10px;
+}
+
+.addMoney form, .myAccount form {
+    display: flex;
+}
+
+.addMoney form .cta, .myAccount form .cta {
+    width: 200px
+}
+
+.myAccount span {
+    text-align: right;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.addMoney .cta, .myAccount .cta {
+    width: 100%;
+    margin: 0 auto;
+    height: 42px;
+}
+
+.personalAccount label {
+    width: 100%;
+    margin-bottom: 10px;
+}
+.addMoney {
+    margin-left: 0;
+}
+
+.contactUs {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 0;
+}
+
+.leftPanel, .rightPanel {
+    background-color: #F5F5F5;
+    padding: 10px;
+}
+
+.leftPanel {
+    width: 65%;
+    margin-right: 10px;
+}
+
+.rightPanel {
+    width: 35%;
+}
+
+.contactUs .contact
+{
+    display: block;
 }

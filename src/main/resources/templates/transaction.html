@@ -44,72 +44,67 @@
             </ol>
         </nav>
     </header>
-    <section class="container-lg sendMoney">
-        <div class="sectionTitle">
-            <h2>Add money to my account</h2>
-            <form class="container-sm addMoney" th:action="@{/addMoney}" method="POST">
+    <section class="container-lg personalAccount">
+        <div class="addMoney">
+            <h4>Add money to my account</h4>
+            <form th:action="@{/addMoney}" method="POST">
                 <label class="amount">
                     <input class="form-control" type="number" id="amountToAdd" name="amount" min="1" placeholder="0€" required>
+                </label>
+                <button class="btn btn-primary cta"  type="submit" value="Create">Add money</button>
+            </form>
+        </div>
+        <div class="myAccount">
+            <h4>Transfer to your bank account: <span th:each="iban: ${iban}" th:value="${iban}" th:text="${iban}"></span></h4>
+            <form class="ibanSection" th:action="@{/bankTransaction}" method="POST">
+
+                <label class="amount">
+                    <input class="form-control" type="number" id="amountBankAccount" name="amount" min="1" placeholder="0€" required>
+                </label>
+                <label>
+                    <input class="form-control" type="text" id="descriptionBankAccount" name="description" placeholder="Description" required>
                 </label>
                 <button class="btn btn-primary cta"  type="submit" value="Create">Transfer</button>
             </form>
         </div>
-    </section>
-    <section class="container-lg sendMoney">
-        <div class="sectionTitle">
-            <h2>Transfer to your bank account</h2>
-        </div>
-        <form class="container-sm paySection ibanSection" th:action="@{/bankTransaction}" method="POST">
-            <label>
-                <span th:each="iban: ${iban}" th:value="${iban}" th:text="${iban}"></span>
-            </label>
-            <label class="amount">
-                <input class="form-control" type="number" id="amountBankAccount" name="amount" min="1" placeholder="0€" required>
-            </label>
-            <label>
-                <input class="form-control" type="text" id="descriptionBankAccount" name="description" placeholder="Description" required>
-            </label>
-            <button class="btn btn-primary cta"  type="submit" value="Create">Transfer</button>
-        </form>
+
     </section>
 
     <section class="container-lg sendMoney">
         <div class="sectionTitle">
-            <h2>Send Money</h2>
-            <form class="container-sm" th:action="@{/addConnection}" method="POST">
+            <h4>Send Money</h4>
+            <form class="container-sm addConnection" th:action="@{/addConnection}" method="POST">
                 <label>
                     <input id="email" type="email" class="form-control" name="email" placeholder="Email" required autofocus>
                 </label>
                 <button class="btn btn-primary cta" type="submit">Add Connection</button>
             </form>
         </div>
-        <div>
-            <form class="container-sm paySection" th:action="@{/transaction}" method="POST">
-                <label>
-                    <select class="form-select" id="selection" th:object="${contactList}" name="id">
-                        <option value="default">Select a connection:</option>
-                        <option th:each="contact: ${contactList}" th:value="${contact.id}" th:text="${contact.email}"></option>
-                    </select>
-                </label>
-                <label class="amount">
-                    <input class="form-control" type="number" id="amount" name="amount" min="1" placeholder="0€" required>
-                </label>
-                <label>
-                    <input class="form-control" type="text" id="description" name="description" placeholder="Description" required>
-                </label>
-                <button class="btn btn-primary cta"  type="submit" value="Create">Pay</button>
-            </form>
-        </div>
+        <form class="container-sm paySection" th:action="@{/transaction}" method="POST">
+            <label>
+                <select class="form-select" id="selection" th:object="${contactList}" name="id">
+                    <option value="default">Select a connection:</option>
+                    <option th:each="contact: ${contactList}" th:value="${contact.id}" th:text="${contact.email}"></option>
+                </select>
+            </label>
+            <label class="amount">
+                <input class="form-control" type="number" id="amount" name="amount" min="1" placeholder="0€" required>
+            </label>
+            <label>
+                <input class="form-control" type="text" id="description" name="description" placeholder="Description" required>
+            </label>
+            <button class="btn btn-primary cta"  type="submit" value="Create">Pay</button>
+        </form>
     </section>
     <section class="container-lg myTransactions">
         <div class="sectionTitle">
-            <h2>My transactions</h2>
+            <h4>My transactions</h4>
         </div>
-        <table class="table table-bordered">
+        <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Debiteur</th>
-                    <th scope="col">Crediteur</th>
+                    <th scope="col">Debtor</th>
+                    <th scope="col">Creditor</th>
                     <th scope="col">Description</th>
                     <th scope="col">Amount</th>
                 </tr>
