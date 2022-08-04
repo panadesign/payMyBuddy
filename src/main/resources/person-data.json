@@ -1,21 +1,21 @@
 [
   {
     "_class": "com.payMyBuddy.model.UserAccount",
-    "email": "c.miossec@mail.com",
+    "email": "demo@mail.com",
     "firstname": "Christophe",
     "lastname": "Miossec",
-    "password": "$2y$10$Ei4ASFiEKe6PoOUnVlfB5eLPa0IgpWbeS8OlRS5RMx.RwUxLH3Ycm",
+    "password": "$2y$10$BDs8lvgAPYlX4EIcvUE68uD..74CedNPmitJuW35WZwmpBfV0ORPC",
     "iban": 123456789,
     "account": {
-      "balance": 980.50
+      "balance": 1000
     }
   },
   {
     "_class": "com.payMyBuddy.model.UserAccount",
-    "email": "a.sylvestre@mail.com",
+    "email": "test@mail.com",
     "firstname": "Anne",
     "lastname": "Sylvestre",
-    "password": "$2y$10$QZZ32o0e/IDHF/6PDN0oCOi72ApuRBoMwjYsH3iUF7sSP6ein667S",
+    "password": "$2y$10$dyYpFIWAIWeRKxbPoq4dc.SIV9ONKO.1MyNo/Ie9oshSzODAIucF.",
     "iban": null,
     "account": {
       "balance": 25
