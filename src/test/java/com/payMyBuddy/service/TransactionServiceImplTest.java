@@ -64,7 +64,7 @@ class TransactionServiceImplTest {
 		transactionService.transferMoney(transaction1.getId(), transaction1.getAmount(),transaction1.getDescription());
 
 		//THEN
-		Assertions.assertTrue(creditor.getAccount().getBalance() == 167);
+		Assertions.assertEquals(167, creditor.getAccount().getBalance());
 	}
 
 	@Test

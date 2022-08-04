@@ -126,7 +126,7 @@ class ContactServiceImplTest {
 		List<UserAccount> contacts = contactService.getContactList();
 
 		//THEN
-		Assertions.assertEquals(contacts.size(), 2);
+		Assertions.assertEquals(2, contacts.size());
 
 	}
 

@@ -11,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @SpringBootTest
 @Sql("/test-data.sql")
@@ -39,4 +41,12 @@ class UserAccountServiceIT {
 		UserAccount userToAdd = new UserAccount("c.miossec@mail.com", "firstname2", "lastname2", "123");
 		Assertions.assertThrows(UserAlreadyExistException.class, () -> userAccountService.registerNewUserAccount(userToAdd));
 	}
+
+	@Test
+	@Transactional
+	void shouldReturnAllUserAccount() {
+		List<UserAccount> allUsers = userAccountService.getAllUsersAccount();
+		Assertions.assertEquals(3, allUsers.size());
+	}
+
 }
