@@ -56,7 +56,7 @@ public class TransactionController {
 				+ " / description = " + description
 		);
 
-		Transaction transaction =  transactionService.transferToBank(iban, amount, description);
+		Transaction transaction =  transactionService.transferToBank(amount, description);
 		model.addAttribute("transaction", transaction);
 		model.addAttribute("transactionSuccess", "Your transaction is successfully added");
 

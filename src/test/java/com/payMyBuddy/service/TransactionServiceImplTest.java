@@ -115,7 +115,7 @@ class TransactionServiceImplTest {
 
 		//WHEN
 		when(mockUserAccountService.getPrincipalUser()).thenReturn(userConnected);
-		transactionService.transferToBank(userConnected.getIban(), transaction.getAmount(), transaction.getDescription());
+		transactionService.transferToBank(transaction.getAmount(), transaction.getDescription());
 
 		//THEN
 		Assertions.assertTrue(userConnected.getAccount().getBalance() == 600);
@@ -146,7 +146,7 @@ class TransactionServiceImplTest {
 		when(mockUserAccountService.getPrincipalUser()).thenReturn(userConnected);
 
 		//THEN
-		Assertions.assertThrows(DebtorAccountException.class, () -> transactionService.transferToBank(userConnected.getIban(), transaction.getAmount(), transaction.getDescription()));
+		Assertions.assertThrows(DebtorAccountException.class, () -> transactionService.transferToBank(transaction.getAmount(), transaction.getDescription()));
 	}
 
 	@Test
