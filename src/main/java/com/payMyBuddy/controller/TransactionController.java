@@ -50,8 +50,8 @@ public class TransactionController {
 	}
 
 	@PostMapping("/bankTransaction")
-	public String transaction(Model model, @RequestParam("iban") String iban, @RequestParam("amount") float amount, @RequestParam("description") String description) {
-		log.debug("Transfer money to selected contact with : ID = " + iban
+	public String transaction(Model model, @RequestParam("amount") float amount, @RequestParam("description") String description) {
+		log.debug("Transfer money to IBAN"
 				+ " / amount = " + amount
 				+ " / description = " + description
 		);

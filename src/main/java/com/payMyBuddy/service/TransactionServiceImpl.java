@@ -50,30 +50,29 @@ public class TransactionServiceImpl implements TransactionService {
 
 		double balanceDebtor = userConnected.getAccount().getBalance();
 		double balanceCreditor = creditorAccount.getAccount().getBalance();
-
-		if(balanceDebtor >= amountWithCommission) {
-
-			userConnected.getAccount().setBalance(balanceDebtor - amountWithCommission);
-			creditorAccount.getAccount().setBalance(balanceCreditor + amount);
-
-			userAccountRepository.save(userConnected);
-			userAccountRepository.save(creditorAccount);
-
-			Transaction transaction =  new Transaction(creditorAccount.getId(), amount, description, "EUR", userConnected, creditorAccount);
-
-			transactionRepository.save(transaction);
-			
-			log.debug("New Transaction = " + transaction);
-
-			return transaction;
-
-		} else throw new DebtorAccountException("Not enough money on your account");
-
+		
+		if (balanceDebtor < amountWithCommission) {
+			throw new DebtorAccountException("Not enough money on your account");
+		}
+		
+		userConnected.getAccount().setBalance(balanceDebtor - amountWithCommission);
+		userAccountRepository.save(userConnected);
+		creditorAccount.getAccount().setBalance(balanceCreditor + amount);
+		userAccountRepository.save(creditorAccount);
+		
+		Transaction transaction = new Transaction(creditorAccount.getId(), amount, description, "EUR", userConnected, creditorAccount);
+		
+		transactionRepository.save(transaction);
+		
+		log.debug("New Transaction = " + transaction);
+		
+		return transaction;
+		
 	}
-
+	
 	@Transactional(isolation = Isolation.READ_COMMITTED)
-	public Transaction transferToBank(String iban, double amount, String description) {
-		log.debug("Transfer money to my bank account: " + iban + ",amount: " + amount + ",description: " + description);
+	public Transaction transferToBank(double amount, String description) {
+		log.debug("Transfer money to my bank account: amount: " + amount + ",description: " + description);
 		UserAccount userConnected = userAccountService.getPrincipalUser();
 
 		if(userConnected.getIban() == null) {

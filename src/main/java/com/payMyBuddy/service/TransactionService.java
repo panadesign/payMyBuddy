@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface TransactionService {
 	List<Transaction> getAllTransactions();
 	Transaction transferMoney(@NonNull UUID id, @NonNull double amount, @NonNull String description);
-	Transaction transferToBank(String iban, double amount, String description);
+	Transaction transferToBank(double amount, String description);
 	void addMoney(double amount);
 
 }

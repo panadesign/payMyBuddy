@@ -118,7 +118,7 @@ class TransactionServiceImplTest {
 		transactionService.transferToBank(transaction.getAmount(), transaction.getDescription());
 
 		//THEN
-		Assertions.assertTrue(userConnected.getAccount().getBalance() == 600);
+		Assertions.assertEquals(600, userConnected.getAccount().getBalance());
 	}
 
 	@Test
@@ -132,7 +132,7 @@ class TransactionServiceImplTest {
 		when(mockUserAccountService.getPrincipalUser()).thenReturn(userConnected);
 
 		//THEN
-		Assertions.assertThrows(ResourceNotFoundException.class, () -> transactionService.transferToBank(userConnected.getIban(), transaction.getAmount(), transaction.getDescription()));
+		Assertions.assertThrows(ResourceNotFoundException.class, () -> transactionService.transferToBank(transaction.getAmount(), transaction.getDescription()));
 	}
 
 	@Test
@@ -160,7 +160,7 @@ class TransactionServiceImplTest {
 		transactionService.addMoney(200.35);
 
 		//THEN
-		Assertions.assertTrue(debtorAccount.getBalance() == 250.35);
+		Assertions.assertEquals(250.35, debtorAccount.getBalance());
 	}
 
 	@Test
