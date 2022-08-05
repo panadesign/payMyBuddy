@@ -98,7 +98,7 @@ foreign key (user_account_id) references user_account (id)
 )
 collate = utf8mb4_0900_ai_ci;
 
-
+<br>And create a new account
 
 ---
 
