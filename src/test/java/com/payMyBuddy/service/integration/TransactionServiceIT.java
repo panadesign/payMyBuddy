@@ -80,7 +80,6 @@ class TransactionServiceIT {
 
 		//WHEN
 		when(userAccountService.getPrincipalUser()).thenReturn(userAccount);
-		when(transactionRepository.save(transaction)).thenReturn(transaction);
 
 		transactionService.transferMoney(transaction.getId(), transaction.getAmount(), transaction.getDescription());
 
