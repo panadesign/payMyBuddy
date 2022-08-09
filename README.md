@@ -23,7 +23,7 @@ Pay my buddy is a web application used to transfer money between friends.
 **H2** for develop : ```mvn clean package -Pdev``` to use dev profile
 
 http://localhost:8080
-http://localhost:8080/h2-console
+<br>http://localhost:8080/h2-console
 
 You can now connect to the application with this user :
 <br>**Email:** demo@mail.com
